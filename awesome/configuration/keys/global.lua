@@ -12,7 +12,10 @@ local apps = require("configuration.apps")
 
 -- {{{ Key bindings
 globalKeys = gears.table.join(
-	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+  awful.key({ modkey, altkey}, "l", function()
+    awful.spawn("xscreensaver-command -lock")
+  end, {description = "Lock the screen", group="Launcher"}),
+  awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
