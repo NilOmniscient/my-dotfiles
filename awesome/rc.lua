@@ -30,6 +30,7 @@ require("modules.auto-start")
 require("modules.sloppy-focus")
 require("modules.set-wallpaper")
 require("modules.rounded-corners")
+require("modules.tile-gap")
 
 -- Setup UI Elements
 require("ui")
