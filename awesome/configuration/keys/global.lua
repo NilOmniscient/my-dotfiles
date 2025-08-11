@@ -15,7 +15,7 @@ local filesystem = require("gears.filesystem")
 -- {{{ Key bindings
 globalKeys = gears.table.join(
   awful.key({ modkey, altkey}, "l", function()
-    awful.spawn("xscreensaver-command -lock")
+    awful.spawn("betterlockscreen -l --off 300")
   end, {description = "Lock the screen", group="Launcher"}),
   awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 
@@ -125,6 +125,11 @@ globalKeys = gears.table.join(
   awful.key({ modkey }, "r", function()
     awful.spawn(filesystem.get_configuration_dir() .. "configuration/keys/rofi_launcher.sh")
   end, {description = "Launch app menu", group = "launcher"}), 
+
+  -- Power Menu
+  awful.key({ modkey, altkey }, "p", function()
+    awful.spawn(filesystem.get_configuration_dir() .. "configuration/keys/rofi_power.sh")
+  end, { description = "Launch Power Menu", group = "launcher" }),
 
 	awful.key({ modkey }, "x", function()
 		awful.prompt.run({

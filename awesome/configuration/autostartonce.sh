@@ -16,7 +16,6 @@ APPS=(
     # radeon-profile
     # $HOME/.config/awesomestart
     udiskie
-    xscreensaver
 )
 
 # Some applications start child applications that need to be killed on reload
@@ -38,9 +37,5 @@ done
 # Start new instances
 for app in "${APPS[@]}"
 do
-  if (( app == "xscreensaver" )); then
-    env $app -no-splash &
-  else
-    env $app ${@:2} &
-  fi
+  env $app ${@:2} &
 done
