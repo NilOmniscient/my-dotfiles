@@ -20,7 +20,7 @@ end)
 local configuration = {
 
 	-- Width of the top panel
-	toppanel_height = dpi(20),
+	toppanel_height = dpi(30),
 }
 
 return configuration
