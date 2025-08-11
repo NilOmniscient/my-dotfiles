@@ -44,3 +44,4 @@
 command = /bin/fish
 theme = catppuccin-mocha
 window-decoration = server
+command = TERM=xterm-256color /usr/bin/bash
