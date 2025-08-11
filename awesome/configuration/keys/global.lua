@@ -10,6 +10,8 @@ local modkey = require("configuration.keys.mod").modKey
 local altkey = require("configuration.keys.mod").altKey
 local apps = require("configuration.apps")
 
+local filesystem = require("gears.filesystem")
+
 -- {{{ Key bindings
 globalKeys = gears.table.join(
   awful.key({ modkey, altkey}, "l", function()
@@ -115,9 +117,14 @@ globalKeys = gears.table.join(
 	end, { description = "restore minimized", group = "client" }),
 
 	-- Prompt
-	awful.key({ modkey }, "r", function()
-		awful.screen.focused().mypromptbox:run()
-	end, { description = "run prompt", group = "launcher" }),
+	-- awful.key({ modkey }, "r", function()
+		-- awful.screen.focused().mypromptbox:run()
+	-- end, { description = "run prompt", group = "launcher" }),
+  
+  -- Rofi
+  awful.key({ modkey }, "r", function()
+    awful.spawn(filesystem.get_configuration_dir() .. "configuration/keys/rofi_launcher.sh")
+  end, {description = "Launch app menu", group = "launcher"}), 
 
 	awful.key({ modkey }, "x", function()
 		awful.prompt.run({
