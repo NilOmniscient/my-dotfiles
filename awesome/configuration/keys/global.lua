@@ -130,12 +130,12 @@ globalKeys = gears.table.join(
   
   -- Rofi
   awful.key({ modkey }, "r", function()
-    awful.spawn(filesystem.get_configuration_dir() .. "configuration/keys/rofi_launcher.sh")
+    awful.spawn(filesystem.get_configuration_dir() .. "scripts/rofi_launcher.sh")
   end, {description = "Launch app menu", group = "launcher"}), 
 
   -- Power Menu
   awful.key({ modkey, altkey }, "p", function()
-    awful.spawn(filesystem.get_configuration_dir() .. "configuration/keys/rofi_power.sh")
+    awful.spawn(filesystem.get_configuration_dir() .. "scripts/rofi_power.sh")
   end, { description = "Launch Power Menu", group = "launcher" }),
 
 	awful.key({ modkey }, "x", function()
