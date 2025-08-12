@@ -23,7 +23,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/breeze/theme.lua")
+beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/catppuccin/theme.lua")
 
 -- Init all modules (You can add/remove active modules here)
 require("modules.auto-start")

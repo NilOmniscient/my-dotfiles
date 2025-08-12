@@ -10,7 +10,7 @@ local icons = "/usr/share/icons/breeze-dark/"
 
 -- {{{ Main
 local theme = {}
-theme.wallpaper = themes_path .. "breeze/breeze-background.jpeg"
+theme.wallpaper = themes_path .. "catppuccin/catppuccin-background.jpeg"
 -- }}}
 
 -- {{{ Styles
@@ -79,33 +79,33 @@ theme.menu_width = dpi(100)
 
 -- {{{ Icons
 -- {{{ Taglist
-theme.taglist_squares_sel = themes_path .. "breeze/taglist/squarefz.png"
-theme.taglist_squares_unsel = themes_path .. "breeze/taglist/squarez.png"
+theme.taglist_squares_sel = themes_path .. "catppuccin/taglist/squarefz.png"
+theme.taglist_squares_unsel = themes_path .. "catppuccin/taglist/squarez.png"
 --theme.taglist_squares_resize = "false"
 -- }}}
 
 -- {{{ Misc
-theme.awesome_icon = themes_path .. "breeze/awesome-icon.png"
+theme.awesome_icon = themes_path .. "catppuccin/awesome-icon.png"
 theme.menu_submenu_icon = icons .. "actions/24/go-next.svg"
 -- }}}
 
 -- {{{ Layout
-theme.layout_tile = themes_path .. "breeze/layouts/tile.png"
-theme.layout_tileleft = themes_path .. "breeze/layouts/tileleft.png"
-theme.layout_tilebottom = themes_path .. "breeze/layouts/tilebottom.png"
-theme.layout_tiletop = themes_path .. "breeze/layouts/tiletop.png"
-theme.layout_fairv = themes_path .. "breeze/layouts/fairv.png"
-theme.layout_fairh = themes_path .. "breeze/layouts/fairh.png"
-theme.layout_spiral = themes_path .. "breeze/layouts/spiral.png"
-theme.layout_dwindle = themes_path .. "breeze/layouts/dwindle.png"
-theme.layout_max = themes_path .. "breeze/layouts/max.png"
-theme.layout_fullscreen = themes_path .. "breeze/layouts/fullscreen.png"
-theme.layout_magnifier = themes_path .. "breeze/layouts/magnifier.png"
-theme.layout_floating = themes_path .. "breeze/layouts/floating.png"
-theme.layout_cornernw = themes_path .. "breeze/layouts/cornernw.png"
-theme.layout_cornerne = themes_path .. "breeze/layouts/cornerne.png"
-theme.layout_cornersw = themes_path .. "breeze/layouts/cornersw.png"
-theme.layout_cornerse = themes_path .. "breeze/layouts/cornerse.png"
+theme.layout_tile = themes_path .. "catppuccin/layouts/tile.png"
+theme.layout_tileleft = themes_path .. "catppuccin/layouts/tileleft.png"
+theme.layout_tilebottom = themes_path .. "catppuccin/layouts/tilebottom.png"
+theme.layout_tiletop = themes_path .. "catppuccin/layouts/tiletop.png"
+theme.layout_fairv = themes_path .. "catppuccin/layouts/fairv.png"
+theme.layout_fairh = themes_path .. "catppuccin/layouts/fairh.png"
+theme.layout_spiral = themes_path .. "catppuccin/layouts/spiral.png"
+theme.layout_dwindle = themes_path .. "catppuccin/layouts/dwindle.png"
+theme.layout_max = themes_path .. "catppuccin/layouts/max.png"
+theme.layout_fullscreen = themes_path .. "catppuccin/layouts/fullscreen.png"
+theme.layout_magnifier = themes_path .. "catppuccin/layouts/magnifier.png"
+theme.layout_floating = themes_path .. "catppuccin/layouts/floating.png"
+theme.layout_cornernw = themes_path .. "catppuccin/layouts/cornernw.png"
+theme.layout_cornerne = themes_path .. "catppuccin/layouts/cornerne.png"
+theme.layout_cornersw = themes_path .. "catppuccin/layouts/cornersw.png"
+theme.layout_cornerse = themes_path .. "catppuccin/layouts/cornerse.png"
 -- }}}
 
 -- {{{ Titlebar
