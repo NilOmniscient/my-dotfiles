@@ -4,13 +4,12 @@ local gears = require("gears")
 
 local beautiful = require("beautiful")
 
-local HOME = os.getenv("HOME")
-local ICONS = HOME .. "/.config/awesome/widgets/logout_menu/icons/"
+local ICONS = "/usr/share/icons/breeze-dark/actions/24/"
 
 local logout_menu_widget = wibox.widget {
   {
     {
-      image = ICONS .. "power_w.svg",
+      image = ICONS .. "system-shutdown.svg",
       resize = true,
       widget = wibox.widget.imagebox,
     },
@@ -48,11 +47,11 @@ local function worker(user_args)
   local onpoweroff = args.onpoweroff or function() awful.spawn.with_shell("shutdown -hP now") end
 
   local menu_items = {
-    { name = "Log Out",  icon_name = "log-out.svg",    command = onlogout },
-    { name = "Lock",     icon_name = "lock.svg",       command = onlock },
-    { name = "Reboot",   icon_name = "refresh-cw.svg", command = onreboot },
-    { name = "Suspend",  icon_name = "moon.svg",       command = onsuspend },
-    { name = "Shutdown", icon_name = "power.svg",      command = onpoweroff },
+    { name = "Log Out",  icon_name = "system-log-out.svg",    command = onlogout },
+    { name = "Lock",     icon_name = "system-lock-screen.svg",       command = onlock },
+    { name = "Reboot",   icon_name = "system-reboot.svg", command = onreboot },
+    { name = "Suspend",  icon_name = "system-suspend.svg",       command = onsuspend },
+    { name = "Shutdown", icon_name = "system-shutdown.svg",      command = onpoweroff },
   }
 
   for _, item in ipairs(menu_items) do

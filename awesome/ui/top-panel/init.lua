@@ -28,7 +28,8 @@ local TopPanel = function(s)
 	})
 	--
 
-  local logout_menu = require("widgets.logout_menu.main")
+  local logout_menu = require("widgets.logout_menu")
+  local volume_control = require("widgets.volume")
 
 	panel:setup({
 		layout = wibox.layout.align.horizontal,
@@ -41,7 +42,10 @@ local TopPanel = function(s)
 		s.mytasklist, -- Middle widget
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
-			mykeyboardlayout,
+			volume_control{
+        widget_type = "arc"
+      },
+      mykeyboardlayout,
 			wibox.widget.systray(),
       mytextclock,
 			s.mylayoutbox,
