@@ -19,7 +19,7 @@ theme.font = "hack 10"
 -- {{{ Colors -- Base these off Catppuccin Mocha
 theme.bg_normal = "#1E1E2E"
 theme.bg_focus = "#89B4FA"
-theme.bg_urgent = "F38BA8"
+theme.bg_urgent = "#F38BA8"
 theme.bg_minimize = "#585B70"
 theme.bg_systray = theme.bg_normal
 
