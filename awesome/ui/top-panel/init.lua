@@ -28,6 +28,8 @@ local TopPanel = function(s)
 	})
 	--
 
+  local logout_menu = require("widgets.logout_menu.main")
+
 	panel:setup({
 		layout = wibox.layout.align.horizontal,
 		{ -- Left widgets
@@ -41,8 +43,9 @@ local TopPanel = function(s)
 			layout = wibox.layout.fixed.horizontal,
 			mykeyboardlayout,
 			wibox.widget.systray(),
-			mytextclock,
+      mytextclock,
 			s.mylayoutbox,
+      logout_menu(),
 		},
 	})
 
