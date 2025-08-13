@@ -2,6 +2,7 @@
 --  "Zenburn" awesome theme  --
 --    By Adrian C. (anrxc)   --
 -------------------------------
+local gears = require("gears")
 
 local themes_path = require("gears.filesystem").get_configuration_dir() .. "themes/"
 local dpi = require("beautiful.xresources").apply_dpi
@@ -37,6 +38,24 @@ theme.border_normal = "#24E3E0" -- "#45475A"
 theme.border_focus = "#24E3E0"
 theme.border_marked = "#A6E3A1"
 -- }}}
+
+-- {{{ TagList
+theme.taglist_bg_occupied = "#45475A"
+theme.taglist_shape = gears.shape.rounded_rect
+theme.taglist_shape_border_width = 2
+theme.taglist_shape_border_color = theme.bg_focus
+theme.taglist_shape_border_color_focus = theme.border_normal
+-- }}}
+
+-- {{{ TaskList
+theme.tasklist_bg_normal = "#45475A"
+theme.tasklist_shape = gears.shape.rounded_rect
+theme.tasklist_shape_border_width = 2
+theme.tasklist_shape_border_color = theme.bg_focus
+theme.tasklist_shape_border_color_focus = theme.border_normal
+-- }}}
+
+theme.wibox_bg_normal = "#FFFFFF"
 
 -- {{{ Titlebars
 theme.titlebar_bg_focus = "#4E6B99"
