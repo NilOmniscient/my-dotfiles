@@ -8,7 +8,8 @@ require("widgets.top-panel")
 
 local BottomPanel = function(s)
 	-- Wiboxes are much more flexible than wibars simply for the fact that there are no defaults, however if you'd rather have the ease of a wibar you can replace this with the original wibar code
-	local panel = wibox({
+	local panel = awful.wibar({
+    position = "bottom",
 		ontop = true,
 		screen = s,
 		height = configuration.toppanel_height,
