@@ -4,9 +4,9 @@ local top_panel = require("ui.top-panel")
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
 	-- You can get edit/rid of this conditional if you want certain bars on specific screens or all screens etc.
-	if s.index == 1 then
+	-- if s.index == 1 then
 		s.top_panel = top_panel(s)
-	end
+	-- end
 end)
 
 -- Hide bars when app go fullscreen
