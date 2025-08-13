@@ -1,11 +1,13 @@
 local awful = require("awful")
 local top_panel = require("ui.top-panel")
+local bottom_panel = require("ui.bottom-panel")
 
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
 	-- You can get edit/rid of this conditional if you want certain bars on specific screens or all screens etc.
 	-- if s.index == 1 then
 		s.top_panel = top_panel(s)
+    s.bottom_panel = bottom_panel(s)
 	-- end
 end)
 
@@ -16,18 +18,12 @@ function updateBarsVisibility()
 			local fullscreen = s.selected_tag.fullscreenMode
 
 			-- Make sure a panel does exist on this specific screen, otherwise return
-			if s.top_panel == nil then
-				return
-			end
-
-			-- These are the bars that are hidden when on any fullscreen mode (The awesomewm fullscreen mode and app fullscren modes like youtube)
-			-- If you want bars to be invisible when you fullscreen an app, you can do so like so :
-			s.top_panel.visible = not fullscreen
-
-			-- If you want bars to be visible even when you fullscreen an app, you can do it like so :
-			-- s.top_panel.visible = visible
-
-			-- I'm sure you can figure out other things you can do here
+			if s.top_panel ~= nil then
+			  s.top_panel.visible = not fullscreen
+      end
+      if s.bottom_panel ~= nil then
+        s.bottom_panel.visible = not fullscreen
+      end
 		end
 	end
 end
