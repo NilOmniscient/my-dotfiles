@@ -18,13 +18,13 @@ theme.font = "hack 10"
 
 -- {{{ Colors -- Base these off Catppuccin Mocha
 theme.bg_normal = "#1E1E2E"
-theme.bg_focus = "#4e6b99" 
+theme.bg_focus = "#4E6B99"
 theme.bg_urgent = "#F38BA8"
 theme.bg_minimize = "#585B70"
 theme.bg_systray = theme.bg_normal
 
 theme.fg_normal = "#CDD6F4"
-theme.fg_focus = "#121212"
+theme.fg_focus = "#CDD6F4" -- "#121212"
 theme.fg_urgent = theme.bg_normal
 theme.fg_minimize = theme.bg_normal
 
@@ -39,7 +39,7 @@ theme.border_marked = "#A6E3A1"
 -- }}}
 
 -- {{{ Titlebars
-theme.titlebar_bg_focus = "#3F3F3F"
+theme.titlebar_bg_focus = "#4E6B99"
 theme.titlebar_bg_normal = "#3F3F3F"
 -- }}}
 

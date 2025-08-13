@@ -30,25 +30,30 @@ local TopPanel = function(s)
 
   local logout_menu = require("widgets.logout_menu")
   local volume_control = require("widgets.volume")
+  local media_player = require("widgets.media_player")
 
 	panel:setup({
 		layout = wibox.layout.align.horizontal,
+    expand = "none",
 		{ -- Left widgets
 			layout = wibox.layout.fixed.horizontal,
-			mylauncher,
-			s.mytaglist,
-			s.mypromptbox,
+			-- mylauncher,
+			s.mylayoutbox,
+      s.mytaglist,
+			-- s.mypromptbox,
 		},
-		s.mytasklist, -- Middle widget
+    {
+      layout = wibox.layout.fixed.horizontal,
+      media_player,
+    },
+		-- s.mytasklist, -- Middle widget
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			volume_control{
         widget_type = "arc"
       },
-      mykeyboardlayout,
 			wibox.widget.systray(),
       mytextclock,
-			s.mylayoutbox,
       logout_menu(),
 		},
 	})
