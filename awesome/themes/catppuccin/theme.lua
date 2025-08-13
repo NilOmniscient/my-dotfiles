@@ -33,8 +33,8 @@ theme.fg_minimize = theme.bg_normal
 -- {{{ Borders
 theme.useless_gap = dpi(5)
 theme.border_width = dpi(2)
-theme.border_normal = "#45475A"
-theme.border_focus = theme.bg_focus
+theme.border_normal = "#24E3E0" -- "#45475A"
+theme.border_focus = "#24E3E0"
 theme.border_marked = "#A6E3A1"
 -- }}}
 

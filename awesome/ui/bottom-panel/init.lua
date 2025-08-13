@@ -19,12 +19,12 @@ local BottomPanel = function(s)
 		bg = beautiful.background,
 		fg = beautiful.fg_normal,
 		struts = {
-			top = configuration.toppanel_height,
+			bottom = configuration.toppanel_height,
 		},
 	})
 
 	panel:struts({
-		top = configuration.toppanel_height,
+	  bottom = configuration.toppanel_height,
 	})
 	--
 
