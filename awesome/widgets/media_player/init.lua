@@ -14,12 +14,21 @@ local watch_fields = {
 
 local watch_cmd = string.format("playerctl -f '{{%s}}' metadata", table.concat(watch_fields, "}};{{"))
 
-function trim(s)
+local player_widget = {}
+-- Player requires:
+-- Source Selector
+-- Control buttons
+-- Metadata
+-- Volume?
+
+local trim = function(s)
   if s == nil then
     return ""
   end
   return s:match("^%s*(.-)%s*$")
 end
+
+
 
 local player, timer = awful.widget.watch({ awful.util.shell, "-c", watch_cmd }, 0.3, function(widget, stdout)
 	local words = gears.string.split(stdout, ";")

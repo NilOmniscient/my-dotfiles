@@ -59,7 +59,7 @@ local BottomPanel = function(s)
 		layout = wibox.layout.align.horizontal,
 		expand = "none",
 		left_widgets,
-		wrap_widget(middle_widgets),
+		middle_widgets,
 		right_widgets,
 	})
 
