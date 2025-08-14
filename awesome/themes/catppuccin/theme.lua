@@ -34,7 +34,7 @@ theme.fg_minimize = theme.bg_normal
 -- {{{ Borders
 theme.useless_gap = dpi(5)
 theme.border_width = dpi(2)
-theme.border_normal = "#24E3E0" -- "#45475A"
+theme.border_normal = theme.bg_focus
 theme.border_focus = "#24E3E0"
 theme.border_marked = "#A6E3A1"
 -- }}}
@@ -44,7 +44,7 @@ theme.taglist_bg_occupied = "#45475A"
 theme.taglist_shape = gears.shape.rounded_rect
 theme.taglist_shape_border_width = 2
 theme.taglist_shape_border_color = theme.bg_focus
-theme.taglist_shape_border_color_focus = theme.border_normal
+theme.taglist_shape_border_color_focus = theme.border_focus
 -- }}}
 
 -- {{{ TaskList
@@ -52,7 +52,7 @@ theme.tasklist_bg_normal = "#45475A"
 theme.tasklist_shape = gears.shape.rounded_rect
 theme.tasklist_shape_border_width = 2
 theme.tasklist_shape_border_color = theme.bg_focus
-theme.tasklist_shape_border_color_focus = theme.border_normal
+theme.tasklist_shape_border_color_focus = theme.border_focus
 -- }}}
 
 theme.wibox_bg_normal = "#FFFFFF"
