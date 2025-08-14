@@ -18,6 +18,9 @@ local TopPanel = function(s)
 		stretch = false,
 		bg = gears.color.change_opacity(beautiful.background, 0.0),
 		fg = beautiful.fg_normal,
+    strut = {
+      top = configuration.toppanel_height,
+    },
 	})
 
 	local logout_menu = require("widgets.logout_menu")
@@ -25,19 +28,19 @@ local TopPanel = function(s)
 	local media_player = require("widgets.media_player")
 
 	local left_widgets = wibox.widget({
-		layout = wibox.layout.align.horizontal,
+		layout = wibox.layout.fixed.horizontal,
 		s.mylayoutbox,
 		s.mytaglist,
 	})
 	local middle_widgets = wibox.widget({
-		layout = wibox.layout.align.horizontal,
+		layout = wibox.layout.fixed.horizontal,
 		media_player,
 	})
 	local right_widgets = wibox.widget({
-		layout = wibox.layout.align.horizontal,
-		volume_control({
+		layout = wibox.layout.fixed.horizontal,
+		volume_control{
 			widget_type = "arc",
-		}),
+		},
 		wibox.widget.systray(),
 		mytextclock,
 		logout_menu(),
