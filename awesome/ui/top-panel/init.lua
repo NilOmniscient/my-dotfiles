@@ -16,38 +16,60 @@ local TopPanel = function(s)
 		x = s.geometry.x,
 		y = s.geometry.y,
 		stretch = false,
-		bg = beautiful.background,
+		bg = gears.color.change_opacity(beautiful.background, 0.0),
 		fg = beautiful.fg_normal,
 	})
 
-  local logout_menu = require("widgets.logout_menu")
-  local volume_control = require("widgets.volume")
-  local media_player = require("widgets.media_player")
+	local logout_menu = require("widgets.logout_menu")
+	local volume_control = require("widgets.volume")
+	local media_player = require("widgets.media_player")
+
+	local left_widgets = wibox.widget({
+		layout = wibox.layout.align.horizontal,
+		s.mylayoutbox,
+		s.mytaglist,
+	})
+	local middle_widgets = wibox.widget({
+		layout = wibox.layout.align.horizontal,
+		media_player,
+	})
+	local right_widgets = wibox.widget({
+		layout = wibox.layout.align.horizontal,
+		volume_control({
+			widget_type = "arc",
+		}),
+		wibox.widget.systray(),
+		mytextclock,
+		logout_menu(),
+	})
+
+	local wrap_widget = function(w)
+		local wrapped = wibox.widget({
+			layout = wibox.layout.fixed.horizontal,
+			{
+				{
+					w,
+					top = 2,
+					bottom = 2,
+					left = 20,
+					right = 20,
+					color = beautiful.wrapped_fg,
+					widget = wibox.container.margin,
+				},
+				bg = beautiful.wrapped_bg,
+				widget = wibox.container.background,
+				shape = gears.shape.rounded_rect,
+			},
+		})
+		return wrapped
+	end
 
 	panel:setup({
 		layout = wibox.layout.align.horizontal,
-    expand = "none",
-		{ -- Left widgets
-			layout = wibox.layout.fixed.horizontal,
-			-- mylauncher,
-			s.mylayoutbox,
-      s.mytaglist,
-			-- s.mypromptbox,
-		},
-    {
-      layout = wibox.layout.fixed.horizontal,
-      media_player,
-    },
-		-- s.mytasklist, -- Middle widget
-		{ -- Right widgets
-			layout = wibox.layout.fixed.horizontal,
-			volume_control{
-        widget_type = "arc"
-      },
-			wibox.widget.systray(),
-      mytextclock,
-      logout_menu(),
-		},
+		expand = "none",
+    wrap_widget(left_widgets),
+    wrap_widget(middle_widgets),
+    wrap_widget(right_widgets),
 	})
 
 	return panel

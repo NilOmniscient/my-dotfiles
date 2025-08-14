@@ -9,7 +9,7 @@ require("widgets.top-panel")
 local BottomPanel = function(s)
 	-- Wiboxes are much more flexible than wibars simply for the fact that there are no defaults, however if you'd rather have the ease of a wibar you can replace this with the original wibar code
 	local panel = awful.wibar({
-    position = "bottom",
+		position = "bottom",
 		ontop = true,
 		screen = s,
 		height = configuration.toppanel_height,
@@ -19,11 +19,14 @@ local BottomPanel = function(s)
 		stretch = false,
 		bg = beautiful.background,
 		fg = beautiful.fg_normal,
+		strut = {
+			bottom = configuration.toppanel_height,
+		},
 	})
 
 	panel:setup({
 		layout = wibox.layout.align.horizontal,
-    expand = "none",
+		expand = "none",
 		s.mytasklist, -- Middle widget
 	})
 

@@ -14,6 +14,11 @@ local theme = {}
 theme.wallpaper = themes_path .. "catppuccin/catppuccin-background.jpeg"
 -- }}}
 
+-- {{{ Wrapped Widget Colors
+theme.wrapped_bg = "#45475A"
+theme.wrapped_fg = "#4E6B99"
+-- }}}
+
 -- {{{ Styles
 theme.font = "hack 10"
 
@@ -22,7 +27,7 @@ theme.bg_normal = "#1E1E2E"
 theme.bg_focus = "#4E6B99"
 theme.bg_urgent = "#F38BA8"
 theme.bg_minimize = "#585B70"
-theme.bg_systray = theme.bg_normal
+theme.bg_systray = theme.wrapped_bg
 
 theme.fg_normal = "#CDD6F4"
 theme.fg_focus = "#CDD6F4" -- "#121212"
