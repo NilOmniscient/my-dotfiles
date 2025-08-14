@@ -26,9 +26,13 @@ local player, timer = awful.widget.watch({ awful.util.shell, "-c", watch_cmd }, 
   if status ~= "" then table.insert(metadata, status) end
   if artist ~= "" then table.insert(metadata, artist) end
   if title ~= "" then table.insert(metadata, title) end
-	local text = "\t" .. " || " .. table.concat(metadata, " | ") .. " || "
-  text = text .. "\t"
-	widget:set_text(text)
+	local contents = table.concat(metadata, " | ")
+  local text = ""
+  if contents ~= "" then
+    text = "\t" .. " || " .. table.concat(metadata, " | ") .. " || "
+    text = text .. "\t"
+  end
+  widget:set_text(text)
 end)
 
 return wibox.widget({
