@@ -46,7 +46,6 @@ local BottomPanel = function(s)
 					right = 20,
 					color = beautiful.wrapped_fg,
 					widget = wibox.container.margin,
-          draw_empty = false,
 				},
 				bg = beautiful.wrapped_bg,
 				widget = wibox.container.background,
@@ -59,9 +58,9 @@ local BottomPanel = function(s)
 	panel:setup({
 		layout = wibox.layout.align.horizontal,
 		expand = "none",
-		wrap_widget(left_widgets),
+		left_widgets,
 		wrap_widget(middle_widgets),
-		wrap_widget(right_widgets),
+		right_widgets,
 	})
 
 	return panel
