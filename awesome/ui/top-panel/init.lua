@@ -8,7 +8,7 @@ require("widgets.top-panel")
 
 local TopPanel = function(s)
 	-- Wiboxes are much more flexible than wibars simply for the fact that there are no defaults, however if you'd rather have the ease of a wibar you can replace this with the original wibar code
-	local panel = wibox({
+	local panel = awful.wibar({
 		ontop = true,
 		screen = s,
 		height = configuration.toppanel_height,
@@ -18,15 +18,7 @@ local TopPanel = function(s)
 		stretch = false,
 		bg = beautiful.background,
 		fg = beautiful.fg_normal,
-		struts = {
-			top = configuration.toppanel_height,
-		},
 	})
-
-	panel:struts({
-		top = configuration.toppanel_height,
-	})
-	--
 
   local logout_menu = require("widgets.logout_menu")
   local volume_control = require("widgets.volume")

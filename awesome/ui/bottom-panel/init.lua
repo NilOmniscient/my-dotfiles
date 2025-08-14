@@ -19,15 +19,7 @@ local BottomPanel = function(s)
 		stretch = false,
 		bg = beautiful.background,
 		fg = beautiful.fg_normal,
-		struts = {
-			bottom = configuration.toppanel_height,
-		},
 	})
-
-	panel:struts({
-	  bottom = configuration.toppanel_height,
-	})
-	--
 
 	panel:setup({
 		layout = wibox.layout.align.horizontal,
