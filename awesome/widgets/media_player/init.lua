@@ -51,7 +51,11 @@ local player, timer = awful.widget.watch({ awful.util.shell, "-c", watch_cmd }, 
 	if metadata.status == "Playing" then
 		icon_text = ""
 	end
-	local text = "\t" .. icon_text .. " || " .. table.concat(metadata, " | ") .. " || " .. progress .. "\t"
+	local text = "\t" .. icon_text .. " || " .. table.concat(metadata, " | ") .. " || " 
+  if progress ~= nil then
+    text = text .. progress
+  end
+  text = text .. "\t"
 	widget:set_text(text)
 end)
 
