@@ -38,7 +38,8 @@ local TopPanel = function(s)
 	})
 	local right_widgets = wibox.widget({
 		layout = wibox.layout.fixed.horizontal,
-		volume_control{
+		spacing = 4,
+    volume_control{
 			widget_type = "arc",
 		},
 		wibox.widget.systray(),
