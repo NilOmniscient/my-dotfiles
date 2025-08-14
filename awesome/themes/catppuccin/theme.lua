@@ -15,7 +15,7 @@ theme.wallpaper = themes_path .. "catppuccin/catppuccin-background.jpeg"
 -- }}}
 
 -- {{{ Wrapped Widget Colors
-theme.wrapped_bg = "#45475A"
+theme.wrapped_bg = "#1E1E2E"
 theme.wrapped_fg = "#4E6B99"
 -- }}}
 
