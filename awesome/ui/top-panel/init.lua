@@ -67,9 +67,9 @@ local TopPanel = function(s)
 	panel:setup({
 		layout = wibox.layout.align.horizontal,
 		expand = "none",
-    wrap_widget(left_widgets),
-    wrap_widget(middle_widgets),
-    wrap_widget(right_widgets),
+		wrap_widget(left_widgets),
+		wrap_widget(middle_widgets),
+		wrap_widget(right_widgets),
 	})
 
 	return panel
