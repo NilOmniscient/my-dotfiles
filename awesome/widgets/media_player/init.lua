@@ -20,6 +20,97 @@ end
 
 local player_source = ""
 
+-- Build the popup.
+local source_selector = awful.popup({
+    bg = beautiful.wrapped_bg,
+    fg = beautiful.fg_normal,
+    ontop = true,
+    visible = false,
+    shape = gears.shape.rounded_rect,
+    border_width = 1,
+    border_color = beautiful.wrapped_fg,
+    maximum_width = 200,
+    offset = {
+      y = 5,
+    },
+    widget = {},
+})
+local source_box = wibox.widget {
+  widget = wibox.widget.textbox,
+  text = "Source",
+  buttons = awful.button({}, 1, nil, function()
+    if source_selector.visible then
+      source_selector.visible = false
+    else
+      rebuild_selector()
+    end
+  end)
+}
+local source_container = wibox.widget({
+  layout = wibox.container.margin,
+  left = 8, right = 8,
+  source_box,
+})
+
+function update_source(src)
+  player_source = src
+  local split = gears.string.split(src, ".")
+  source_box:set_text(split[1])
+  if src ~= "" then
+    watch_cmd = string.format("playerctl -f '{{%s}}' -p '" .. player_source .. "' metadata", table.concat(watch_fields, "}};{{"))
+  else
+    watch_cmd = string.format("playerctl -f '{{%s}}' metadata", table.concat(watch_fields, "}};{{"))
+
+  end
+end
+
+function rebuild_selector()
+  awful.spawn.easy_async("playerctl -l", function(stdout, _, _, _)
+    local rows = {
+      layout = wibox.layout.fixed.vertical
+    }
+    -- Get the list of sources. 
+    if stdout ~= "" then
+      for name in stdout:gmatch("[^\r\n]+") do
+        if name ~= "" and name ~= nil then
+          local split = gears.string.split(name, ".")
+          -- Set up a row, and append it to rows.
+          local row = wibox.widget({
+            {
+              layout = wibox.container.margin,
+              margins = 8,
+              {
+                text = split[1],
+                font = beautiful.font,
+                widget = wibox.widget.textbox,
+              }
+            },
+            fg = beautiful.fg_normal,
+            bg = beautiful.bg_normal,
+            widget = wibox.container.background,
+            buttons = awful.button({}, 1, nil, function()
+              update_source(name)
+              source_selector.visible = false
+            end)
+          })
+          row:connect_signal("mouse::enter", function(c)
+            c:set_bg(beautiful.bg_focus)
+            c:set_fg(beautiful.fg_focus)
+          end)
+          row:connect_signal("mouse::leave", function(c)
+            c:set_bg(beautiful.bg_normal)
+            c:set_fg(beautiful.fg_normal)
+          end)
+          table.insert(rows, row)
+        end
+      end
+      source_selector:setup(rows)
+      source_selector:move_next_to(mouse.current_widget_geometry)
+      source_selector.visible = true
+    end
+  end)
+end
+
 local prev_button = wibox.widget{
   layout = wibox.layout.fixed.horizontal,
   {
@@ -71,25 +162,74 @@ local controls = wibox.widget({
   prev_button, pause_button, next_button
 })
 
-local player, timer = awful.widget.watch({ awful.util.shell, "-c", watch_cmd }, 0.3, function(widget, stdout)
-	local words = gears.string.split(stdout, ";")
+local player_text = wibox.widget({
+  widget = wibox.widget.textbox,
+  text = "Nothing Playing Right Now",
+  ellipsize = true,
+  forced_width = 400,
+  align = "center",
+})
+local player_container = wibox.widget({
+  layout = wibox.container.margin,
+  left = 8, right = 8,
+  player_text,
+})
 
-  local metadata = {}
-  local status, artist, title = trim(words[1]), trim(words[2]), trim(words[3])
-  if status ~= "" then table.insert(metadata, status) end
-  if artist ~= "" then table.insert(metadata, artist) end
-  if title ~= "" then table.insert(metadata, title) end
-	local contents = table.concat(metadata, " | ")
-  local text = ""
-  if contents ~= "" then
-    text = "\t" .. " || " .. table.concat(metadata, " | ") .. " || "
-    text = text .. "\t"
+gears.timer{
+  timeout = 0.1,
+  autostart = true,
+  call_now = true,
+  single_shot = true,
+  callback = function()
+    if player_source == "" then
+      awful.spawn.easy_async("playerctl -l", function(stdout, _, _, _)
+        if stdout ~= "" then
+          for name in stdout:gmatch("[^\r\n]+") do
+            if name ~= "" and name ~= nil then
+              update_source(name)
+              break
+            end
+          end
+        end
+      end)
+    end
   end
-  widget:set_text(text)
-end)
+}
+
+gears.timer{
+  timeout = 0.3,
+  autostart = true,
+  call_now = true,
+  callback = function()
+    awful.spawn.easy_async(watch_cmd, function(stdout, _, _, _)
+      local words = gears.string.split(stdout, ";")
+      local metadata = {}
+      local status, artist, title = trim(words[1]), trim(words[2]), trim(words[3])
+      if status ~= "" then 
+        if status == "Playing" then
+          status = "||"
+        else
+          status = "||"
+        end
+        table.insert(metadata, status)
+      end
+      if title ~= "" then table.insert(metadata, "󰎇 " .. title) end
+      if artist ~= "" then table.insert(metadata, "󰠃 " .. artist) end
+      local contents = table.concat(metadata, " | ")
+      local text = ""
+      if contents ~= "" then
+        text = " " .. table.concat(metadata, " ") .. " "
+      else
+        text = " Nothing playing right now "
+      end
+      player_text:set_text(text)
+    end)
+  end
+}
 
 return wibox.widget({
+  source_container,
+  player_container,
   controls,
-  player,
   layout = wibox.layout.align.horizontal
 })
