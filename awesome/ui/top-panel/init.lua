@@ -53,17 +53,17 @@ local TopPanel = function(s)
 			{
 				{
 					w,
-					top = 1,
-					bottom = 1,
-					left = 1,
-					right = 1,
-					color = beautiful.wrapped_fg,
+					top = 2,
+					bottom = 2,
+					left = 10,
+					right = 10,
+					color = beautiful.wrapped_bg,
 					widget = wibox.container.margin,
 				},
 				bg = beautiful.wrapped_bg,
         widget = wibox.container.background,
 				shape = gears.shape.rounded_rect,
-        shape_border_width = 1,
+        shape_border_width = 2,
         shape_border_color = beautiful.wrapped_fg,
 			},
 		})
