@@ -18,16 +18,58 @@ local trim = function(s)
   return s:match("^%s*(.-)%s*$")
 end
 
+local player_source = ""
+
+local prev_button = wibox.widget{
+  layout = wibox.layout.fixed.horizontal,
+  {
+    widget = wibox.widget.textbox,
+    text = " 󰒮 ",
+    buttons = awful.button({}, 1, nil, function()
+      local cmd = "playerctl "
+      if player_source ~= "" then
+        cmd = cmd .. "-p " .. player_source .. " "
+      end
+      cmd = cmd .. "previous"
+      awful.spawn(cmd)
+    end)
+  }
+}
 local pause_button = wibox.widget{
   layout = wibox.layout.fixed.horizontal,
   {
     widget = wibox.widget.textbox,
-    text = "󰐎",
+    text = " 󰐎 ",
     buttons = awful.button({}, 1, nil, function()
-      awful.spawn("playerctl play-pause")
+      local cmd = "playerctl "
+      if player_source ~= "" then
+        cmd = cmd .. "-p " .. player_source .. " "
+      end
+      cmd = cmd .. "play-pause"
+      awful.spawn(cmd)
     end)
   }
 }
+local next_button = wibox.widget{
+  layout = wibox.layout.fixed.horizontal,
+  {
+    widget = wibox.widget.textbox,
+    text = " 󰒭 ",
+    buttons = awful.button({}, 1, nil, function()
+      local cmd = "playerctl "
+      if player_source ~= "" then
+        cmd = cmd .. "-p " .. player_source .. " "
+      end
+      cmd = cmd .. "next"
+      awful.spawn(cmd)
+    end)
+  }
+}
+local controls = wibox.widget({
+  layout = wibox.layout.align.horizontal,
+  spacing = 10,
+  prev_button, pause_button, next_button
+})
 
 local player, timer = awful.widget.watch({ awful.util.shell, "-c", watch_cmd }, 0.3, function(widget, stdout)
 	local words = gears.string.split(stdout, ";")
@@ -47,7 +89,7 @@ local player, timer = awful.widget.watch({ awful.util.shell, "-c", watch_cmd }, 
 end)
 
 return wibox.widget({
-  -- pause_button,
+  controls,
   player,
   layout = wibox.layout.align.horizontal
 })
