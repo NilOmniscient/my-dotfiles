@@ -18,6 +18,17 @@ local trim = function(s)
   return s:match("^%s*(.-)%s*$")
 end
 
+local pause_button = wibox.widget{
+  layout = wibox.layout.fixed.horizontal,
+  {
+    widget = wibox.widget.textbox,
+    text = "󰐎",
+    buttons = awful.button({}, 1, nil, function()
+      awful.spawn("playerctl play-pause")
+    end)
+  }
+}
+
 local player, timer = awful.widget.watch({ awful.util.shell, "-c", watch_cmd }, 0.3, function(widget, stdout)
 	local words = gears.string.split(stdout, ";")
 
@@ -36,6 +47,7 @@ local player, timer = awful.widget.watch({ awful.util.shell, "-c", watch_cmd }, 
 end)
 
 return wibox.widget({
+  -- pause_button,
   player,
-  layout = wibox.layout.fixed.horizontal
+  layout = wibox.layout.align.horizontal
 })
