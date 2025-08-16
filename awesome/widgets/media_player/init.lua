@@ -50,7 +50,7 @@ local player_text = wibox.widget({
   widget = wibox.widget.textbox,
   text = "Nothing Playing Right Now",
   ellipsize = true,
-  forced_width = 400,
+  forced_width = 300,
   align = "center",
 })
 local player_container = wibox.widget({

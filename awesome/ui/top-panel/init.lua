@@ -36,16 +36,25 @@ local TopPanel = function(s)
 		layout = wibox.layout.fixed.horizontal,
 		media_player,
 	})
-	local right_widgets = wibox.widget({
-		layout = wibox.layout.fixed.horizontal,
-		spacing = 4,
-    volume_control{
-			widget_type = "arc",
-		},
-		wibox.widget.systray(),
-		mytextclock,
-		logout_menu(),
-	})
+  local right_widgets = {}
+  if s.index == 1 then
+    right_widgets = wibox.widget({
+      layout = wibox.layout.fixed.horizontal,
+      spacing = 4,
+      volume_control{
+        widget_type = "arc",
+      },
+      wibox.widget.systray(),
+      mytextclock,
+      logout_menu(),
+    })
+  else
+    right_widgets = wibox.widget({
+      layout = wibox.layout.fixed.horizontal,
+      spacing = 4,
+      mytextclock,
+    })
+  end
 
   local wrap_widget = function(w)
 		local wrapped = wibox.widget({
