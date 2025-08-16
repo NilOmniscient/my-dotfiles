@@ -9,9 +9,9 @@ local ICONS = "/usr/share/icons/breeze-dark/actions/24/"
 local logout_menu_widget = wibox.widget({
 	{
 		{
-			image = ICONS .. "system-shutdown.svg",
-			resize = true,
-			widget = wibox.widget.imagebox,
+      text = " ⏻ ",
+			font = beautiful.font,
+			widget = wibox.widget.textbox,
 		},
 		margins = 4,
 		layout = wibox.container.margin,
