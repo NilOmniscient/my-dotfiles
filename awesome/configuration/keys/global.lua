@@ -15,7 +15,7 @@ local filesystem = require("gears.filesystem")
 -- {{{ Key bindings
 globalKeys = gears.table.join(
   awful.key({ modkey, altkey}, "l", function()
-    awful.spawn("betterlockscreen -l -u " .. filesystem.get_configuration_dir() .. "themes/catppuccin/catppuccin-screensaver.png")
+    awful.spawn("betterlockscreen -l")
   end, {description = "Lock the screen", group="Launcher"}),
   awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 
