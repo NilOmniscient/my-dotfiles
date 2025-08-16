@@ -1,6 +1,7 @@
 local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
+local custom_buttons = require("widgets.titlebar_buttons")
 
 -- Double click titlebar timer, how long it takes for a 2 clicks to be considered a double click
 function double_click_event_handler(double_click_event)
@@ -67,8 +68,10 @@ client.connect_signal("request::titlebars", function(c)
 			awful.titlebar.widget.floatingbutton(c),
 			awful.titlebar.widget.maximizedbutton(c),
 			awful.titlebar.widget.stickybutton(c),
-			awful.titlebar.widget.ontopbutton(c),
-			awful.titlebar.widget.closebutton(c),
+			-- awful.titlebar.widget.ontopbutton(c),
+			custom_buttons.ontopbutton(c),
+      custom_buttons.closebutton(c),
+      -- awful.titlebar.widget.closebutton(c),
 			layout = wibox.layout.fixed.horizontal(),
 		},
 		layout = wibox.layout.align.horizontal,
