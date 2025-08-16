@@ -92,7 +92,7 @@ function closebutton(c)
   local callback = function()
     c:kill()
   end
-  return generate_button("  ", callback)
+  return generate_button("  ", callback)
 end
 
 function generate_button(text, action)
