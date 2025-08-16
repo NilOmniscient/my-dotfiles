@@ -57,11 +57,11 @@ local function worker(user_args)
 	end
 
 	local menu_items = {
-		{ name = "Log Out", icon_name = "system-log-out.svg", command = onlogout },
-		{ name = "Lock", icon_name = "system-lock-screen.svg", command = onlock },
-		{ name = "Reboot", icon_name = "system-reboot.svg", command = onreboot },
-		{ name = "Suspend", icon_name = "system-suspend.svg", command = onsuspend },
-		{ name = "Shutdown", icon_name = "system-shutdown.svg", command = onpoweroff },
+		{ name = "Log Out", text=" 󰍃 ", command = onlogout },
+		{ name = "Lock", text = "  ", command = onlock },
+		{ name = "Reboot", text = "  ", command = onreboot },
+		{ name = "Suspend", text = " 󰒲 ", command = onsuspend },
+		{ name = "Shutdown", text = " ⏻ " , command = onpoweroff },
 	}
 
 	for _, item in ipairs(menu_items) do
@@ -69,9 +69,9 @@ local function worker(user_args)
 			{
 				{
 					{
-						image = ICONS .. item.icon_name,
-						resize = false,
-						widget = wibox.widget.imagebox,
+            text = item.text,
+            font = beautiful.font,
+						widget = wibox.widget.textbox,
 					},
 					{
 						text = item.name,
