@@ -44,3 +44,5 @@
 command = TERM=xterm-256color /bin/fish
 theme = catppuccin-mocha
 window-decoration = server
+font-family = Hack
+font-size = 14
