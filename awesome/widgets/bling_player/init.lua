@@ -66,6 +66,30 @@ local play_widget = build_textbox(" 󰐎 ", function() play() end)
 local shuf_widget = build_textbox("  ", function() shuf() end)
 local rept_widget = build_textbox(" 󰑖 ", function() rept() end)
 
+local controls_widget = wibox.widget {
+  layout = wibox.layout.fixed.horizontal,
+  prev_widget, play_widget, next_widget, shuf_widget, rept_widget,
+}
+
+local progress_text = wibox.widget {
+  widget = wibox.widget.textbox,
+  text = "00:00 / 00:00",
+  font = theme.font,
+}
+local progress_widget = wibox.widget {
+  layout = wibox.layout.stack,
+  {
+    widget = wibox.widget.progress_bar,
+    shape = gears.shape.rounded_bar,
+    value = 0.0,
+    border_width = 2,
+    border_color = theme.fg_normal,
+    forced_width = 100,
+    max_value = 1.0,
+  },
+  progress_text,
+}
+
 -- When a player exits, remove from the list. 
 playerctl:connect_signal("exit", function(_, player_name)
   players[player_name] = nil
@@ -220,6 +244,38 @@ function update_widgets(player_name)
     rept_widget:set_markup_silently(rept_a)
   else
     rept_widget:set_markup_silently(rept_n)
+  end
+
+  -- Update the progressbar. 
+  local current = "00:00"
+  local seconds = players[player_name].position_sec
+  local minutes = math.floor(seconds / 60)
+  seconds = seconds - (minutes * 60)
+  if minutes >= 60 then
+    local hours = math.floor(minutes / 60)
+    minutes = minutes - (hours * 60)
+    current = string.format("%02d:%02d:%02d", hours, minutes, seconds)
+  else
+    current = string.format("%02d:%02d", minutes, seconds)
+  end
+  if players[player_name].length_sec == 0 or players[player_name].length_sec == nil then
+    -- For streams and the like, just display a running time.
+    progress_text:set_text(current)
+  else
+    -- Otherwise, make it Running / Length
+    -- Convert length. 
+    local s = players[player_name].length_sec
+    local m = math.floor(s / 60)
+    s = s - (m * 60)
+    local l = "00:00"
+    if m >= 60 then
+      local h = math.floor(m / 60)
+      m = m - (h * 60)
+      l = string.format("%02d:%02d:%02d", h, m, s)
+    else
+      l = string.format("%02d:%02d", m, s)
+    end
+    progress_text:set_text(current .. " / " .. l)
   end
 end
 
