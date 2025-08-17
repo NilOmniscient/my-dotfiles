@@ -19,6 +19,7 @@ return {
 		opts = {
 			ensure_installed = {
 				"lua_ls",
+        "ols",
 				"ts_ls",
 				"zls",
 			},
@@ -37,6 +38,13 @@ return {
 			lspconfig.zls.setup({})
 			lspconfig.clangd.setup({})
 			lspconfig.phpactor.setup({})
+      lspconfig.ols.setup({
+        checker_args="-strict-style",
+        collections = {
+          name = "modules",
+          path = vim.fn.expand("$HOME/programming/odin/modules")
+        },
+      })
 
 			local opts = {}
 			vim.api.nvim_create_autocmd("LspAttach", {
