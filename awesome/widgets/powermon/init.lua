@@ -3,14 +3,15 @@ local gears = require("gears")
 local theme = require("beautiful")
 local wibox = require("wibox")
 
-local f = io.open("/sys/class/power_supply/BAT0/present", "r")
-if f == nil then return wibox.widget{} end
-local present = f:read("*all")
-f:close()
-
-if string.find(present, "0") then
-  return wibox.widget{}
+local exists = false
+for i = 0, 10, 1 do
+  if gears.filesystem.dir_readable("/sys/class/power_supply/BAT" .. i) then
+    exists = true
+    break
+  end
 end
+
+if exists == false then return wibox.widget {} end
 
 -- If we got here, then there's a battery. 
 local powermon = wibox.widget {
