@@ -48,7 +48,7 @@ local details = awful.popup {
   shape = gears.shape.rounded_rect,
   border_widget = 1,
   border_color = theme.bg_focus,
-  offset = { y = -5 },
+  offset = { y = 5 },
   widget = {},
 }
 function create_row(w)
@@ -56,7 +56,7 @@ function create_row(w)
     {
       layout = wibox.container.margin,
       margins = 8,
-      artist_widget,
+      w,
     },
     fg = theme.fg_normal,
     bg = theme.bg_normal,
@@ -73,6 +73,14 @@ details:setup(detail_rows)
 local final_widget = wibox.widget {
   layout = wibox.layout.fixed.horizontal,
   spacing = 8,
-  status_widget,title_widget, artist_widget, album_widget
+  status_widget,title_widget,
+  buttons = awful.button({}, 1, nil, function()
+    if details.visible then
+      details.visible = false
+    else
+      details:move_next_to(mouse.current_widget_geometry)
+      details.visible = true
+    end
+  end)
 }
 return final_widget
