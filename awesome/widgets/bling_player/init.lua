@@ -4,6 +4,8 @@ local awful = require("awful")
 local wibox = require("wibox")
 local bling = require("modules/bling")
 
+local players = {}
+local active_player = ""
 
 local playerctl = bling.signal.playerctl.lib()
 
@@ -26,10 +28,37 @@ local artist_widget = build_textbox("󰠃 Nothing Playing")
 local album_widget = build_textbox("󰀥 Nothing Playing")
 local status_widget = build_textbox("||")
 
+function new_player(player_name)
+  local player = {
+    title = "",
+    artist = "",
+    album = "",
+    active = false,
+  }
+  return player
+end
+
 playerctl:connect_signal("metadata", function(_, title, artist, album_path, album, new, player_name)
-  title_widget:set_markup_silently("󰎇 " .. title)
-  artist_widget:set_markup_silently("󰠃 " .. artist)
-  album_widget:set_markup_silently("󰀥 " .. album)
+
+  -- Update this particular player. 
+  local player = {}
+  if players[player_name] == nil then
+    player = new_player(player_name)
+  else
+    player = players[player_name]
+  end
+  player.title = title
+  player.artist = artist
+  player.album = album
+  players[player_name] = player
+  if active_player == "" then
+    active_player = player_name
+  end
+  if active_player == player_name then
+    title_widget:set_markup_silently("󰎇 " .. title)
+    artist_widget:set_markup_silently("󰠃 " .. artist)
+    album_widget:set_markup_silently("󰀥 " .. album)
+  end
 end)
 playerctl:connect_signal("playback_status", function(_, playing, player_name)
   if playing then
@@ -70,7 +99,27 @@ local detail_rows = {
   create_row(album_widget),
 }
 details:setup(detail_rows)
-local final_widget = wibox.widget {
+-- Build the control buttons. 
+local prev_button = build_textbox("󰒮", function()
+  if active_player ~= "" then
+    local player = active_player
+    playerctl:previous(player)
+  end
+end)
+local play_button = build_textbox("󰐎", function()
+  local player = active_player
+  playerctl:play_pause(player)
+end)
+local next_button = build_textbox("󰒭", function()
+  playerctl:next()
+end)
+local controls_widget = wibox.widget {
+  layout = wibox.layout.fixed.horizontal,
+  spacing = 10,
+  prev_button, play_button, next_button,
+}
+
+local condensed_widget = wibox.widget {
   layout = wibox.layout.fixed.horizontal,
   spacing = 8,
   status_widget,title_widget,
@@ -83,4 +132,8 @@ local final_widget = wibox.widget {
     end
   end)
 }
-return final_widget
+return wibox.widget {
+  layout = wibox.layout.fixed.horizontal,
+  spacing = 8,
+  condensed_widget, controls_widget,
+}

@@ -36,8 +36,8 @@ local TopPanel = function(s)
 	})
 	local middle_widgets = wibox.widget({
 		layout = wibox.layout.fixed.horizontal,
-	  bling_player,
-    -- media_player,
+	  -- bling_player,
+    media_player,
 	})
   local right_widgets = {}
   if s.index == 1 then
