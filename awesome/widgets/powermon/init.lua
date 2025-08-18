@@ -4,11 +4,12 @@ local theme = require("beautiful")
 local wibox = require("wibox")
 
 local f = io.open("/sys/class/power_supply/BAT0/present", "r")
+if f == nil then return wibox.widget{} end
 local present = f:read("*all")
 f:close()
 
 if string.find(present, "0") then
-  return {}
+  return wibox.widget{}
 end
 
 -- If we got here, then there's a battery. 
