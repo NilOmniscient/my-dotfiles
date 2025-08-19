@@ -30,10 +30,10 @@ local BottomPanel = function(s)
 		layout = wibox.layout.fixed.horizontal,
     s.mytasklist
   })
-  local bling_player = require("widgets/bling_player")
+  -- local adv_player = require("widgets.advanced_media")
 	local right_widgets = wibox.widget({
 		layout = wibox.layout.fixed.horizontal,
-    --bling_player,
+    -- adv_player,
 	})
 
 	local wrap_widget = function(w)
