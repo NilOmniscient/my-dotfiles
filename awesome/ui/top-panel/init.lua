@@ -27,7 +27,7 @@ local TopPanel = function(s)
 	local volume_control = require("widgets.volume")
 	local media_player = require("widgets.media_player")
   local powermon = require("widgets.powermon")
-  local bling_player = require("widgets.bling_player")
+  -- local bling_player = require("widgets.bling_player")
 
 	local left_widgets = wibox.widget({
 		layout = wibox.layout.fixed.horizontal,

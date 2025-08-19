@@ -136,7 +136,7 @@ function rebuild_selector()
             fg = beautiful.fg_normal,
             bg = beautiful.bg_normal,
             widget = wibox.container.background,
-buttons = awful.button({}, 1, nil, function()
+              buttons = awful.button({}, 1, nil, function()
               update_source(name)
               source_selector.visible = false
             end)
@@ -227,7 +227,8 @@ local words = gears.string.split(stdout, ";")
 
 -- Utility functions
 function trim(s)
-  if s == nil then
+  s = s or ""
+  if s == "" then
     return ""
   end
   return s:match("^%s*(.-)%s*$")
