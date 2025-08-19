@@ -228,6 +228,7 @@ local words = gears.string.split(stdout, ";")
 -- Utility functions
 function trim(s)
   s = s or ""
+  if s == nil then s = "" end
   if s == "" then
     return ""
   end
