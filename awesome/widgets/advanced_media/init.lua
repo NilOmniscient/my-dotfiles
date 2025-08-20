@@ -56,12 +56,10 @@ local source_text = wibox.widget {
   maximum_width = 100,
 }
 local function build_sources(player_names)
-  log_message("Got to Callback\n")
   local has_name = false
   local rows = { layout = wibox.layout.fixed.vertical }
   for name in player_names:gmatch("[^\r\n]+") do
     if not has_name then
-      log_message("Set source to first available\n")
       has_name = true
       if source_text.text == "Source" then
         active_source = name
@@ -95,7 +93,6 @@ local function build_sources(player_names)
 end
 
 source_text.buttons = awful.button({}, 1, nil, function()
-  log_message("Button Triggered")
   if not source_selector.visible then
     playerctl:get_players(build_sources)
     source_selector:move_next_to(mouse.current_widget_geometry)
@@ -216,9 +213,7 @@ local function build_details_popup()
 end
 
 song_title.buttons = awful.button({}, 1, nil, function()
-  log_message("Song Title clicked. Toggle visible\n")
   if not details_popup.visible then
-    log_message("Move to here, then make visible\n")
     details_popup:move_next_to(mouse.current_widget_geometry)
     details_popup.visible = true
   else
