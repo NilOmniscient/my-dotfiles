@@ -53,7 +53,7 @@ local source_text = wibox.widget {
   widget = wibox.widget.textbox,
   text = "Source",
   ellipsize = "end",
-  maximum_width = 100,
+  forced_width = 100,
 }
 local function build_sources(player_names)
   local has_name = false
