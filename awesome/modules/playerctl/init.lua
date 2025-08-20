@@ -37,20 +37,20 @@ end
 
 function playerctl:toggle()
   local cmd = self._private.cmd .. "play-pause"
-  awful.spawn.with_shell(cmd)
+  awful.spawn(cmd)
 end
 function playerctl:previous()
   local cmd = self._private.cmd .. "previous"
-  awful.spawn.with_shell(cmd)
+  awful.spawn(cmd)
 end
 function playerctl:next()
   local cmd = self._private.cmd .. "next"
-  awful.spawn.with_shell(cmd)
+  awful.spawn(cmd)
 end
 function playerctl:set_loop_status(loop_status)
   local cmd = self._private.cmd .. "loop " .. loop_status
   self._private.loop_status = loop_status
-  awful.spawn.with_shell(cmd)
+  awful.spawn(cmd)
 end
 function playerctl:cycle_loop_status()
   local loop_status = self._private.loop_status or "None"
@@ -70,26 +70,13 @@ function playerctl:toggle_shuffle()
   local cmd = self._private.cmd .. "shuffle " .. shuffle
   awful.spawn.with_shell(cmd)
 end
-
--- Getter/Emitters
-local function get_players(self)
-  local cmd = "playerctl -l"
-  awful.spawn.easy_async(cmd, function(line, _, _, _)
-    local player_names = {}
-    -- Need to split up the lines. 
-    if line and line ~= "" then
-      --for name in line:gmatch("[^\r\n]+") do
-        --if name and name ~= "" then
-      log_message("Sending Signal\n" .. line)
-          self:emit_signal("players", line)
-          -- table.insert(player_names, name)
-        --end
-      --end
-    end
-    -- self:emit_signal("players", player_names)
+function playerctl:get_players(callback)
+  awful.spawn.easy_async("playerctl -l", function(line)
+    log_message("Call the Callback\n")
+    callback(line)
   end)
 end
-local function get_metadata(self)
+function playerctl:get_metadata(callback)
   local keys = {
     "title",
     "artist",
@@ -97,9 +84,8 @@ local function get_metadata(self)
     "playerName",
     "album",
   }
-
   local cmd = string.format(self._private.cmd .. "-f '{{%s}}' metadata", table.concat(keys, "}};{{"))
-  awful.spawn.easy_async(cmd, function(line, _, _, _)
+  awful.spawn.easy_async(cmd, function(line)
     local words = gears.string.split(line, ";")
     local title = words[1] or ""
     local artist = words[2] or ""
@@ -111,97 +97,58 @@ local function get_metadata(self)
     if player_name == "spotify" then
       art_url = art_url:gsub("open.spotify.com", "i.scdn.co")
     end
-
-    if self._private.metadata_timer and self._private.metadata_timer.started then
-      self._private.metadata_timer:stop()
-    end
-
     if title and title ~= "" then
       if art_url ~= "" then
         local art_path = os.tmpname()
         save_image_async(art_url, art_path, function()
-          self:emit_signal("metadata", title, artist, art_path, album, player_name)
+          callback(title, artist, art_path, album, player_name)
         end)
       else
-        self:emit_signal("metadata", title, artist, "", album, player_name)
+        callback(title, artist, "", album, player_name)
       end
     end
   end)
 end
-
-local function get_position(self)
-  local position_cmd = self._private.cmd .. "position"
-  local length_cmd = self._private.cmd .. "metadata mpris:length"
-
-  awful.spawn.easy_async(position_cmd, function(position)
-    awful.spawn.easy_async(length_cmd, function(length)
+function playerctl:get_position(callback)
+  local pcmd = self._private.cmd .. "position"
+  local lcmd = self._private.cmd .. "metadata mpris:length"
+  awful.spawn.easy_async(pcmd, function(pos)
+    awful.spawn.easy_async(lcmd, function(len)
       local l = tonumber(length)
       local p = tonumber(position)
       if l and p then
         if p >= 0 and l >= 0 then
-          self:emit_signal("position", p, l / 1000000)
+          callback(p, l / 1000000)
         end
       end
     end)
   end)
 end
 
-local function get_playback_status(self)
-  local status_cmd = self._private.cmd .. "status"
-  awful.spawn.easy_async(status_cmd, function(line)
+function playerctl:get_status(callback)
+  local cmd = self._private.cmd .. "status"
+  awful.spawn.easy_async(cmd, function(line)
     local s = false
     if line:find("Playing") then s = true end
-    self:emit_signal("playback_status", s)
+    callback(s)
   end)
 end
-
-local function get_loop_status(self)
-  local cmd = self._private.cmd .. "loop"
+function playerctl:get_loop_status(callback)
   awful.spawn.easy_async(cmd, function(line)
     self._private.loop_status = line
-    self:emit_signal("loop_status", line:lower())
+    callback(line:lower())
   end)
 end
-
-local function get_shuffle_status(self)
+function playerctl:get_shuffle_status(callback)
   local cmd = self._private.cmd .. "shuffle"
   awful.spawn.easy_async(cmd, function(line)
     local s = false
     if line:find("On") then s = true end
     self._private.shuffle = s
-    self:emit_signal("shuffle", s)
+    callback(s)
   end)
 end
-
--- Emitter timers. 
-local function build_timer(interval, callback)
-  return gears.timer {
-    timer = interval,
-    autostart = true,
-    callback = callback,
-  }
-end
-
-local function emit_metadata(self)
-  self._private.metadata_timer = build_timer(self.debounce, function() get_metadata(self) end)
-end
-local function emit_players(self)
-  self._private.players_timer = build_timer(self.debounce, function() get_players(self) end)
-end
-local function emit_position(self)
-  self._private.position_timer = build_timer(self.interval, function() get_position(self) end)
-end
-local function emit_playback_status(self)
-  self._private.playback_status_timer = build_timer(self.debounce, function() get_playback_status(self) end)
-end
-local function emit_loop_status(self)
-  self._private.loop_status_timer = build_timer(self.debounce, function() get_loop_status(self) end)
-end
-local function emit_shuffle_status(self)
-  self._private.shuffle_status_timer = build_timer(self.debounce, function() get_shuffle_status(self) end)
-end
-
-local function parse_args(self, args)
+function parse_args(self, args)
   if args.ignore then
     self._private.cmd = self._private.cmd .. "--ignore-player="
     if type(args.ignore) == "string" then
@@ -232,13 +179,6 @@ local function new(args)
   ret._private.cmd = "playerctl "
   parse_args(ret, args)
 
-  -- Now set up the signals to emit.
-  emit_players(ret)
-  emit_metadata(ret)
-  emit_position(ret)
-  emit_playback_status(ret)
-  emit_loop_status(ret)
-  emit_shuffle_status(ret)
   return ret
 end
 
