@@ -32,6 +32,8 @@ local function build_textbox(text)
     widget = wibox.widget.textbox,
     font = theme.font,
     text = text,
+    align = "center",
+    valign = "center",
   }
 end
 
