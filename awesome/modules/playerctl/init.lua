@@ -47,12 +47,13 @@ function playerctl:next()
   local cmd = self._private.cmd .. "next"
   awful.spawn(cmd)
 end
+
 function playerctl:set_loop_status(loop_status)
   local cmd = self._private.cmd .. "loop " .. loop_status
   self._private.loop_status = loop_status
   awful.spawn(cmd)
 end
-function playerctl:cycle_loop_status()
+function playerctl:cycle_loop_status(callback)
   local loop_status = self._private.loop_status or "None"
   local new_status = loop_status
   if loop_status == "None" then
@@ -62,17 +63,19 @@ function playerctl:cycle_loop_status()
   else
     new_status = "None"
   end
+  callback(new_status)
   self:set_loop_status(new_status)
 end
-function playerctl:toggle_shuffle()
-  local shuffle = self._private.shuffle == "on" and true or false
+function playerctl:toggle_shuffle(callback)
+  local shuffle = self._private.shuffle and true or false
+  local s = "On" and shuffle or "Off"
   self._private.shuffle = not shuffle
-  local cmd = self._private.cmd .. "shuffle " .. shuffle
+  local cmd = self._private.cmd .. "shuffle " .. s
+  callback(shuffle)
   awful.spawn.with_shell(cmd)
 end
 function playerctl:get_players(callback)
   awful.spawn.easy_async("playerctl -l", function(line)
-    log_message("Call the Callback\n")
     callback(line)
   end)
 end
@@ -134,9 +137,9 @@ function playerctl:get_status(callback)
   end)
 end
 function playerctl:get_loop_status(callback)
-  awful.spawn.easy_async(cmd, function(line)
+  awful.spawn.easy_async(self._private.cmd .. "loop", function(line)
     self._private.loop_status = line
-    callback(line:lower())
+    callback(line)
   end)
 end
 function playerctl:get_shuffle_status(callback)
