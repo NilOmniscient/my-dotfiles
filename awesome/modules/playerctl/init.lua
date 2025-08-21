@@ -12,6 +12,15 @@ local log_message = function(s)
   end
 end
 
+function trim(s)
+  s = s or ""
+  if s == nil then s = "" end
+  if s == "" then
+    return ""
+  end
+  return s:match("^%s*(.-)%s*$")
+end
+
 local playerctl = {
   mt = {}
 }
@@ -54,8 +63,8 @@ function playerctl:set_loop_status(loop_status)
   awful.spawn(cmd)
 end
 function playerctl:cycle_loop_status(callback)
-  local loop_status = self._private.loop_status or "None"
-  local new_status = loop_status
+  local loop_status = self._private.loop_status
+  local new_status = ""
   if loop_status == "None" then
     new_status = "Track"
   elseif loop_status == "Track" then
@@ -63,16 +72,13 @@ function playerctl:cycle_loop_status(callback)
   else
     new_status = "None"
   end
-  callback(new_status)
   self:set_loop_status(new_status)
+  callback(new_status)
 end
 function playerctl:toggle_shuffle(callback)
-  local shuffle = self._private.shuffle and true or false
-  local s = "On" and shuffle or "Off"
-  self._private.shuffle = not shuffle
-  local cmd = self._private.cmd .. "shuffle " .. s
-  callback(shuffle)
-  awful.spawn.with_shell(cmd)
+  local cmd = self._private.cmd .. "shuffle Toggle"
+  awful.spawn(cmd)
+  self:get_shuffle_status(callback)
 end
 function playerctl:get_players(callback)
   awful.spawn.easy_async("playerctl -l", function(line)
@@ -138,8 +144,8 @@ function playerctl:get_status(callback)
 end
 function playerctl:get_loop_status(callback)
   awful.spawn.easy_async(self._private.cmd .. "loop", function(line)
-    self._private.loop_status = line
-    callback(line)
+    self._private.loop_status = trim(line)
+    callback(trim(line))
   end)
 end
 function playerctl:get_shuffle_status(callback)
