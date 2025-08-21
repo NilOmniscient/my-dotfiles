@@ -172,15 +172,6 @@ local function update_metadata(title, artist, art_path, album, _)
   end
 end
 
-local status_widget = build_textbox("󰐊")
-local function update_status(status)
-  if status then
-    status_widget:set_text("󰐊")
-  else
-    status_widget:set_text("󰏤")
-  end
-end
-
 -- Build the details popup. 
 local details_popup = awful.popup {
   bg = theme.bg_normal,
@@ -223,6 +214,20 @@ song_title.buttons = awful.button({}, 1, nil, function()
   end
 end)
 
+local status_widget = build_textbox("󰐊")
+local function update_status(status)
+  if status then
+    status_widget:set_text("󰏤")
+  else
+    status_widget:set_text("󰐊")
+  end
+end
+
+status_widget.buttons = awful.button({}, 1, nil, function()
+  playerctl:toggle()
+  update_status()
+end)
+
 local function update_widgets()
   playerctl:get_metadata(update_metadata)
   playerctl:get_loop_status(update_repeat)
@@ -234,7 +239,8 @@ local controls = wibox.widget {
   layout = wibox.layout.fixed.horizontal,
   spacing = 8,
   build_button("󰒮", function() playerctl:previous() end),
-  build_button("󰐎", function() playerctl:toggle() end),
+  status_widget,
+  -- build_button("󰐎", function() playerctl:toggle() end),
   build_button("󰒭", function() playerctl:next() end),
   repeat_button,
   shuffle_button,
@@ -262,7 +268,7 @@ local final_widget = wibox.widget {
   layout = wibox.layout.fixed.horizontal,
   spacing = 16,
   source_text,
-  status_widget,
+  -- status_widget,
   song_title,
   controls,
 }
