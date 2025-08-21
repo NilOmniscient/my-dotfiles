@@ -44,9 +44,6 @@ local TopPanel = function(s)
     right_widgets = wibox.widget({
       layout = wibox.layout.fixed.horizontal,
       spacing = 4,
-      volume_control{
-        widget_type = "arc",
-      },
       wibox.widget.systray(),
       powermon,
       mytextclock,
