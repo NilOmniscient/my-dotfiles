@@ -1,2 +1,8 @@
 #!/usr/bin/env bash
-xautolock -time 5 -locker "betterlockscreen -l" &
+xidlehook \
+  --detect-sleep \
+  --not-when-audio \
+  --not-when-fullscreen \
+  --timer 300 'xset dpms force standby' ''\
+  --timer 300 'betterlockscreen -l' ''\
+  --timer 300 'systemctl suspend' ''
