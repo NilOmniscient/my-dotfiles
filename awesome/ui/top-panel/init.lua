@@ -24,9 +24,7 @@ local TopPanel = function(s)
 	})
 
 	local logout_menu = require("widgets.logout_menu")
-	local volume_control = require("widgets.volume")
-	-- local media_player = require("widgets.media_player")
-  local adv_player = require("widgets.advanced_media")
+  local media_player = require("widgets.media_player")
   local powermon = require("widgets.powermon")
 
 	local left_widgets = wibox.widget({
@@ -36,8 +34,7 @@ local TopPanel = function(s)
 	})
 	local middle_widgets = wibox.widget({
 		layout = wibox.layout.fixed.horizontal,
-    -- media_player,
-    adv_player,
+    media_player,
 	})
   local right_widgets = {}
   if s.index == 1 then
