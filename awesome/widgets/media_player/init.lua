@@ -138,7 +138,7 @@ shuffle_button.buttons = awful.button({}, 1, nil, function()
   playerctl:toggle_shuffle(update_shuffle)
 end)
 
--- Build out the info widgets. 
+-- Build out the info widgets.
 local song_title = build_textbox("󰝚 Nothing playing")
 song_title.ellipsize = "end"
 song_title.forced_width = 300
@@ -165,14 +165,14 @@ local function update_metadata(title, artist, art_path, album, _)
     album = "󰲹 Nothing Playing"
   end
   song_album:set_text("󰲹 " .. album)
-  if art_path == "" then
-    album_art:set_image(nil)
-  else
+  if art_path and art_path ~= "" then
     album_art:set_image(art_path)
+  else
+    album_art:set_image(nil)
   end
 end
 
--- Build the details popup. 
+-- Build the details popup.
 local details_popup = awful.popup {
   bg = theme.bg_normal,
   fg = theme.fg_normal,

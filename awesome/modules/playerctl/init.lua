@@ -48,10 +48,12 @@ function playerctl:toggle()
   local cmd = self._private.cmd .. "play-pause"
   awful.spawn(cmd)
 end
+
 function playerctl:previous()
   local cmd = self._private.cmd .. "previous"
   awful.spawn(cmd)
 end
+
 function playerctl:next()
   local cmd = self._private.cmd .. "next"
   awful.spawn(cmd)
@@ -62,6 +64,7 @@ function playerctl:set_loop_status(loop_status)
   self._private.loop_status = loop_status
   awful.spawn(cmd)
 end
+
 function playerctl:cycle_loop_status(callback)
   local loop_status = self._private.loop_status
   local new_status = ""
@@ -75,16 +78,19 @@ function playerctl:cycle_loop_status(callback)
   self:set_loop_status(new_status)
   callback(new_status)
 end
+
 function playerctl:toggle_shuffle(callback)
   local cmd = self._private.cmd .. "shuffle Toggle"
   awful.spawn(cmd)
   self:get_shuffle_status(callback)
 end
+
 function playerctl:get_players(callback)
   awful.spawn.easy_async("playerctl -l", function(line)
     callback(line)
   end)
 end
+
 function playerctl:get_metadata(callback)
   local keys = {
     "title",
@@ -107,10 +113,16 @@ function playerctl:get_metadata(callback)
       art_url = art_url:gsub("open.spotify.com", "i.scdn.co")
     end
     if title and title ~= "" then
+      -- For now, workaround.
+      art_url = ""
       if art_url ~= "" then
         local art_path = os.tmpname()
         save_image_async(art_url, art_path, function()
-          callback(title, artist, art_path, album, player_name)
+          if art_path then
+            callback(title, artist, art_path, album, player_name)
+          else
+            callback(title, artist, "", album, player_name)
+          end
         end)
       else
         callback(title, artist, "", album, player_name)
@@ -118,6 +130,7 @@ function playerctl:get_metadata(callback)
     end
   end)
 end
+
 function playerctl:get_position(callback)
   local pcmd = self._private.cmd .. "position"
   local lcmd = self._private.cmd .. "metadata mpris:length"
@@ -142,12 +155,14 @@ function playerctl:get_status(callback)
     callback(s)
   end)
 end
+
 function playerctl:get_loop_status(callback)
   awful.spawn.easy_async(self._private.cmd .. "loop", function(line)
     self._private.loop_status = trim(line)
     callback(trim(line))
   end)
 end
+
 function playerctl:get_shuffle_status(callback)
   local cmd = self._private.cmd .. "shuffle"
   awful.spawn.easy_async(cmd, function(line)
@@ -157,6 +172,7 @@ function playerctl:get_shuffle_status(callback)
     callback(s)
   end)
 end
+
 function parse_args(self, args)
   if args.ignore then
     self._private.cmd = self._private.cmd .. "--ignore-player="
@@ -178,7 +194,7 @@ end
 local function new(args)
   args = args or {}
 
-  local ret = gears.object{}
+  local ret = gears.object {}
   gears.table.crush(ret, playerctl, true)
   ret.interval = args.interval or theme.playerctl_interval or 1
   ret.debounce = args.debounce or theme.playerctl_debounce or 0.35
