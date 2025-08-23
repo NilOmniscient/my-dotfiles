@@ -116,10 +116,14 @@ function playerctl:get_metadata(callback)
       -- For now, workaround.
       if art_url ~= "" then
         local art_path = ""
+        if self._private.art_path then
+          art_path = self._private.art_path
+        else
+          self._private.art_path = os.tmpname()
+          art_path = self._private.art_path
+        end
         if not self._private.art_url or art_url ~= self._private.art_url then
-          local art_path = os.tmpname()
           self._private.art_url = art_url
-          self._private.art_path = art_path
           save_image_async(art_url, art_path, function()
             if art_path then
               callback(title, artist, art_path, album, player_name)
