@@ -47,13 +47,13 @@ local function worker(user_args)
 		awful.spawn.with_shell("betterlockscreen -l")
 	end
 	local onreboot = args.onreboot or function()
-		awful.spawn.with_shell("reboot")
+		awful.spawn.with_shell("loginctl reboot")
 	end
 	local onsuspend = args.onsuspend or function()
-		awful.spawn.with_shell("systemctl suspend")
+		awful.spawn.with_shell("loginctl suspend")
 	end
 	local onpoweroff = args.onpoweroff or function()
-		awful.spawn.with_shell("shutdown -hP now")
+		awful.spawn.with_shell("loginctl poweroff")
 	end
 
 	local menu_items = {
