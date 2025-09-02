@@ -27,7 +27,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/catppuccin/th
 
 -- Init all modules (You can add/remove active modules here)
 require("modules.auto-start")
-require("modules.sloppy-focus")
+-- require("modules.sloppy-focus")
 require("modules.set-wallpaper")
 require("modules.rounded-corners")
 require("modules.tile-gap")
