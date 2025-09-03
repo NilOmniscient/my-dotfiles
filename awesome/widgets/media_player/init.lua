@@ -70,12 +70,12 @@ local function build_sources(player_names)
     end
 
     local row = build_row(build_textbox(name))
-    row.buttons = awful.button({}, 1, nil, function()
+    row:buttons(awful.util.table.join(awful.button({}, 1, nil, function()
       active_source = name
       source_selector.visible = false
       source_text:set_text(name)
       playerctl:set_player(active_source)
-    end)
+    end)))
     row:connect_signal("mouse::enter", function(c)
       c:set_bg(theme.bg_focus)
       c:set_fg(theme.fg_focus)
@@ -94,21 +94,21 @@ local function build_sources(player_names)
   end
 end
 
-source_text.buttons = awful.button({}, 1, nil, function()
+source_text:buttons(awful.util.table.join(awful.button({}, 1, nil, function()
   if not source_selector.visible then
     playerctl:get_players(build_sources)
     source_selector:move_next_to(mouse.current_widget_geometry)
   else
     source_selector.visible = false
   end
-end)
+end)))
 
 -- Control buttons and widget.
 local function build_button(text, callback)
   local btn = build_textbox(text)
-  btn.buttons = awful.button({}, 1, nil, function()
+  btn:buttons(awful.util.table.join(awful.button({}, 1, nil, function()
     callback()
-  end)
+  end)))
   return btn
 end
 
@@ -122,9 +122,9 @@ local function update_repeat(status)
     repeat_button:set_text("󰑖")
   end
 end
-repeat_button.buttons = awful.button({}, 1, nil, function()
+repeat_button:buttons(awful.util.table.join(awful.button({}, 1, nil, function()
   playerctl:cycle_loop_status(update_repeat)
-end)
+end)))
 
 local shuffle_button = build_textbox("󰒞")
 local function update_shuffle(status)
@@ -134,9 +134,9 @@ local function update_shuffle(status)
     shuffle_button:set_text("󰒞")
   end
 end
-shuffle_button.buttons = awful.button({}, 1, nil, function()
+shuffle_button:buttons(awful.util.table.join(awful.button({}, 1, nil, function()
   playerctl:toggle_shuffle(update_shuffle)
-end)
+end)))
 
 -- Build out the info widgets.
 local song_title = build_textbox("󰝚 Nothing playing")
@@ -205,14 +205,14 @@ local function build_details_popup()
   details_popup:setup(details_rows)
 end
 
-song_title.buttons = awful.button({}, 1, nil, function()
+song_title:buttons(awful.util.table.join(awful.button({}, 1, nil, function()
   if not details_popup.visible then
     details_popup:move_next_to(mouse.current_widget_geometry)
     details_popup.visible = true
   else
     details_popup.visible = false
   end
-end)
+end)))
 
 local status_widget = build_textbox("󰐊")
 local function update_status(status)
@@ -222,11 +222,12 @@ local function update_status(status)
     status_widget:set_text("󰐊")
   end
 end
-
-status_widget.buttons = awful.button({}, 1, nil, function()
+log_message("Make status button\n")
+status_widget:buttons(awful.util.table.join(awful.button({}, 1, nil, function()
+  log_message("Status Button clicked")
   playerctl:toggle()
   update_status()
-end)
+end)))
 
 local function update_widgets()
   playerctl:get_metadata(update_metadata)

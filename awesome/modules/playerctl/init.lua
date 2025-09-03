@@ -45,6 +45,7 @@ function playerctl:set_player(player)
 end
 
 function playerctl:toggle()
+  log_message("Play/Pause")
   local cmd = self._private.cmd .. "play-pause"
   awful.spawn(cmd)
 end
