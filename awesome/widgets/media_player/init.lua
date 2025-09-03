@@ -222,9 +222,7 @@ local function update_status(status)
     status_widget:set_text("󰐊")
   end
 end
-log_message("Make status button\n")
 status_widget:buttons(awful.util.table.join(awful.button({}, 1, nil, function()
-  log_message("Status Button clicked")
   playerctl:toggle()
   update_status()
 end)))
