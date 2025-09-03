@@ -12,7 +12,7 @@ apps = {
 	-- editor_cmd = terminal .. " -e " .. editor,
 
 	-- Your default file explorer
-	explorer = "pcmanfm",
+	explorer = "thunar",
 }
 
 apps.editor_cmd = apps.terminal .. " -e " .. apps.editor
