@@ -44,7 +44,7 @@ local function worker(user_args)
 		awesome.quit()
 	end
 	local onlock = args.onlock or function()
-		awful.spawn.with_shell("betterlockscreen -l")
+		awful.spawn.with_shell("xautolock -locknow")
 	end
 	local onreboot = args.onreboot or function()
 		awful.spawn.with_shell("loginctl reboot")

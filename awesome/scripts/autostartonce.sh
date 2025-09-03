@@ -18,7 +18,6 @@ APPS=(
     udiskie
     volumeicon
     nm-applet
-    # gentoo-pipewire-launcher
 )
 
 # Some applications start child applications that need to be killed on reload
