@@ -12,7 +12,8 @@ local apps = require("configuration.apps")
 
 local filesystem = require("gears.filesystem")
 
--- local power_menu = require("widgets.power_menu")
+local power_menu = require("widgets.power_menu")
+local power_popup = power_menu()
 
 -- {{{ Key bindings
 globalKeys = gears.table.join(
@@ -137,7 +138,12 @@ globalKeys = gears.table.join(
 
   -- Power Menu
   awful.key({ modkey, altkey }, "p", function()
-    awful.spawn(filesystem.get_configuration_dir() .. "scripts/rofi_power.sh")
+    local active_screen = awful.screen.focused()
+    awful.placement.centered(power_popup, {
+      parent = active_screen,
+    })
+    power_popup.visible = not power_popup.visible
+    --  awful.spawn(filesystem.get_configuration_dir() .. "scripts/rofi_power.sh")
   end, { description = "Launch Power Menu", group = "launcher" }),
 
   awful.key({ modkey }, "x", function()
