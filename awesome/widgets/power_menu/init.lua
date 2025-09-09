@@ -26,10 +26,3 @@ local menu_items = {
 local close_key = { "Mod4", "p" }
 local menu = menu_builder(menu_items)
 return menu
-
---return awful.menu {
---  items = menu_items,
---  theme = {
---    width = 400,
---  }
---}

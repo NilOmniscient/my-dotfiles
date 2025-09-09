@@ -3,15 +3,6 @@ local wibox = require("wibox")
 local gears = require("gears")
 local theme = require("beautiful")
 
-local log_message = function(s)
-  local filepath = "/home/bwhittington/popup.log"
-  local file = io.open(filepath, "a")
-  if file then
-    file:write(s)
-    file:close()
-  end
-end
-
 local active_row = {}
 
 local function build_row(row_widget, row_callback)
@@ -148,21 +139,13 @@ local function build_menu(items, close_key)
   )
 
   function popup.toggle()
-    log_message("Toggle Visibilty\n")
     if popup.visible then
-      log_message("Hide\n")
       kg:stop()
     else
-      log_message("Show\n")
       active_row = popup.rows[1]
       switch_focus(nil, active_row)
       popup.visible = true
       kg:start()
-    end
-    if popup.visible then
-      log_message("visible")
-    else
-      log_message("Not visible")
     end
   end
 
