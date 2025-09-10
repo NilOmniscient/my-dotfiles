@@ -39,6 +39,7 @@ local function build_text_row(row_text, row_callback)
     widget = wibox.widget.textbox,
     text = row_text,
     font = theme.font,
+    forced_width=300,
   }
   return build_row(textbox, row_callback)
 end
