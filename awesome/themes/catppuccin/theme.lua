@@ -20,7 +20,7 @@ theme.wrapped_fg = "#4E6B99"
 -- }}}
 
 -- {{{ Styles
-theme.font = "hack 16"
+theme.font = "hack 14"
 
 -- {{{ Colors -- Base these off Catppuccin Mocha
 theme.bg_normal = "#1E1E2E"
