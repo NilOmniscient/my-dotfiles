@@ -16,7 +16,7 @@ APPS=(
     # radeon-profile
     # $HOME/.config/awesomestart
     udiskie
-    volumeicon
+    # volumeicon
     nm-applet
 )
 
