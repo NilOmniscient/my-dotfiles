@@ -1,6 +1,10 @@
-#!/usr/bin/env bash
-xautolock -time 5 \
-  -locker 'betterlockscreen -l' \
-  -killtime 5 \
-  -killer 'loginctl suspend' \
-  -detectsleep
+#!/usr/bin/fish
+xidlehook --detect-sleep \
+  --not-when-audio \
+  --not-when-fullscreen \
+  --timer 300 \
+    'betterlockscreen -l' \
+    '' \
+  --timer 600 \
+    'loginctl suspend' \
+    ''

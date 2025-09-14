@@ -11,12 +11,9 @@
 # is intended to be a copy of this file
 # to allow out of tree autostart programs
 APPS=(
-    # keepassxc
     kdeconnect-indicator
-    # radeon-profile
     # $HOME/.config/awesomestart
     udiskie
-    # volumeicon
     nm-applet
 )
 

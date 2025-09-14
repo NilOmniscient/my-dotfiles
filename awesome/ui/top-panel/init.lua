@@ -44,7 +44,7 @@ local TopPanel = function(s)
       spacing = 4,
       wibox.widget.systray(),
       volume_widget {
-        widget_type = "icon"
+        widget_type = "icon_and_text"
       },
       powermon,
       mytextclock,
