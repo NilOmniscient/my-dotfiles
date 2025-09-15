@@ -14,6 +14,8 @@ return {
     "/bin/bash -c "
     .. filesystem.get_configuration_dir()
     .. "scripts/autostartonce.sh", -- Spawn "dirty" apps that can linger between sessions
-    "xidlehook --detect-sleep --not-when-audio --not-when-fullscreen --socket /run/user/1000/xidlehook.socket --timer 300 'betterlockscreen -l' '' --timer 600 'loginctl suspend' ''",
+    "/bin/bash -c "
+    .. filesystem.get_configuration_dir()
+    .. "scripts/autolock.sh", -- Spawn "dirty" apps that can linger between sessions
   },
 }
