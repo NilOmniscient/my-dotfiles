@@ -45,7 +45,7 @@ local function worker(user_args)
   end
   local onlock = args.onlock or function()
     awful.spawn.with_shell(
-      "~/.cargo/bin/xidlehook-client --socket /run/user/1000/xidlehook.socket control --action Trigger --timer 0")
+      "xautolock -locknow")
   end
   local onreboot = args.onreboot or function()
     awful.spawn.with_shell("loginctl reboot")
