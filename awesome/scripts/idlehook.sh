@@ -1,5 +1,5 @@
-#!/usr/bin/fish
-xidlehook --detect-sleep \
+#!/usr/bin/bash
+~/.cargo/bin/xidlehook --detect-sleep \
   --not-when-audio \
   --not-when-fullscreen \
   --timer 300 \

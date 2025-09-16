@@ -10,7 +10,8 @@ local menu_items = {
     awesome.quit()
   end },
   { " Lock", function()
-    awful.spawn("xautolock -locknow")
+    awful.spawn.with_shell(
+      "~/.cargo/bin/xidlehook-client --socket /run/user/1000/xidlehook.socket control --action Trigger --timer 0")
   end },
   { " Reboot", function()
     awful.spawn("loginctl reboot")

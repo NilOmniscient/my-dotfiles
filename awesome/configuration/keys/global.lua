@@ -17,7 +17,8 @@ local power_menu = require("widgets.power_menu")
 -- {{{ Key bindings
 globalKeys = gears.table.join(
   awful.key({ modkey, altkey }, "l", function()
-    awful.spawn("xautolock -locknow")
+    awful.spawn.with_shell(
+      "~/.cargo/bin/xidlehook-client --socket /run/user/1000/xidlehook.socket control --action Trigger --timer 0")
   end, { description = "Lock the screen", group = "Launcher" }),
   awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
   awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
