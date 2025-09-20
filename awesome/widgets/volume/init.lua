@@ -130,3 +130,52 @@ end
 
 local volume = {}
 local rows = { layout = wibox.layout.fixed.vertical }
+
+local osd_popup = awful.popup({
+  bg = theme.bg_normal,
+  fg = theme.fg_normal,
+  ontop = true,
+  visible = false,
+  shape = gears.shape.rounded_rect,
+  border_width = 1,
+  border_color = theme.fg_focus,
+  maximum_width = 400,
+  offset = { y = 5 },
+  widget = {},
+})
+
+function osd_popup.toggle()
+  if (osd_popup.visible) then
+    osd_popup.visible = false
+  else
+    local active_screen = awful.screen.focused()
+    awful.placement.centered(osd_popup, {
+      parent = active_screen,
+    })
+    osd_popup.visible = true
+  end
+end
+
+local sink_popup = awful.popup({
+  bg = theme.bg_normal,
+  fg = theme.fg_normal,
+  ontop = true,
+  visible = false,
+  shape = gears.shape.rounded_rect,
+  border_width = 1,
+  border_color = theme.fg_focus,
+  maximum_width = 400,
+  offset = { y = 5 },
+  widget = {},
+})
+function sink_popup.toggle()
+  if (sink_popup.visible) then
+    sink_popup.visible = false
+  else
+    local active_screen = awful.screen.focused()
+    awful.placement.centered(sink_popup, {
+      parent = active_screen,
+    })
+    sink_popup.visible = true
+  end
+end
