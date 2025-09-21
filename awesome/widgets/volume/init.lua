@@ -144,7 +144,7 @@ local osd_popup = awful.popup({
   widget = {},
 })
 
-function osd_popup.toggle()
+function osd_popup:toggle()
   if (osd_popup.visible) then
     osd_popup.visible = false
   else
@@ -168,7 +168,7 @@ local sink_popup = awful.popup({
   offset = { y = 5 },
   widget = {},
 })
-function sink_popup.toggle()
+function sink_popup:toggle()
   if (sink_popup.visible) then
     sink_popup.visible = false
   else
@@ -179,3 +179,26 @@ function sink_popup.toggle()
     sink_popup.visible = true
   end
 end
+
+local function worker(user_args)
+  function volume:toggle_osd()
+    osd_popup:toggle()
+  end
+
+  function volume:toggle_sink()
+    sink_popup:toggle()
+  end
+
+  volume.widget:buttons(awful.util.table.join(
+    awful.button({}, 3, function()
+      sink_popup:toggle()
+    end)
+  ))
+  return volume.widget
+end
+
+return setmetatable(volume, {
+  __call = function(_, ...)
+    return worker(...)
+  end,
+})
