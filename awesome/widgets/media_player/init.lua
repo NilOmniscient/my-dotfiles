@@ -152,18 +152,12 @@ local album_art = wibox.widget {
 }
 
 local function update_metadata(title, artist, art_path, album, _)
-  if title == "" then
-    title = "󰝚 Nothing playing"
-  end
+  title = title or "Nothing Playing"
   song_title:set_text("󰝚 " .. title)
   full_title:set_text("󰝚 " .. title)
-  if artist == "" then
-    artist = "󰠃 Nothing Playing"
-  end
+  artist = artist or "Nothing Playing"
   song_artist:set_text("󰠃 " .. artist)
-  if album == "" then
-    album = "󰲹 Nothing Playing"
-  end
+  album = album or "Nothing Playing"
   song_album:set_text("󰲹 " .. album)
   if art_path and art_path ~= "" then
     album_art:set_image(art_path)
