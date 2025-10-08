@@ -17,5 +17,6 @@ return {
     "/bin/bash -c "
     .. filesystem.get_configuration_dir()
     .. "scripts/autolock.sh",
+    "autorandr -c",
   },
 }
