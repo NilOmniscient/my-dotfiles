@@ -41,7 +41,7 @@
 # # which is explained in the docs for that config option.
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
-command = TERM=xterm-256color /bin/fish
+command = TERM=xterm-256color /bin/bash
 theme = catppuccin-mocha
 window-decoration = server
 font-family = Hack
