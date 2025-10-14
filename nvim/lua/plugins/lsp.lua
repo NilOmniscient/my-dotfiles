@@ -33,18 +33,16 @@ return {
 		config = function()
 			local lspconfig = require("lspconfig")
 			-- Setup various lspconfigs
-			lspconfig.lua_ls.setup({})
-			lspconfig.ts_ls.setup({})
-			lspconfig.zls.setup({})
-			lspconfig.clangd.setup({})
-			lspconfig.phpactor.setup({})
-      lspconfig.ols.setup({
-        checker_args="-strict-style",
-        collections = {
-          name = "modules",
-          path = vim.fn.expand("$HOME/programming/odin/modules")
-        },
+			vim.lsp.config("lua_ls", {})
+      vim.lsp.config("ts_ls", {})
+      vim.lsp.config("zls", {})
+      vim.lsp.config("clangd", {})
+      vim.lsp.config("phpactor", {})
+      vim.lsp.config("ols", {
+        checker_args="-strict-style"
       })
+
+      vim.lsp.enable({"lua_ls", "ts_ls", "zls", "clangd", "phpactor", "ols"})
 
 			local opts = {}
 			vim.api.nvim_create_autocmd("LspAttach", {
