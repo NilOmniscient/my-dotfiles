@@ -18,5 +18,6 @@ return {
     .. filesystem.get_configuration_dir()
     .. "scripts/autolock.sh",
     "autorandr -c",
+    "gentoo-pipewire-launcher restart",
   },
 }
