@@ -26,7 +26,7 @@ local TopPanel = function(s)
   local logout_menu = require("widgets.logout_menu")
   local media_player = require("widgets.media_player")
   local powermon = require("widgets.powermon")
-  local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+  -- local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 
   local left_widgets = wibox.widget({
     layout = wibox.layout.fixed.horizontal,
@@ -43,9 +43,7 @@ local TopPanel = function(s)
       layout = wibox.layout.fixed.horizontal,
       spacing = 4,
       wibox.widget.systray(),
-      volume_widget {
-        widget_type = "icon_and_text"
-      },
+      -- volume_widget { widget_type = "icon_and_text" },
       powermon,
       mytextclock,
       logout_menu(),
