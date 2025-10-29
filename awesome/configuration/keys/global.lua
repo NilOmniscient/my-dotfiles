@@ -18,7 +18,10 @@ local power_menu = require("widgets.power_menu")
 globalKeys = gears.table.join(
   awful.key({ modkey, altkey }, "l", function()
     awful.spawn.with_shell(
-      "xautolock -locknow")
+      "/bin/bash -c "
+      .. filesystem.get_configuration_dir()
+      .. "scripts/locknow.sh"
+    )
   end, { description = "Lock the screen", group = "Launcher" }),
   awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
   awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
