@@ -6,7 +6,7 @@ then
     --not-when-audio \
     --not-when-fullscreen \
     --timer 600 'betterlockscreen -l' '' \
-    --timer 600 'loginctl suspend' '' \
+    --timer 1200 'loginctl suspend' '' \
     --socket /tmp/xidle.sock
 else
   xautolock -time 5 \
