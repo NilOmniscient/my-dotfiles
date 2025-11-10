@@ -15,7 +15,7 @@ APPS=(
     # $HOME/.config/awesomestart
     udiskie
     nm-applet
-    volumeicon
+    volctl
 )
 
 # Some applications start child applications that need to be killed on reload
