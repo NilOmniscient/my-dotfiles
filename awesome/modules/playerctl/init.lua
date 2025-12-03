@@ -100,45 +100,58 @@ function playerctl:get_metadata(callback)
     "album",
   }
   local cmd = string.format(self._private.cmd .. "-f '{{%s}}' metadata", table.concat(keys, "}};{{"))
-  awful.spawn.easy_async(cmd, function(line)
-    local words = gears.string.split(line, ";")
-    local title = words[1] or ""
-    local artist = words[2] or ""
-    local art_url = words[3] or ""
-    local player_name = words[4] or ""
-    local album = words[5] or ""
+  awful.spawn.with_line_callback(cmd, {
+    stdout = function(line)
+      log_message("STDOUT: "..line)
+    end,
+    stderr = function(line)
+      log_message("STDERR: "..line)
+    end,
+  })
+  awful.spawn.with_line_callback(cmd, {
+    stdout = function(line)
+      local words = gears.string.split(line, ";")
+      local title = words[1] or ""
+      local artist = words[2] or ""
+      local art_url = words[3] or ""
+      local player_name = words[4] or ""
+      local album = words[5] or ""
 
-    art_url = art_url:gsub("%\n", "")
-    if player_name == "spotify" then
-      art_url = art_url:gsub("open.spotify.com", "i.scdn.co")
-    end
-    if title and title ~= "" then
-      -- For now, workaround.
-      if art_url ~= "" then
-        local art_path = ""
-        if self._private.art_path then
-          art_path = self._private.art_path
-        else
-          self._private.art_path = os.tmpname()
-          art_path = self._private.art_path
-        end
-        if not self._private.art_url or art_url ~= self._private.art_url then
-          self._private.art_url = art_url
-          save_image_async(art_url, art_path, function()
-            if art_path then
-              callback(title, artist, art_path, album, player_name)
-            else
-              callback(title, artist, "", album, player_name)
-            end
-          end)
-        else
-          callback(title, artist, self._private.art_path, album, player_name)
-        end
-      else
-        callback(title, artist, "", album, player_name)
+      art_url = art_url:gsub("%\n", "")
+      if player_name == "spotify" then
+        art_url = art_url:gsub("open.spotify.com", "i.scdn.co")
       end
+      if title and title ~= "" then
+        -- For now, workaround.
+        if art_url ~= "" then
+          local art_path = ""
+          if self._private.art_path then
+            art_path = self._private.art_path
+          else
+            self._private.art_path = os.tmpname()
+            art_path = self._private.art_path
+          end
+          if not self._private.art_url or art_url ~= self._private.art_url then
+            self._private.art_url = art_url
+            save_image_async(art_url, art_path, function()
+              if art_path then
+                callback(title, artist, art_path, album, player_name)
+              else
+                callback(title, artist, "", album, player_name)
+              end
+            end)
+          else
+            callback(title, artist, self._private.art_path, album, player_name)
+          end
+        else
+          callback(title, artist, "", album, player_name)
+        end
+      end
+    end,
+    stderr = function(line)
+      callback(line, line, line, line, line)
     end
-  end)
+  })
 end
 
 function playerctl:get_position(callback)
