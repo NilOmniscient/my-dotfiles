@@ -7,7 +7,6 @@ configuration = require("configuration.config")
 require("widgets.top-panel")
 
 local TopPanel = function(s)
-  -- Wiboxes are much more flexible than wibars simply for the fact that there are no defaults, however if you'd rather have the ease of a wibar you can replace this with the original wibar code
   local panel = awful.wibar({
     ontop = true,
     screen = s,
@@ -16,7 +15,7 @@ local TopPanel = function(s)
     x = s.geometry.x,
     y = s.geometry.y,
     stretch = false,
-    bg = beautiful.background,
+    bg = beautiful.transparent,
     fg = beautiful.fg_normal,
     strut = {
       top = configuration.toppanel_height,
@@ -26,7 +25,6 @@ local TopPanel = function(s)
   local logout_menu = require("widgets.logout_menu")
   local media_player = require("widgets.media_player")
   local powermon = require("widgets.powermon")
-  -- local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 
   local left_widgets = wibox.widget({
     layout = wibox.layout.fixed.horizontal,
@@ -43,7 +41,6 @@ local TopPanel = function(s)
       layout = wibox.layout.fixed.horizontal,
       spacing = 4,
       wibox.widget.systray(),
-      -- volume_widget { widget_type = "icon_and_text" },
       powermon,
       mytextclock,
       logout_menu(),

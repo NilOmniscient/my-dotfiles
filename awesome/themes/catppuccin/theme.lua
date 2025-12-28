@@ -12,6 +12,7 @@ local icons = "/usr/share/icons/breeze-dark/"
 -- {{{ Main
 local theme = {}
 theme.wallpaper = themes_path .. "catppuccin/catppuccin-background.png"
+theme.transparent = "#00000000"
 -- }}}
 
 -- {{{ Wrapped Widget Colors

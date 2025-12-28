@@ -2,7 +2,7 @@ local awful = require("awful")
 local gears = require("gears")
 local client_keys = require("configuration.client.keys")
 local client_buttons = require("configuration.client.buttons")
-local title_bars = require("configuration.client.titlebars")
+-- local title_bars = require("configuration.client.titlebars")
 local beautiful = require("beautiful")
 
 -- {{{ Rules

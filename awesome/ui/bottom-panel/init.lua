@@ -7,7 +7,6 @@ configuration = require("configuration.config")
 require("widgets.top-panel")
 
 local BottomPanel = function(s)
-	-- Wiboxes are much more flexible than wibars simply for the fact that there are no defaults, however if you'd rather have the ease of a wibar you can replace this with the original wibar code
 	local panel = awful.wibar({
     position = "bottom",
     ontop = true,
@@ -17,7 +16,7 @@ local BottomPanel = function(s)
 		x = s.geometry.x,
 		y = s.geometry.y,
 		stretch = false,
-		bg = beautiful.background,
+		bg = beautiful.transparent,
 		fg = beautiful.fg_normal,
     strut = {
       bottom = configuration.toppanel_height,
@@ -33,27 +32,6 @@ local BottomPanel = function(s)
 	local right_widgets = wibox.widget({
 		layout = wibox.layout.fixed.horizontal,
 	})
-
-	local wrap_widget = function(w)
-		local wrapped = wibox.widget({
-			layout = wibox.layout.fixed.horizontal,
-			{
-				{
-					w,
-					top = 2,
-					bottom = 2,
-					left = 20,
-					right = 20,
-					color = beautiful.wrapped_fg,
-					widget = wibox.container.margin,
-				},
-				bg = beautiful.wrapped_bg,
-				widget = wibox.container.background,
-				shape = gears.shape.rounded_rect,
-			},
-		})
-		return wrapped
-	end
 
 	panel:setup({
 		layout = wibox.layout.align.horizontal,
