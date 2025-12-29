@@ -31,10 +31,10 @@ require("modules.set-wallpaper")
 require("modules.rounded-corners")
 
 -- Enable BetterSnap instead of Awful.Snap
--- local bettersnap = require("modules.bettersnap")
--- bettersnap.snap.edge_enabled = true
--- awful.mouse.snap.edge_enabled = false
--- awful.mouse.snap.client_enabled = false
+local bettersnap = require("modules.bettersnap")
+bettersnap.snap.edge_enabled = true
+awful.mouse.snap.edge_enabled = false
+awful.mouse.snap.client_enabled = false
 
 -- Setup UI Elements
 require("ui")

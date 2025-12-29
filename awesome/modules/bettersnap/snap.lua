@@ -66,124 +66,62 @@ local function build_placement(snap)
 end
 
 local function detect_screen_edges(c, snap)
-  local coords = capi.mouse.coords()
-  local sg = capi.mouse.screen.geometry
   local h, v = false, false
-  local hindex, vindex = -1, -1
-  local hincr = sg.width / 8
-  local vincr = sg.height / 6
+  local hindex, vindex = 0, 0
+  local coords = capi.mouse.coords()
 
-  local hlist = { math.abs(coords.x - sg.x),
-    math.abs((sg.x + sg.width) - coords.x) }
-  local vlist = { math.abs(coords.y - sg.y),
-    math.abs((sg.y + sg.height) - coords.y) }
+  local sg = c.screen.geometry
 
-  local hdist = hlist[1] <= hlist[2] and hlist[1] or hlist[2]
-  local vdist = vlist[1] <= vlist[2] and vlist[1] or vlist[2]
+  local vloc, hloc = nil
 
-  h = (hdist <= snap)
-  v = (vdist <= snap)
-
-  if v and not h then
-    if hdist <= hincr then
-      hindex = 1
-    elseif hdist <= 2 * hincr then
-      hindex = 2
-    elseif hdist <= 3 * hincr then
-      hindex = 3
-    else
-      hindex = 4
-    end
-    if (vdist < 2) and hdist > 3.8 * hincr then
-      hindex = 5
-    end
-  elseif h and not v then
-    if vdist <= vincr then
-      vindex = 1
-    elseif vdist <= 2 * vincr then
-      vindex = 2
-    else
-      vindex = 3
-    end
-  elseif h and v then
-    hindex, vindex = 0, 0
+  if math.abs(coords.x) <= snap + sg.x and coords.x >= sg.x then
+    h = true
+    hloc = "left"
+  elseif math.abs((sg.x + sg.width) - coords.x) <= snap then
+    h = true
+    hloc = "right"
   end
 
-  local hloc = hlist[1] <= hlist[2] and "left" or "right"
-  local vloc = vlist[1] <= vlist[2] and "top" or "bottom"
-
-
+  if math.abs(coords.y) <= snap + sg.y and coords.y >= sg.y then
+    v = true
+    vloc = "top"
+  elseif math.abs((sg.y + sg.height) - coords.y) <= snap then
+    v = true
+    vloc = "bottom"
+  end
   return h, v, hindex, vindex, hloc, vloc
 end
 
 local current_snap = nil
 
 local function get_geometry(hindex, vindex, hloc, vloc)
-  local geo = { x = 0, y = 0, width = 0, height = 0 }
   local sw = capi.mouse.screen.workarea
+  local geo = {
+    x = snapper_gap,
+    y = snapper_gap,
+    width = sw.width - 2 * snapper_gap,
+    height = sw.height -
+        2 * snapper_gap
+  }
 
-  if hindex == 0 and vindex == 0 then
+  if hloc then
     geo.width = sw.width / 2 - 1.5 * snapper_gap
-    geo.height = sw.height / 2 - 1.5 * snapper_gap
     if hloc == "left" then
       geo.x = sw.x + snapper_gap
     else
       geo.x = sw.x + sw.width / 2 + 0.5 * snapper_gap
     end
+  end
+
+  if vloc then
+    geo.height = sw.height / 2 - 1.5 * snapper_gap
     if vloc == "top" then
       geo.y = sw.y + snapper_gap
     else
       geo.y = sw.y + sw.height / 2 + 0.5 * snapper_gap
     end
-  else
-    geo.y = sw.y + snapper_gap
-    geo.height = sw.height - 2 * snapper_gap
-    if hindex == 5 then
-      geo.x = sw.x + snapper_gap
-      geo.width = sw.width - 2 * snapper_gap
-    elseif hindex == 1 then
-      geo.width = sw.width * 2 / 3 - 1.5 * snapper_gap
-      if hloc == "left" then
-        geo.x = sw.x + snapper_gap
-      else
-        geo.x = sw.x + sw.width * 1 / 3 + 0.5 * snapper_gap
-      end
-    elseif hindex == 2 then
-      geo.width = sw.width * 3 / 4 - 1.5 * snapper_gap
-      if hloc == "left" then
-        geo.x = sw.x + snapper_gap
-      else
-        geo.x = sw.x + 1 / 4 * sw.width + 0.5 * snapper_gap
-      end
-    elseif hindex == 3 then
-      geo.width = sw.width / 2 - snapper_gap
-      geo.x = sw.x + sw.width * 1 / 4 + 0.5 * snapper_gap
-    elseif hindex == 4 then
-      geo.width = sw.width / 3 - snapper_gap
-      geo.x = sw.x + sw.width / 3 + 0.5 * snapper_gap
-    elseif vindex == 3 then
-      geo.width = sw.width / 4 - 1.5 * snapper_gap
-      if hloc == "left" then
-        geo.x = sw.x + snapper_gap
-      else
-        geo.x = sw.x + sw.width * 3 / 4 + 0.5 * snapper_gap
-      end
-    elseif vindex == 2 then
-      geo.width = sw.width * 1 / 3 - 1.5 * snapper_gap
-      if hloc == "left" then
-        geo.x = sw.x + snapper_gap
-      else
-        geo.x = sw.x + sw.width * 2 / 3 + 0.5 * snapper_gap
-      end
-    elseif vindex == 1 then
-      geo.width = sw.width / 2 - 1.5 * snapper_gap
-      if hloc == "left" then
-        geo.x = sw.x + snapper_gap
-      else
-        geo.x = sw.x + sw.width / 2 + 0.5 * snapper_gap
-      end
-    end
   end
+
   return geo
 end
 
