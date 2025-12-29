@@ -27,10 +27,14 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/catppuccin/th
 
 -- Init all modules (You can add/remove active modules here)
 require("modules.auto-start")
--- require("modules.sloppy-focus")
 require("modules.set-wallpaper")
 require("modules.rounded-corners")
-require("modules.tile-gap")
+
+-- Enable BetterSnap instead of Awful.Snap
+-- local bettersnap = require("modules.bettersnap")
+-- bettersnap.snap.edge_enabled = true
+-- awful.mouse.snap.edge_enabled = false
+-- awful.mouse.snap.client_enabled = false
 
 -- Setup UI Elements
 require("ui")
