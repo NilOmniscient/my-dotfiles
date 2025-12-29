@@ -97,8 +97,8 @@ local current_snap = nil
 local function get_geometry(hindex, vindex, hloc, vloc)
   local sw = capi.mouse.screen.workarea
   local geo = {
-    x = snapper_gap,
-    y = snapper_gap,
+    x = sw.x + snapper_gap,
+    y = sw.y + snapper_gap,
     width = sw.width - 2 * snapper_gap,
     height = sw.height -
         2 * snapper_gap
