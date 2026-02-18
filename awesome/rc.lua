@@ -2,6 +2,9 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
+-- Before anything else is run, call the preload file
+require("configuration.preload")
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
