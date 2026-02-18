@@ -66,6 +66,7 @@
         <value type="string" value="ethernet network connection “wired connection 2” active"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="chrome_status_icon_1"/>
         <value type="string" value="zoom"/>
       </property>
       <property name="icon-size" type="int" value="22"/>
@@ -73,11 +74,12 @@
     <property name="plugin-24" type="string" value="power-manager-plugin"/>
     <property name="plugin-25" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="known-players" type="string" value="firefox"/>
+      <property name="known-players" type="string" value="firefox;youtube-music"/>
     </property>
     <property name="plugin-26" type="string" value="clock">
       <property name="digital-layout" type="uint" value="3"/>
       <property name="digital-time-font" type="string" value="Hack 10"/>
+      <property name="digital-time-format" type="string" value="%I:%M %p"/>
     </property>
     <property name="plugin-27" type="string" value="notification-plugin"/>
     <property name="plugin-28" type="string" value="pager">
@@ -100,11 +102,12 @@
     <property name="plugin-32" type="string" value="notification-plugin"/>
     <property name="plugin-33" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="known-players" type="string" value="firefox"/>
+      <property name="known-players" type="string" value="firefox;youtube-music"/>
     </property>
     <property name="plugin-34" type="string" value="clock">
       <property name="digital-layout" type="uint" value="3"/>
       <property name="digital-time-font" type="string" value="Hack 10"/>
+      <property name="digital-time-format" type="string" value="%I:%M %p"/>
     </property>
   </property>
 </channel>
