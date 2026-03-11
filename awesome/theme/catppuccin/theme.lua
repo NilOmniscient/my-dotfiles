@@ -52,14 +52,14 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_
 
 -- Theme the taglist
 theme.taglist_bg_occupied = "#45475A"
-theme.taglist_shap = gears.shape.rounded_rect
+theme.taglist_shape = gears.shape.rounded_rect
 theme.taglist_shape_border_width = dpi(2)
 theme.taglist_shape_border_color = theme.bg_focus
 theme.taglist_shape_border_color_focus = theme.border_focus
 
 -- Theme Tasklist
 theme.tasklist_bg_normal = "#45475A"
-theme.tasklist_shap = gears.shape.rounded_rect
+theme.tasklist_shape = gears.shape.rounded_rect
 theme.tasklist_shape_border_width = dpi(2)
 theme.tasklist_shape_border_color = theme.bg_focus
 theme.tasklist_shape_border_color_focus = theme.border_focus

@@ -15,9 +15,12 @@ return function(s)
 		height = beautiful.panel_height or 34,
 		position = "bottom",
 		screen = s,
+		bg = beautiful.transparent,
+		fg = beautiful.fg_normal,
 		widget = {
 			layout = wibox.layout.align.horizontal,
 			expand = "none",
+
 			-- Left widgets.
 			empty,
 			-- Middle widgets.
