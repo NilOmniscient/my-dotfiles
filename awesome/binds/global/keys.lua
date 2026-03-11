@@ -170,6 +170,12 @@ awful.keyboard.append_global_keybindings({
 		end,
 	}),
 	-- Custom keys
+	awful.key({ modkey }, "f", function()
+		awful.spawn(apps.browser)
+	end, { description = "open a web browser", group = "launcher" }),
+	awful.key({ modkey }, "b", function()
+		awful.spawn(apps.file_browser)
+	end, { description = "open a file browser", group = "launcher" }),
 	awful.key({ modkey, mod.alt }, "l", function()
 		awful.spawn("xflock4")
 	end, { description = "Lock Screen", group = "awesome" }),
