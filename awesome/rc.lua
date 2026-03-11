@@ -44,3 +44,4 @@ awful.mouse.snap.edge_enabled = false
 awful.mouse.snap.client_enabled = false
 
 -- Finally, autostart anything that needs starting
+require("autostart")

@@ -30,12 +30,33 @@ end
 return function(s)
 	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
 
+	local right_widgets = {}
+	if s.index == 1 then
+		right_widgets = wibox.widget({
+			layout = wibox.layout.fixed.horizontal,
+			awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
+			wibox.widget.systray(),
+			wibox.widget.textclock(),
+		})
+	else
+		right_widgets = wibox.widget({
+			layout = wibox.layout.fixed.horizontal,
+			awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
+			wibox.widget.textclock(),
+		})
+	end
 	-- Create the wibox
 	s.mywibox = awful.wibar({
+		layout = wibox.layout.fixed.horizontal,
 		position = "top",
 		screen = s,
+		height = beautiful.panel_height or 34,
+		bg = beautiful.transparent,
+		fg = beautiful.fg_normal,
 		widget = {
 			layout = wibox.layout.align.horizontal,
+			expand = "none",
+			width = s.geometry.width,
 			-- Left widgets.
 			wrap_widget({
 				layout = wibox.layout.fixed.horizontal,
@@ -45,16 +66,12 @@ return function(s)
 				s.mypromptbox,
 			}),
 			-- Middle widgets.
-			wibox.widget({
-				layout = wibox.layout.fixed.horizontal,
-			}),
-			-- Right widgets.
 			wrap_widget({
 				layout = wibox.layout.fixed.horizontal,
-				awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
-				wibox.widget.systray(),
-				wibox.widget.textclock(), -- Create a textclock widget.
+				module.media_player,
 			}),
+			-- Right widgets.
+			wrap_widget(right_widgets),
 		},
 	})
 end

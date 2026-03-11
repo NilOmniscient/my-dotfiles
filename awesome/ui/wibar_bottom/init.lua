@@ -12,10 +12,12 @@ return function(s)
 
 	-- Create the wibox
 	s.mywibox = awful.wibar({
+		height = beautiful.panel_height or 34,
 		position = "bottom",
 		screen = s,
 		widget = {
 			layout = wibox.layout.align.horizontal,
+			expand = "none",
 			-- Left widgets.
 			empty,
 			-- Middle widgets.

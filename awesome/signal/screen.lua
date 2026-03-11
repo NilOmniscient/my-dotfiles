@@ -1,5 +1,6 @@
 local awful = require("awful")
 local beautiful = require("beautiful")
+local gears = require("gears")
 local wibox = require("wibox")
 
 --- Attach tags and widgets to all screens.
@@ -27,9 +28,10 @@ screen.connect_signal("request::wallpaper", function(s)
 			tiled = false,
 			{
 				widget = wibox.widget.imagebox,
-				image = beautiful.wallpaper,
-				upscale = true,
-				downscale = true,
+				image = gears.surface.crop_surface({
+					surface = gears.surface.load_uncached(beautiful.wallpaper),
+					ratio = s.geometry.width / s.geometry.height,
+				}),
 			},
 		},
 	})

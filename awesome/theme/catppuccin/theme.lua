@@ -14,7 +14,7 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 theme.font = "hack 14"
-
+theme.transparent = "#00000000"
 theme.bg_normal = "#1e1e2e"
 theme.bg_focus = "#4e6b99"
 theme.bg_urgent = "#f38ba8"
@@ -109,7 +109,8 @@ theme.titlebar_maximized_button_focus_inactive = themes_path .. "default/titleba
 theme.titlebar_maximized_button_normal_active = themes_path .. "default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active = themes_path .. "default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = themes_path .. "default/background.png"
+-- theme.wallpaper = themes_path .. "default/background.png"
+theme.wallpaper = gears.filesystem.get_configuration_dir() .. "theme/catppuccin/assets/wallpaper.jpeg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path .. "default/layouts/fairhw.png"
@@ -134,7 +135,11 @@ theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = nil
+-- theme.icon_theme = nil
+theme.icon_theme = "/usr/share/icons/Qogir-Dark"
+
+-- Custom theme vars.
+theme.panel_height = 26
 
 -- Set different colors for urgent notifications.
 rnotification.connect_signal("request::rules", function()
