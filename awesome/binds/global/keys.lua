@@ -170,6 +170,9 @@ awful.keyboard.append_global_keybindings({
 		end,
 	}),
 	-- Custom keys
+	awful.key({ modkey, mod.alt }, "l", function()
+		awful.spawn("xflock4")
+	end, { description = "Lock Screen", group = "awesome" }),
 	awful.key({ modkey, mod.alt }, "p", function()
 		local active_screen = awful.screen.focused()
 		awful.placement.centered(power_menu, {
