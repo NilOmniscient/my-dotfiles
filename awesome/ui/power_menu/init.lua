@@ -9,31 +9,31 @@ local menu_items = {
 	{
 		"󰍃 Log Out",
 		function()
-			awesome.quit()
+			awful.spawn.with_shell("lxqt-leave --logout")
 		end,
 	},
 	{
 		" Lock",
 		function()
-			awful.spawn.with_shell("xflock4")
+			awful.spawn.with_shell("lxqt-leave --lockscreen")
 		end,
 	},
 	{
 		" Reboot",
 		function()
-			awful.spawn("systemctl reboot")
+			awful.spawn("lxqt-leave --reboot")
 		end,
 	},
 	{
 		"󰒲 Sleep",
 		function()
-			awful.spawn("systemctl sleep")
+			awful.spawn("lxqt-leave --susspend")
 		end,
 	},
 	{
 		"⏻ Shutdown",
 		function()
-			awful.spawn("systemctl poweroff")
+			awful.spawn("lxqt-leave --shutdown")
 		end,
 	},
 }

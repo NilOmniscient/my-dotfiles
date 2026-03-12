@@ -24,6 +24,7 @@ require("awful.hotkeys_popup.keys")
 
 -- Load the theme. In other words, defines the variables within the `beautiful`
 -- table.
+-- require("theme.default")
 require("theme.catppuccin")
 
 -- Treat all signals. Bear in mind this implies creating all tags, attaching
