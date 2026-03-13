@@ -30,19 +30,20 @@ end
 return function(s)
 	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
 
+	local text_clock = wibox.widget.textclock(" %b %d, %I:%M %P")
 	local right_widgets = {}
 	if s.index == 1 then
 		right_widgets = wibox.widget({
 			layout = wibox.layout.fixed.horizontal,
 			awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
 			wibox.widget.systray(),
-			wibox.widget.textclock(),
+			text_clock,
 		})
 	else
 		right_widgets = wibox.widget({
 			layout = wibox.layout.fixed.horizontal,
 			awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
-			wibox.widget.textclock(),
+			text_clock,
 		})
 	end
 	-- Create the wibox
