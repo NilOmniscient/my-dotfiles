@@ -244,7 +244,7 @@ gears.timer({
 	end,
 })
 gears.timer({
-	timeout = 0.35,
+	timeout = 1,
 	autostart = true,
 	call_now = true,
 	callback = function()
