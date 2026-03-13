@@ -9,31 +9,31 @@ local menu_items = {
 	{
 		"󰍃 Log Out",
 		function()
-			awful.spawn.with_shell("lxqt-leave --logout")
+			awful.spawn.with_shell("xfce4-session-logout --logout")
 		end,
 	},
 	{
 		" Lock",
 		function()
-			awful.spawn.with_shell("lxqt-leave --lockscreen")
+			awful.spawn.with_shell("xflock4")
 		end,
 	},
 	{
 		" Reboot",
 		function()
-			awful.spawn("lxqt-leave --reboot")
+			awful.spawn("xfce4-session-logout --reboot")
 		end,
 	},
 	{
 		"󰒲 Sleep",
 		function()
-			awful.spawn("lxqt-leave --susspend")
+			awful.spawn("xfce4-session-logout --susspend")
 		end,
 	},
 	{
 		"⏻ Shutdown",
 		function()
-			awful.spawn("lxqt-leave --shutdown")
+			awful.spawn("poweroff")
 		end,
 	},
 }
