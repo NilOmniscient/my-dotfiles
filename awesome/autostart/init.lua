@@ -1,1 +1,1 @@
-require(... .. ".module.xfsession")
+-- require(... .. ".module.xfsession")
