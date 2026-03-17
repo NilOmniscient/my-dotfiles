@@ -67,9 +67,12 @@ return function(s)
 				s.mypromptbox,
 			}),
 			-- Middle widgets.
-			wrap_widget({
+			-- wrap_widget({
+			--	layout = wibox.layout.fixed.horizontal,
+			--	module.media_player,
+			-- }),
+			wibox.widget({
 				layout = wibox.layout.fixed.horizontal,
-				module.media_player,
 			}),
 			-- Right widgets.
 			wrap_widget(right_widgets),
