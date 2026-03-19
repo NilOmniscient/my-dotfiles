@@ -66,13 +66,10 @@ return function(s)
 				module.taglist(s),
 				s.mypromptbox,
 			}),
-			-- Middle widgets.
-			-- wrap_widget({
-			--	layout = wibox.layout.fixed.horizontal,
-			--	module.media_player,
-			-- }),
-			wibox.widget({
+			-- Middle Widgets.
+			wrap_widget({
 				layout = wibox.layout.fixed.horizontal,
+				module.media_player,
 			}),
 			-- Right widgets.
 			wrap_widget(right_widgets),

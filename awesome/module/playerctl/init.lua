@@ -92,12 +92,8 @@ function playerctl:get_metadata(callback)
 	}
 	local cmd = string.format(self._private.cmd .. "-f '{{%s}}' metadata", table.concat(keys, "}};{{"))
 	awful.spawn.with_line_callback(cmd, {
-		stdout = function(line)
-			log_message("STDOUT: " .. line)
-		end,
-		stderr = function(line)
-			log_message("STDERR: " .. line)
-		end,
+		stdout = function(line) end,
+		stderr = function(line) end,
 	})
 	awful.spawn.with_line_callback(cmd, {
 		stdout = function(line)
