@@ -65,6 +65,12 @@ theme.tasklist_shape_border_color = theme.bg_focus
 theme.tasklist_shape_border_color_focus = theme.border_focus
 
 -- Variables set for theming notifications:
+theme.notification_position = "top_right"
+theme.notification_bg = theme.bg_normal
+theme.notification_fg = theme.fg_normal
+theme.notification_border_width = dpi(2)
+theme.notification_shape = gears.shape.rounded_rect
+theme.notification_border_color = theme.bg_focus
 -- notification_font
 -- notification_[bg|fg]
 -- notification_[width|height|margin]
