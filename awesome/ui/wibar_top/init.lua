@@ -1,6 +1,7 @@
 local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
+local screen = require("screen")
 local beautiful = require("beautiful")
 local module = require(... .. ".module")
 
@@ -46,6 +47,8 @@ return function(s)
 			text_clock,
 		})
 	end
+
+	local center_widget = awful.widget.watch('playerctl metadata --format "󰝚  {{title}}"')
 	-- Create the wibox
 	s.mywibox = awful.wibar({
 		layout = wibox.layout.fixed.horizontal,
@@ -67,10 +70,11 @@ return function(s)
 				s.mypromptbox,
 			}),
 			-- Middle Widgets.
-			wrap_widget({
-				layout = wibox.layout.fixed.horizontal,
-				module.media_player,
-			}),
+			-- wrap_widget({
+			--	layout = wibox.layout.fixed.horizontal,
+			--	module.media_player,
+			-- }),
+			wrap_widget(center_widget),
 			-- Right widgets.
 			wrap_widget(right_widgets),
 		},
