@@ -5,11 +5,17 @@ local theme = require("beautiful")
 
 local menu_builder = require("module.menu_builder")
 
+local is_somewm = awesome.release == "somewm"
+
 local menu_items = {
 	{
 		"󰍃 Log Out",
 		function()
-			awful.spawn.with_shell("lxqt-leave --logout")
+			if is_somewm then
+				awesome.quit()
+			else
+				awful.spawn.with_shell("lxqt-leave --logout")
+			end
 		end,
 	},
 	{
