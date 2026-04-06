@@ -48,7 +48,15 @@ return function(s)
 		})
 	end
 
-	local center_widget = awful.widget.watch('playerctl metadata --format "󰝚  {{title}}"')
+	local center_widget = awful.widget.watch(
+		'playerctl metadata --format "󰝚  {{title}}"',
+		5,
+		function(widget, stdout)
+			if stdout == "" then
+				widget:set_text("󰝚  Nothing Playing")
+			end
+		end
+	)
 	-- Create the wibox
 	s.mywibox = awful.wibar({
 		layout = wibox.layout.fixed.horizontal,
