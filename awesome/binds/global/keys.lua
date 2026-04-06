@@ -200,7 +200,7 @@ awful.keyboard.append_global_keybindings({
 		awful.spawn(apps.file_browser)
 	end, { description = "open a file browser", group = "launcher" }),
 	awful.key({ modkey, mod.alt }, "l", function()
-		awful.spawn("xflock4")
+		awful.spawn("lxqt-leave --lockscreen")
 	end, { description = "Lock Screen", group = "awesome" }),
 	awful.key({ modkey, mod.alt }, "p", function()
 		local active_screen = awful.screen.focused()
