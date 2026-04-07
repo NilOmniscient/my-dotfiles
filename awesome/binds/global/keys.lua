@@ -7,6 +7,7 @@ local apps = require("config.apps")
 
 local power_menu = require("widgets.power_menu")
 local windowswitcher = require("widgets.windowswitcher")
+local launcher = require("widgets.launcher")
 
 local function table_to_keybinding(bindings)
 	local key_bindings = {}
@@ -50,6 +51,15 @@ local global_keys = {
 		"Launch File Browser",
 		"launcher",
 	},
+	{
+		{ modkey },
+		"r",
+		function()
+			launcher.toggle()
+		end,
+		"Application Launcher",
+		"launcher",
+	},
 }
 awful.keyboard.append_global_keybindings(table_to_keybinding(global_keys))
 
@@ -65,9 +75,9 @@ awful.keyboard.append_global_keybindings({
 		})
 	end, { description = "lua execute prompt", group = "awesome" }),
 
-	awful.key({ modkey }, "r", function()
-		awful.spawn("xfce4-appfinder")
-	end, { description = "App Launcher", group = "launcher" }),
+	-- awful.key({ modkey }, "r", function()
+	--	awful.spawn("xfce4-appfinder")
+	-- end, { description = "App Launcher", group = "launcher" }),
 	-- awful.key({ modkey            }, 'r', function() awful.screen.focused().mypromptbox:run() end,
 	--   { description = 'run prompt', group = 'launcher' }),
 	awful.key({ modkey }, "p", function()

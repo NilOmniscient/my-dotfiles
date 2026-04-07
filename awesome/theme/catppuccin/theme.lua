@@ -147,6 +147,24 @@ theme.icon_theme = "/usr/share/icons/Qogir-Dark"
 -- Custom theme vars.
 theme.panel_height = 26
 
+-- Accent Colors
+theme.accent_colors = {
+	"#f5e0dc", -- Rosewater
+	"#f2cdcd", -- Flamingo
+	"#f5c2e7", -- Pink
+	"#cba6f7", -- Mauve
+	"#f38ba8", -- Red
+	"#eba0ac", -- Maroon
+	"#fab387", -- Peach
+	"#f9e2af", -- Yellow
+	"#a6e3a1", -- Green
+	"#94e2d5", -- Teal
+	"#89dceb", -- Sky
+	"#74c7ec", -- Sapphire
+	"#89b4fa", -- Blue
+	"#b4befe", -- Lavender
+}
+
 -- Set different colors for urgent notifications.
 rnotification.connect_signal("request::rules", function()
 	rnotification.append_rule({
