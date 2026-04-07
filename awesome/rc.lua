@@ -44,5 +44,12 @@ snapgap.snap.edge_enabled = true
 awful.mouse.snap.edge_enabled = false
 awful.mouse.snap.client_enabled = false
 
--- Finally, autostart anything that needs starting
+-- Autostart anything that needs starting
 require("autostart")
+
+-- Finally, make the garbage collector more aggressive.
+local gears = require("gears")
+gears.timer.start_new(600, function()
+	collectgarbage("step", 1024)
+	return true
+end)
