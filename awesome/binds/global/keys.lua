@@ -25,14 +25,30 @@ end
 local global_keys = {
 	-- Awesome keybinds.
 	{ { modkey }, "s", require("awful.hotkeys_popup").show_help, "Show Help", "awesome" },
-	{ { modkey }, "w", require("ui.menu").main:show(), "Show Awesome Menu", "awesome" },
+	{
+		{ modkey },
+		"w",
+		function()
+			require("ui.menu").main:show()
+		end,
+		"Show Awesome Menu",
+		"awesome",
+	},
 	{ { modkey, mod.ctrl }, "r", awesome.restart, "Restart Awesome", "awesome" },
 	{ { modkey, mod.shift }, "q", awesome.quit, "Quit Awesome", "awesome" },
 	-- Client keybinds.
 	{ { modkey }, "Tab", windowswitcher.show, "Window Switcher", "client" },
 
 	-- Launcher keybinds.
-	{ { modkey }, "Return", awful.spawn(apps.terminal), "Launch Terminal", "launcher" },
+	{
+		{ modkey },
+		"Return",
+		function()
+			awful.spawn(apps.terminal)
+		end,
+		"Launch Terminal",
+		"launcher",
+	},
 	{
 		{ modkey },
 		"b",
