@@ -8,20 +8,54 @@ local apps = require("config.apps")
 local power_menu = require("widgets.power_menu")
 local windowswitcher = require("widgets.windowswitcher")
 
+local function table_to_keybinding(bindings)
+	local key_bindings = {}
+	for _, g_key in ipairs(bindings) do
+		table.insert(
+			key_bindings,
+			awful.key(g_key[1], g_key[2], g_key[3], { description = g_key[4], group = g_key[5] })
+		)
+	end
+	return key_bindings
+end
+
+-- Slowly convert declarative style keys to table.
+
+local global_keys = {
+	-- Awesome keybinds.
+	{ { modkey }, "s", require("awful.hotkeys_popup").show_help, "Show Help", "awesome" },
+	{ { modkey }, "w", require("ui.menu").main:show(), "Show Awesome Menu", "awesome" },
+	{ { modkey, mod.ctrl }, "r", awesome.restart, "Restart Awesome", "awesome" },
+	{ { modkey, mod.shift }, "q", awesome.quit, "Quit Awesome", "awesome" },
+	-- Client keybinds.
+	{ { modkey }, "Tab", windowswitcher.show, "Window Switcher", "client" },
+
+	-- Launcher keybinds.
+	{ { modkey }, "Return", awful.spawn(apps.terminal), "Launch Terminal", "launcher" },
+	{
+		{ modkey },
+		"b",
+		function()
+			awful.spawn(apps.browser)
+		end,
+		"Launch Browser",
+		"launcher",
+	},
+	{
+		{ modkey },
+		"f",
+		function()
+			awful.spawn(apps.file_browser)
+		end,
+		"Launch File Browser",
+		"launcher",
+	},
+}
+awful.keyboard.append_global_keybindings(table_to_keybinding(global_keys))
+
 --- Global key bindings
 awful.keyboard.append_global_keybindings({
 	-- General Awesome keys.
-	awful.key(
-		{ modkey },
-		"s",
-		require("awful.hotkeys_popup").show_help,
-		{ description = "show help", group = "awesome" }
-	),
-	awful.key({ modkey }, "w", function()
-		require("ui.menu").main:show()
-	end, { description = "show main menu", group = "awesome" }),
-	awful.key({ modkey, mod.ctrl }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
-	awful.key({ modkey, mod.shift }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 	awful.key({ modkey }, "x", function()
 		awful.prompt.run({
 			prompt = "Run Lua code: ",
@@ -30,9 +64,7 @@ awful.keyboard.append_global_keybindings({
 			history_path = awful.util.get_cache_dir() .. "/history_eval",
 		})
 	end, { description = "lua execute prompt", group = "awesome" }),
-	awful.key({ modkey }, "Return", function()
-		awful.spawn(apps.terminal)
-	end, { description = "open a terminal", group = "launcher" }),
+
 	awful.key({ modkey }, "r", function()
 		awful.spawn("xfce4-appfinder")
 	end, { description = "App Launcher", group = "launcher" }),
@@ -54,13 +86,7 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey }, "k", function()
 		awful.client.focus.byidx(-1)
 	end, { description = "focus previous by index", group = "client" }),
-	-- awful.key({ modkey }, "Tab", function()
-	-- 	awful.client.focus.history.previous()
-	--	if client.focus then
-	--		client.focus:raise()
-	--	end
-	-- end, { description = "go back", group = "client" }),
-	awful.key({ modkey }, "Tab", windowswitcher.show, { description = "Window Switcher", group = "client" }),
+
 	awful.key({ modkey, mod.ctrl }, "j", function()
 		awful.screen.focus_relative(1)
 	end, { description = "focus the next screen", group = "screen" }),
@@ -195,12 +221,6 @@ awful.keyboard.append_global_keybindings({
 	end, { description = "Lower Volume", group = "media" }),
 
 	-- Custom keys
-	awful.key({ modkey }, "f", function()
-		awful.spawn(apps.browser)
-	end, { description = "open a web browser", group = "launcher" }),
-	awful.key({ modkey }, "b", function()
-		awful.spawn(apps.file_browser)
-	end, { description = "open a file browser", group = "launcher" }),
 	awful.key({ modkey, mod.alt }, "l", function()
 		awful.spawn("lxqt-leave --lockscreen")
 	end, { description = "Lock Screen", group = "awesome" }),
