@@ -54,6 +54,8 @@ return function(s)
 		function(widget, stdout)
 			if stdout == "" then
 				widget:set_text("󰝚  Nothing Playing")
+			else
+				widget:set_text(stdout)
 			end
 		end
 	)
