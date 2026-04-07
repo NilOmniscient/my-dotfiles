@@ -3,6 +3,8 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
+-- Before anything else, include the display config
+-- require("config.display")
 --- Error handling.
 -- Notification library.
 local naughty = require("naughty")
@@ -39,10 +41,15 @@ require("config.rules")
 
 -- Replace Awful.Snap with a better snapping module
 local awful = require("awful")
-local snapgap = require("module.snapgap")
-snapgap.snap.edge_enabled = true
-awful.mouse.snap.edge_enabled = false
-awful.mouse.snap.client_enabled = false
+
+local is_somewm = awesome.release == "somewm"
+if is_somewm then
+else
+	local snapgap = require("module.snapgap")
+	snapgap.snap.edge_enabled = true
+	awful.mouse.snap.edge_enabled = false
+	awful.mouse.snap.client_enabled = false
+end
 
 -- Autostart anything that needs starting
 require("autostart")
