@@ -5,7 +5,8 @@ local modkey = mod.modkey
 
 local apps = require("config.apps")
 
-local power_menu = require("ui.power_menu")
+local power_menu = require("widgets.power_menu")
+local windowswitcher = require("widgets.windowswitcher")
 
 --- Global key bindings
 awful.keyboard.append_global_keybindings({
@@ -53,12 +54,13 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey }, "k", function()
 		awful.client.focus.byidx(-1)
 	end, { description = "focus previous by index", group = "client" }),
-	awful.key({ modkey }, "Tab", function()
-		awful.client.focus.history.previous()
-		if client.focus then
-			client.focus:raise()
-		end
-	end, { description = "go back", group = "client" }),
+	-- awful.key({ modkey }, "Tab", function()
+	-- 	awful.client.focus.history.previous()
+	--	if client.focus then
+	--		client.focus:raise()
+	--	end
+	-- end, { description = "go back", group = "client" }),
+	awful.key({ modkey }, "Tab", windowswitcher.show, { description = "Window Switcher", group = "client" }),
 	awful.key({ modkey, mod.ctrl }, "j", function()
 		awful.screen.focus_relative(1)
 	end, { description = "focus the next screen", group = "screen" }),

@@ -3,7 +3,7 @@ local gears = require("gears")
 local wibox = require("wibox")
 local screen = require("screen")
 local beautiful = require("beautiful")
-local module = require(... .. ".module")
+local module = require("ui.wibar.module")
 
 local wrap_widget = function(w)
 	local wrapped = wibox.widget({
