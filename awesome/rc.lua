@@ -3,6 +3,9 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
+-- Autostart things that need to be run
+require("autostart")
+
 -- Before anything else, include the display config
 -- require("config.display")
 --- Error handling.
@@ -50,9 +53,6 @@ else
 	awful.mouse.snap.edge_enabled = false
 	awful.mouse.snap.client_enabled = false
 end
-
--- Autostart anything that needs starting
-require("autostart")
 
 -- Finally, make the garbage collector more aggressive.
 local gears = require("gears")
