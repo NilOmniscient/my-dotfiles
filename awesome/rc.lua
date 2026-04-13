@@ -7,7 +7,7 @@ pcall(require, "luarocks.loader")
 require("autostart")
 
 -- Before anything else, include the display config
--- require("config.display")
+require("config.display")
 --- Error handling.
 -- Notification library.
 local naughty = require("naughty")
