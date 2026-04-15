@@ -71,7 +71,7 @@ local global_keys = {
 		{ modkey },
 		"r",
 		function()
-			launcher.toggle()
+			awful.spawn(apps.launcher)
 		end,
 		"Application Launcher",
 		"launcher",

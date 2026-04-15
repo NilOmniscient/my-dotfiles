@@ -1,10 +1,10 @@
 -- This is used later as the default terminal and editor to run.
 local apps = {}
-apps.terminal = "ghostty"
-apps.editor = os.getenv("EDITOR") or "nvim"
-apps.editor_cmd = apps.terminal .. " -e " .. apps.editor
 apps.browser = "firefox"
+apps.editor = os.getenv("EDITOR") or "nvim"
 apps.file_browser = "pcmanfm-qt"
+apps.launcher = "xfce4-appfinder"
+apps.terminal = "ghostty"
 
 -- Set the terminal for the menubar.
 require("menubar").utils.terminal = apps.terminal
