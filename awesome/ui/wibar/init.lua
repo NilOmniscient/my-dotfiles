@@ -33,7 +33,7 @@ return function(s)
 
 	local text_clock = wibox.widget.textclock(" %b %d, %I:%M %P")
 	local right_widgets = {}
-	if s.index == 1 then
+	if s == screen.primary then
 		right_widgets = wibox.widget({
 			layout = wibox.layout.fixed.horizontal,
 			awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
