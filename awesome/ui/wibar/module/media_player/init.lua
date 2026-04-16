@@ -1,3 +1,4 @@
+-- TODO: Write a simplified version
 local theme = require("beautiful")
 local gears = require("gears")
 local awful = require("awful")
@@ -143,9 +144,13 @@ local album_art = wibox.widget({
 })
 
 local function update_metadata(title, artist, art_path, album, _)
+	local short_title = "Nothing Playing"
+	if title == "" then
+		-- short_title = "Now Playing"
+	end
 	title = title or "Nothing Playing"
-	song_title:set_text("󰝚 " .. title)
-	full_title:set_text("󰝚 " .. title)
+	song_title:set_text("󰝚 " .. short_title)
+	full_title:set_text("󰝚 " .. short_title)
 	artist = artist or "Nothing Playing"
 	song_artist:set_text("󰠃 " .. artist)
 	album = album or "Nothing Playing"

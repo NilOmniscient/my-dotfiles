@@ -47,7 +47,7 @@ return function(s)
 		})
 	end
 
-	local center_widget = awful.widget.watch(
+	local media_summary = awful.widget.watch(
 		'playerctl metadata --format "󰝚  {{title}}"',
 		5,
 		function(widget, stdout)
@@ -58,6 +58,20 @@ return function(s)
 			end
 		end
 	)
+
+	local center_widget = {
+		layout = wibox.layout.fixed.horizontal,
+		{
+			widget = wibox.container.margin,
+			media_summary,
+			-- module.media_player,
+		},
+		{
+			widget = wibox.container.margin,
+			module.clock,
+		},
+	}
+
 	-- Create the wibox
 	s.mywibox = awful.wibar({
 		layout = wibox.layout.fixed.horizontal,

@@ -3,7 +3,6 @@ local final_widget = {
 	layout = wibox.layout.fixed.horizontal,
 	{
 		widget = wibox.container.margin,
-		right = 8,
 		wibox.widget.textbox("  "),
 	},
 	{
