@@ -8,7 +8,7 @@ local apps = require("config.apps")
 local power_menu = require("widgets.power_menu")
 local windowswitcher = require("widgets.windowswitcher")
 local launcher = require("widgets.launcher")
-local notification = require("ui.notification")
+local notifications = require("module.notifications")
 
 local function table_to_keybinding(bindings)
 	local key_bindings = {}
@@ -48,7 +48,7 @@ local global_keys = {
 	{ { modkey, mod.alt }, "l", apps.locker, "Lock Screen", "awesome" },
 
 	-- Dashboard Controls
-	{ { modkey, "Shift" }, "n", notification.toggle_notification_center, "Toggle Notifications", "awesome" },
+	{ { modkey, "Shift" }, "n", notifications.toggle_notification_center, "Toggle Notifications", "awesome" },
 }
 awful.keyboard.append_global_keybindings(table_to_keybinding(global_keys))
 
