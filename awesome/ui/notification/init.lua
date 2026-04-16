@@ -215,7 +215,7 @@ local function show_snooze_picker(notif_data, anchor_geometry)
 
 		-- Hover effect
 		btn:connect_signal("mouse::enter", function()
-			btn.bg = beautiful.primary_color or "#d65d0e"
+			btn.bg = beautiful.bg_focus or "#d65d0e"
 			btn.fg = beautiful.bg_normal or "#282828"
 		end)
 		btn:connect_signal("mouse::leave", function()
@@ -253,7 +253,7 @@ local function show_snooze_picker(notif_data, anchor_geometry)
 		visible = true,
 		bg = "#00000000",
 		border_width = beautiful.border_width or 1,
-		border_color = beautiful.primary_color or "#d65d0e",
+		border_color = beautiful.bg_focus or "#d65d0e",
 		shape = beautiful.shape or gears.shape.rectangle,
 	})
 
@@ -355,7 +355,7 @@ local function create_group_header(group)
 	local is_expanded = expanded_groups[group.app_name]
 	local chevron = is_expanded and "▼" or "▶"
 	local unread_badge = group.unread_count > 0
-			and " <span foreground='" .. (beautiful.primary_color or "#d65d0e") .. "'>(" .. group.unread_count .. ")</span>"
+			and " <span foreground='" .. (beautiful.bg_focus or "#d65d0e") .. "'>(" .. group.unread_count .. ")</span>"
 		or ""
 
 	local header = wibox.widget({
@@ -401,7 +401,7 @@ local function create_group_header(group)
 	-- Hover effect
 	local default_bg = beautiful.bg_focus or "#504945"
 	header:connect_signal("mouse::enter", function()
-		header.bg = beautiful.primary_color or "#d65d0e"
+		header.bg = beautiful.bg_focus or "#d65d0e"
 	end)
 	header:connect_signal("mouse::leave", function()
 		header.bg = default_bg
@@ -447,7 +447,7 @@ local function create_notification_item(notif, index)
 	end)))
 
 	snooze_btn:connect_signal("mouse::enter", function()
-		snooze_btn.bg = beautiful.primary_color or "#d65d0e"
+		snooze_btn.bg = beautiful.bg_focus or "#d65d0e"
 	end)
 	snooze_btn:connect_signal("mouse::leave", function()
 		snooze_btn.bg = "transparent"
@@ -462,7 +462,7 @@ local function create_notification_item(notif, index)
 						{
 							markup = (
 								is_unread
-									and "<span foreground='" .. (beautiful.primary_color or "#d65d0e") .. "'>● </span>"
+									and "<span foreground='" .. (beautiful.bg_focus or "#d65d0e") .. "'>● </span>"
 								or ""
 							)
 								.. "<b>"
@@ -709,7 +709,7 @@ function M.show_notification_center()
 			visible = false,
 			bg = "#00000000",
 			border_width = beautiful.border_width or 1,
-			border_color = beautiful.primary_color or "#d65d0e",
+			border_color = beautiful.bg_focus or "#d65d0e",
 			shape = beautiful.shape or gears.shape.rounded_rect,
 		})
 	end
@@ -1080,7 +1080,7 @@ naughty.connect_signal("request::display", function(n)
 		fg = n.fg or beautiful.notification_fg or beautiful.fg_normal,
 		shape = beautiful.notification_shape or beautiful.shape,
 		border_width = beautiful.notification_border_width or 1,
-		border_color = beautiful.notification_border_color or beautiful.primary_color,
+		border_color = beautiful.notification_border_color or beautiful.bg_focus,
 		widget = wibox.container.background,
 	}
 
