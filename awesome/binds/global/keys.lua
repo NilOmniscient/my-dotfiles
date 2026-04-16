@@ -97,10 +97,6 @@ awful.keyboard.append_global_keybindings({
 		})
 	end, { description = "lua execute prompt", group = "awesome" }),
 
-	awful.key({ modkey }, "p", function()
-		require("menubar").show()
-	end, { description = "show the menubar", group = "launcher" }),
-
 	-- Tags related keybindings.
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
@@ -256,6 +252,6 @@ awful.keyboard.append_global_keybindings({
 		awful.placement.centered(power_menu, {
 			parent = active_screen,
 		})
-		power_menu:toggle()
+		power_menu:show()
 	end, { description = "power menu", group = "awesome" }),
 })
