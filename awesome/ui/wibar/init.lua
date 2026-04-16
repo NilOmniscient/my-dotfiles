@@ -30,8 +30,7 @@ end
 
 return function(s)
 	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
-
-	local text_clock = wibox.widget.textclock(" %b %d, %I:%M %P")
+	local text_clock = module.clock
 	local right_widgets = {}
 	if s == screen.primary then
 		right_widgets = wibox.widget({
