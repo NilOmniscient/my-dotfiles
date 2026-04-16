@@ -18,6 +18,8 @@ local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")
 
+local apps = require("config.apps")
+
 local screensaver = gears.filesystem.get_configuration_dir() .. "assets/screensaver.png"
 
 local lockscreen = {}
@@ -275,6 +277,34 @@ function lockscreen.init(opts)
 		return
 	end
 	initialized = true
+
+	-- Set up idle timeouts
+	awesome.clear_all_idle_timeouts()
+
+	awesome.set_idle_timeout("lock", 300, function()
+		awesome.lock()
+	end)
+	awesome.set_idle_timeout("dim", 600, function()
+		awesome.dpms_off()
+	end)
+	awesome.set_idle_timeout("suspend", 900, function()
+		apps.suspend()
+	end)
+	client.connect_signal("property::fullscreen", function()
+		local dominated = false
+		for _, c in ipairs(client.get()) do
+			if c.fullscreen then
+				dominated = true
+				break
+			end
+		end
+		awesome.idle_inhibit = dominated
+	end)
+	awesome.connect_signal("logind::prepare_sleep", function(going_to_sleep)
+		if going_to_sleep then
+			awesome.lock()
+		end
+	end)
 
 	opts = opts or {}
 
