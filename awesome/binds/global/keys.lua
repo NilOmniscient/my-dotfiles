@@ -20,12 +20,6 @@ local function table_to_keybinding(bindings)
 	return key_bindings
 end
 
-local lockscreen = "lxqt-leave --lockscreen"
-local is_somewm = awesome.release == "somewm"
-if is_somewm then
-	lockscreen = apps.locker
-end
-
 -- Slowly convert declarative style keys to table.
 
 local global_keys = {
@@ -43,60 +37,14 @@ local global_keys = {
 	{ { modkey, mod.ctrl }, "r", awesome.restart, "Restart Awesome", "awesome" },
 	{ { modkey, mod.shift }, "q", awesome.quit, "Quit Awesome", "awesome" },
 	-- Client keybinds.
-	{
-		{ modkey },
-		"Tab",
-		windowswitcher.show,
-		"Window Switcher",
-		"client",
-	},
+	{ { modkey }, "Tab", windowswitcher.show, "Window Switcher", "client" },
 
 	-- Launcher keybinds.
-	{
-		{ modkey },
-		"Return",
-		function()
-			awful.spawn(apps.terminal)
-		end,
-		"Launch Terminal",
-		"launcher",
-	},
-	{
-		{ modkey },
-		"b",
-		function()
-			awful.spawn(apps.browser)
-		end,
-		"Launch Browser",
-		"launcher",
-	},
-	{
-		{ modkey },
-		"f",
-		function()
-			awful.spawn(apps.file_browser)
-		end,
-		"Launch File Browser",
-		"launcher",
-	},
-	{
-		{ modkey },
-		"r",
-		function()
-			launcher.show()
-		end,
-		"Application Launcher",
-		"launcher",
-	},
-	{
-		{ modkey, mod.alt },
-		"l",
-		function()
-			awful.spawn(lockscreen)
-		end,
-		"Lock Screen",
-		"awesome",
-	},
+	{ { modkey }, "Return", apps.terminal, "Launch Terminal", "launcher" },
+	{ { modkey }, "b", apps.browser, "Launch Browser", "launcher" },
+	{ { modkey }, "f", apps.file_browser, "Launch File Browser", "launcher" },
+	{ { modkey }, "r", launcher.show, "Application Launcher", "launcher" },
+	{ { modkey, mod.alt }, "l", apps.locker, "Lock Screen", "awesome" },
 }
 awful.keyboard.append_global_keybindings(table_to_keybinding(global_keys))
 

@@ -42,6 +42,15 @@ require("binds")
 -- Load all client rules.
 require("config.rules")
 
+-- Load the lockscreen
+-- require("lockscreen").init()
+local awful = require("awful")
+require("module.lockscreen").init({
+	lock_screen = function()
+		return awful.screen.focused()
+	end,
+})
+
 -- Replace Awful.Snap with a better snapping module
 local awful = require("awful")
 
