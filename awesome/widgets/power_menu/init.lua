@@ -2,6 +2,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local theme = require("beautiful")
+local apps = require("config.apps")
 
 local menu_builder = require("module.menu_builder")
 
@@ -21,25 +22,25 @@ local menu_items = {
 	{
 		" Lock",
 		function()
-			awful.spawn.with_shell("lxqt-leave --lockscreen")
+			awful.spawn.with_shell(apps.locker)
 		end,
 	},
 	{
 		" Reboot",
 		function()
-			awful.spawn("lxqt-leave --reboot")
+			awful.spawn(apps.reboot)
 		end,
 	},
 	{
 		"󰒲 Sleep",
 		function()
-			awful.spawn("lxqt-leave --suspend")
+			awful.spawn(apps.sleep)
 		end,
 	},
 	{
 		"⏻ Shutdown",
 		function()
-			awful.spawn("lxqt-leave --shutdown")
+			awful.spawn(apps.shutdown)
 		end,
 	},
 }

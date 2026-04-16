@@ -1,6 +1,7 @@
 local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
+local beautiful = require("beautiful")
 
 local wallpaper = gears.filesystem.get_configuration_dir() .. "assets/wallpaper.png"
 --- Attach tags and widgets to all screens.

@@ -8,6 +8,9 @@ local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
 local dpi = xresources.apply_dpi
 
+local gfs = require("gears.filesystem")
+local themes_path = gfs.get_themes_dir()
+
 local theme = {}
 
 theme.font = "hack 14"
