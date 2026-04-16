@@ -3,6 +3,16 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
+-- Load the theme. In other words, defines the variables within the `beautiful`
+-- table.
+-- require("theme.default")
+require("theme.catppuccin")
+
+-- Load notification system before any notifications can fire.
+local notifications_ok, notifications_err = pcall(require, "ui.notification")
+if not notifications_ok then
+	io.stderr:write("[RC.LUA] Failed to load notifications: " .. tostring(notifications_err) .. "\n")
+end
 -- Autostart things that need to be run
 require("autostart")
 
@@ -26,11 +36,6 @@ require("awful.autofocus")
 -- Enable hotkeys help widget for VIM and other apps when client with a matching
 -- name is opened:
 require("awful.hotkeys_popup.keys")
-
--- Load the theme. In other words, defines the variables within the `beautiful`
--- table.
--- require("theme.default")
-require("theme.catppuccin")
 
 -- Treat all signals. Bear in mind this implies creating all tags, attaching
 -- their layouts, setting client behavior and loading UI.
