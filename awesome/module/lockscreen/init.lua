@@ -1,16 +1,6 @@
 ---------------------------------------------------------------------------
---- Default lockscreen module for somewm.
---
--- Provides a simple but complete lockscreen with visual feedback.
--- Creates one wibox per screen: an interactive wibox with password UI on the
--- primary screen, and opaque cover wiboxes on all other screens.
---
--- Usage:
---    require("lockscreen").init()
---    -- Then bind awesome.lock to a key, e.g.:
---    awful.key({ modkey, "Shift" }, "Escape", awesome.lock)
---
--- @module lockscreen
+-- This was made by grabbing SomeWM's default lockscreen module
+-- and modifying it to my liking.
 ---------------------------------------------------------------------------
 
 local wibox = require("wibox")
