@@ -9,7 +9,7 @@ pcall(require, "luarocks.loader")
 require("theme.catppuccin")
 
 -- Load notification system before any notifications can fire.
-local notifications_ok, notifications_err = pcall(require, "ui.notification")
+local notifications_ok, notifications_err = pcall(require, "module.notifications")
 if not notifications_ok then
 	io.stderr:write("[RC.LUA] Failed to load notifications: " .. tostring(notifications_err) .. "\n")
 end
