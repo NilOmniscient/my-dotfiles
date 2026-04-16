@@ -1,8 +1,8 @@
 local awful = require("awful")
-local beautiful = require("beautiful")
 local gears = require("gears")
 local wibox = require("wibox")
 
+local wallpaper = gears.filesystem.get_configuration_dir() .. "assets/wallpaper.png"
 --- Attach tags and widgets to all screens.
 screen.connect_signal("request::desktop_decoration", function(s)
 	-- Create all tags and attach the layouts to each of them.
@@ -28,7 +28,7 @@ screen.connect_signal("request::wallpaper", function(s)
 			{
 				widget = wibox.widget.imagebox,
 				image = gears.surface.crop_surface({
-					surface = gears.surface.load_uncached(beautiful.wallpaper),
+					surface = gears.surface.load_uncached(wallpaper),
 					ratio = s.geometry.width / s.geometry.height,
 				}),
 			},

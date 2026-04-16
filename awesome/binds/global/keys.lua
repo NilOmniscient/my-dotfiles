@@ -20,6 +20,12 @@ local function table_to_keybinding(bindings)
 	return key_bindings
 end
 
+local lockscreen = "lxqt-leave --lockscreen"
+local is_somewm = awesome.release == "somewm"
+if is_somewm then
+	lockscreen = apps.locker
+end
+
 -- Slowly convert declarative style keys to table.
 
 local global_keys = {
@@ -81,6 +87,15 @@ local global_keys = {
 		end,
 		"Application Launcher",
 		"launcher",
+	},
+	{
+		{ modkey, mod.alt },
+		"l",
+		function()
+			awful.spawn(lockscreen)
+		end,
+		"Lock Screen",
+		"awesome",
 	},
 }
 awful.keyboard.append_global_keybindings(table_to_keybinding(global_keys))
@@ -244,9 +259,7 @@ awful.keyboard.append_global_keybindings({
 	end, { description = "Lower Volume", group = "media" }),
 
 	-- Custom keys
-	awful.key({ modkey, mod.alt }, "l", function()
-		awful.spawn("lxqt-leave --lockscreen")
-	end, { description = "Lock Screen", group = "awesome" }),
+
 	awful.key({ modkey, mod.alt }, "p", function()
 		local active_screen = awful.screen.focused()
 		awful.placement.centered(power_menu, {
