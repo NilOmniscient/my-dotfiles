@@ -24,7 +24,7 @@ end
 
 local global_keys = {
 	-- Awesome keybinds.
-	{ { modkey },            "s", require("awful.hotkeys_popup").show_help, "Show Help",       "awesome" },
+	{ { modkey }, "s", require("awful.hotkeys_popup").show_help, "Show Help", "awesome" },
 	{
 		{ modkey },
 		"w",
@@ -34,15 +34,13 @@ local global_keys = {
 		"Show Awesome Menu",
 		"awesome",
 	},
-	{ { modkey, mod.ctrl },  "r", awesome.restart,                          "Restart Awesome", "awesome" },
-	{ { modkey, mod.shift }, "q", awesome.quit,                             "Quit Awesome",    "awesome" },
+	{ { modkey, mod.ctrl }, "r", awesome.restart, "Restart Awesome", "awesome" },
+	{ { modkey, mod.shift }, "q", awesome.quit, "Quit Awesome", "awesome" },
 	-- Client keybinds.
 	{
 		{ modkey },
 		"Tab",
-		function()
-			awful.spawn(apps.window_switcher)
-		end,
+		windowswitcher.show,
 		"Window Switcher",
 		"client",
 	},
@@ -79,7 +77,7 @@ local global_keys = {
 		{ modkey },
 		"r",
 		function()
-			awful.spawn(apps.launcher)
+			launcher.show()
 		end,
 		"Application Launcher",
 		"launcher",
@@ -99,11 +97,6 @@ awful.keyboard.append_global_keybindings({
 		})
 	end, { description = "lua execute prompt", group = "awesome" }),
 
-	-- awful.key({ modkey }, "r", function()
-	--	awful.spawn("xfce4-appfinder")
-	-- end, { description = "App Launcher", group = "launcher" }),
-	-- awful.key({ modkey            }, 'r', function() awful.screen.focused().mypromptbox:run() end,
-	--   { description = 'run prompt', group = 'launcher' }),
 	awful.key({ modkey }, "p", function()
 		require("menubar").show()
 	end, { description = "show the menubar", group = "launcher" }),
