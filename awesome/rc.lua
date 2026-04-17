@@ -50,11 +50,13 @@ require("config.rules")
 -- Load the lockscreen
 -- require("lockscreen").init()
 local awful = require("awful")
-require("module.lockscreen").init({
-	lock_screen = function()
-		return awful.screen.focused()
-	end,
-})
+if awesome.release == "somewm" then
+	require("module.lockscreen").init({
+		lock_screen = function()
+			return awful.screen.focused()
+		end,
+	})
+end
 
 -- Replace Awful.Snap with a better snapping module
 local awful = require("awful")
