@@ -4,6 +4,7 @@ local wibox = require("wibox")
 local screen = require("screen")
 local beautiful = require("beautiful")
 local module = require("ui.wibar.module")
+local media_player = require("ui.wibar.module.media_player")
 
 local wrap_widget = function(w)
 	local wrapped = wibox.widget({
@@ -47,28 +48,22 @@ return function(s)
 		})
 	end
 
-	local media_summary = awful.widget.watch(
-		'playerctl metadata --format "󰝚  {{title}}"',
-		5,
-		function(widget, stdout)
-			if stdout == "" then
-				widget:set_text("󰝚  Nothing Playing")
-			else
-				widget:set_text(stdout)
-			end
-		end
-	)
-
 	local center_widget = {
 		layout = wibox.layout.fixed.horizontal,
+		spacing = 2,
+		spacing_widget = wibox.widget.separator,
 		{
 			widget = wibox.container.margin,
-			media_summary,
-			-- module.media_player,
+			-- media_summary,
+			module.media_player,
 		},
 		{
 			widget = wibox.container.margin,
 			module.clock,
+		},
+		{
+			widget = wibox.container.margin,
+			module.notifications,
 		},
 	}
 

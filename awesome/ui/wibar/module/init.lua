@@ -3,9 +3,7 @@
 local path = ... .. "."
 return setmetatable({}, {
 	__index = function(_, key)
-		if key ~= "media_player" then
-			local module, _ = require(path .. key)
-			return module
-		end
+		local module, _ = require(path .. key)
+		return module
 	end,
 })

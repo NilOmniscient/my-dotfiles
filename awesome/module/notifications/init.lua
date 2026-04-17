@@ -188,7 +188,7 @@ local function show_snooze_picker(notif_data, anchor_geometry)
 				{
 					{
 						text = "󰥔", -- nf-md-clock_outline
-						font = "JetBrainsMono Nerd Font 12",
+						font = "hack 12",
 						forced_width = 20,
 						widget = wibox.widget.textbox,
 					},
@@ -426,7 +426,7 @@ local function create_notification_item(notif, index)
 		{
 			{
 				text = "󰥔", -- nf-md-clock_outline
-				font = "JetBrainsMono Nerd Font 14",
+				font = "hack 14",
 				halign = "center",
 				valign = "center",
 				widget = wibox.widget.textbox,
