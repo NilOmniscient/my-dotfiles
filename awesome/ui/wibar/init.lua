@@ -67,7 +67,7 @@ return function(s)
 		},
 		{
 			widget = wibox.container.margin,
-			module.clock,
+			wibox.widget.textclock("   %I:%M %P "),
 		},
 		{
 			widget = wibox.container.margin,
