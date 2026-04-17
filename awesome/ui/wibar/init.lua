@@ -36,14 +36,15 @@ return function(s)
 	if s == screen.primary then
 		right_widgets = wibox.widget({
 			layout = wibox.layout.fixed.horizontal,
-			awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
-			wibox.widget.systray(),
+			wibox.widget({
+				widget = wibox.widget.systray,
+				forced_width = 100,
+			}),
 			text_clock,
 		})
 	else
 		right_widgets = wibox.widget({
 			layout = wibox.layout.fixed.horizontal,
-			awful.widget.keyboardlayout(), -- Keyboard map indicator and switcher.
 			text_clock,
 		})
 	end
