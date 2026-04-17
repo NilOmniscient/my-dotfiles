@@ -40,7 +40,7 @@ return function(s)
 			layout = wibox.layout.fixed.horizontal,
 			wibox.widget({
 				widget = wibox.container.margin,
-				right = 4,
+				margins = 2,
 				{
 					widget = wibox.widget.systray,
 				},
