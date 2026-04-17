@@ -4,7 +4,6 @@ local wibox = require("wibox")
 local screen = require("screen")
 local beautiful = require("beautiful")
 local module = require("ui.wibar.module")
-local media_player = require("ui.wibar.module.media_player")
 
 local wrap_widget = function(w)
 	local wrapped = wibox.widget({
@@ -31,7 +30,6 @@ end
 
 return function(s)
 	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
-	local text_clock = module.clock
 	local right_widgets = {}
 	if s == screen.primary or awesome.release == "somewm" then
 		right_widgets = wibox.widget({
