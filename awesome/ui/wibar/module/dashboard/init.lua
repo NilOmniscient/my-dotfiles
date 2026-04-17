@@ -4,7 +4,7 @@ local wibox = require("wibox")
 local dashboard = wibox.widget({
 	{
 		{
-			text = " 󰕮 ",
+			text = " 󰕮 Dashboard ",
 			font = theme.font,
 			widget = wibox.widget.textbox,
 		},

@@ -33,19 +33,22 @@ return function(s)
 	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
 	local text_clock = module.clock
 	local right_widgets = {}
-	if s == screen.primary then
+	if s == screen.primary or awesome.release == "somewm" then
 		right_widgets = wibox.widget({
+			spacing = 1,
+			spacing_widget = wibox.widget.separator,
 			layout = wibox.layout.fixed.horizontal,
 			wibox.widget({
 				widget = wibox.widget.systray,
-				forced_width = 100,
 			}),
-			text_clock,
+			module.dashboard,
 		})
 	else
 		right_widgets = wibox.widget({
+			spacing = 1,
+			spacing_widget = wibox.widget.separator,
 			layout = wibox.layout.fixed.horizontal,
-			text_clock,
+			module.dashboard,
 		})
 	end
 
