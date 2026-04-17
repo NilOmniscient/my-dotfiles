@@ -39,7 +39,11 @@ return function(s)
 			spacing_widget = wibox.widget.separator,
 			layout = wibox.layout.fixed.horizontal,
 			wibox.widget({
-				widget = wibox.widget.systray,
+				widget = wibox.container.margin,
+				right = 4,
+				{
+					widget = wibox.widget.systray,
+				},
 			}),
 			module.dashboard,
 		})
