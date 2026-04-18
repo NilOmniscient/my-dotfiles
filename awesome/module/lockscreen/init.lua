@@ -278,7 +278,7 @@ function lockscreen.init(opts)
 		awesome.dpms_off()
 	end)
 	awesome.set_idle_timeout("suspend", 900, function()
-		apps.suspend()
+		apps.sleep()
 	end)
 	client.connect_signal("property::fullscreen", function()
 		local dominated = false
@@ -319,7 +319,7 @@ function lockscreen.init(opts)
 		config.font = beautiful.font or defaults.font
 	end
 	if not opts.font_large and not beautiful.lockscreen_font_large then
-		confit.font_large = beautiful.font_large or defaults.font_large
+		config.font_large = beautiful.font_large or defaults.font_large
 	end
 	-- lock_screen is not a beautiful property
 	if opts.lock_screen ~= nil then
