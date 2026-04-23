@@ -11,6 +11,7 @@ return {
   { import = "astrocommunity.completion.blink-cmp" },
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.dart" },
+  { import = "astrocommunity.pack.godot" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.php" },
   { import = "astrocommunity.pack.typescript" },
