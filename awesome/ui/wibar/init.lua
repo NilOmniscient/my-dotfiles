@@ -32,6 +32,8 @@ return function(s)
 	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
 	local right_widgets = {}
 	if s == screen.primary or awesome.release == "somewm" then
+		local systray = wibox.widget.systray()
+		systray:set_base_size(28)
 		right_widgets = wibox.widget({
 			spacing = 1,
 			spacing_widget = wibox.widget.separator,
@@ -39,9 +41,7 @@ return function(s)
 			wibox.widget({
 				widget = wibox.container.margin,
 				margins = 2,
-				{
-					widget = wibox.widget.systray,
-				},
+				systray,
 			}),
 			module.dashboard,
 		})

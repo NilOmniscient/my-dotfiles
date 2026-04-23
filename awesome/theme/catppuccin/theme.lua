@@ -32,6 +32,8 @@ theme.fg_minimize = theme.bg_normal
 
 theme.useless_gap = dpi(5)
 theme.snapper_gap = dpi(5)
+theme.systray_icon_spacing = 0
+theme.systray_paddings = 0
 theme.border_width = dpi(2)
 theme.border_color_normal = theme.bg_focus
 theme.border_color_active = "#24e3e0"

@@ -14,7 +14,7 @@ local update_icon = function()
 	end
 end
 
-awesome.connect_signal("notification:unread_count", function(count)
+awesome.connect_signal("notification::unread_count", function(count)
 	update_icon()
 end)
 
