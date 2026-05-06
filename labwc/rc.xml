@@ -116,16 +116,13 @@
     <windowRule identifier="*" serverDecoration="no"/>
   </windowRules>
   <snapping>
-    <overlay>
-      <delay>
-        <inner>100ms</inner>
-        <outer>100ms</outer>
-      </delay>
-      <topMaximize>no</topMaximize>
-      <range>
-        <inner>50</inner>
-        <outer>50</outer>
-      </range>
+    <!-- Set inner and outer range to 0 to disable window snapping completely -->
+    <range inner="50" outer="50" />
+    <cornerRange>50</cornerRange>
+    <overlay enabled="yes">
+      <delay inner="100" outer="100" />
     </overlay>
+    <topMaximize>no</topMaximize>
+    <notifyClient>always</notifyClient>
   </snapping>
 </labwc_config>
