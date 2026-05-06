@@ -1,0 +1,131 @@
+<!--
+  This is a very simple config file with many options missing. For a complete
+  set of options with comments, see docs/rc.xml.all
+-->
+
+<labwc_config>
+
+  <theme>
+    <name>Artwiz-boxed</name>
+    <cornerRadius>8</cornerRadius>
+    <font name="sans" size="10" />
+    <keepBorder>yes</keepBorder>
+    <titlebar>
+      <showTitle>yes</showTitle>
+    </titlebar>
+    <dropShadows>no</dropShadows>
+    <dropShadowsOnTiled>no</dropShadowsOnTiled>
+  </theme>
+
+  <keyboard>
+    <numlock>on</numlock>
+    <default />
+    <!-- Use a different terminal emulator -->
+    <keybind key="W-Return">
+      <action name="Execute" command="ghostty" />
+    </keybind>
+    <keybind key="W-f">
+      <action name="Execute" command="firefox"/>
+    </keybind>
+    <keybind key="W-b">
+      <action name="Execute" command="pcmanfm-qt"/>
+    </keybind>
+    <keybind key="W-q">
+      <action name="Close"/> 
+    </keybind>
+    <keybind key="W-m">
+      <action name="ToggleMaximize"/>
+    </keybind>
+    <keybind key="W-Tab">
+      <action name="NextWindow"/>
+    </keybind>
+    <keybind key="W-S-Tab">
+      <action name="PreviousWindow"/>
+    </keybind>
+    <!-- Noctalia Specific Keybinds -->
+    <keybind key="W-r">
+      <action name="Execute" command="qs -c noctalia-shell ipc call launcher toggle"/>
+    </keybind>
+    <keybind key="W-p">
+      <action name="Execute" command="qs -c noctalia-shell ipc call sessionMenu toggle"/>
+    </keybind>
+    <keybind key="W-l">
+      <action name="Execute" command="qs -c noctalia-shell ipc call lockScreen lock"/>
+    </keybind>
+    <!-- Media Keys -->
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute" command="qs -c noctalia-shell ipc call volume increase"/>
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+      <action name="Execute" command="qs -c noctalia-shell ipc call volume decrease"/>
+    </keybind>
+    <keybind key="XF86AudioMute">
+      <action name="Execute" command="qs -c noctalia-shell ipc call volume muteOutput"/>
+    </keybind>
+    <keybind key="XF86AudioPause">
+      <action name="Execute" command="qs -c noctalia-shell ipc call media playPause"/>
+    </keybind>
+    <keybind key="XF86AudioPlay">
+      <action name="Execute" command="qs -c noctalia-shell ipc call media playPause"/>
+    </keybind>
+    <keybind key="XF86AudioNext">
+      <action name="Execute" command="qs -c noctalia-shell ipc call media next"/>
+    </keybind>
+    <keybind key="XF86AudioPrev">
+      <action name="Execute" command="qs -c noctalia-shell ipc call media previous"/>
+    </keybind>
+
+    <!--
+      Remove a previously defined keybind
+      A shorter alternative is <keybind key="W-F4" />
+    -->
+    <keybind key="W-F4">
+      <action name="None" />
+    </keybind>
+  </keyboard>
+
+  <mouse>
+    <default />
+    <!-- Show a custom menu on desktop right click -->
+    <context name="Root">
+      <mousebind button="Right" action="Press">
+        <action name="ShowMenu" menu="some-custom-menu" />
+      </mousebind>
+    </context>
+  <doubleClickTime>500</doubleClickTime></mouse>
+
+  <focus>
+    <followMouse>no</followMouse>
+    <followMouseRequiresMovement>no</followMouseRequiresMovement>
+    <raiseOnFocus>no</raiseOnFocus>
+  </focus>
+  <placement>
+    <policy>center</policy>
+  </placement>
+  <osd show="yes" style="thumbnail" output="all" thumbnailLabelFormat="%T" />
+  <resize>
+    <popupShow>Never</popupShow>
+    <drawContents>yes</drawContents>
+    <cornerRange>20</cornerRange>
+    <minimumArea>64</minimumArea>
+  </resize>
+  <desktops>
+    <prefix>Workspace</prefix>
+  </desktops>
+  <windowRules>
+    <windowRule identifier="*" serverDecoration="no"/>
+  </windowRules>
+  <snapping>
+    <overlay>
+      <delay>
+        <inner>100ms</inner>
+        <outer>100ms</outer>
+      </delay>
+      <topMaximize>no</topMaximize>
+      <range>
+        <inner>50</inner>
+        <outer>50</outer>
+      </range>
+    </overlay>
+  </snapping>
+</labwc_config>
