@@ -97,10 +97,10 @@
                 {
                     "clockColor": "none",
                     "customFont": "",
-                    "formatHorizontal": "HH:mm ddd, MMM dd",
-                    "formatVertical": "HH mm - dd MM",
+                    "formatHorizontal": "hh:mm AP ddd, MMM dd",
+                    "formatVertical": "hh:mm AP ddd, MMM dd",
                     "id": "Clock",
-                    "tooltipFormat": "HH:mm ddd, MMM dd",
+                    "tooltipFormat": "hh:mm ddd, MMM dd",
                     "useCustomFont": false
                 }
             ],
@@ -314,7 +314,7 @@
         "deadOpacity": 0.6,
         "displayMode": "auto_hide",
         "dockType": "floating",
-        "enabled": true,
+        "enabled": false,
         "floatingRatio": 1,
         "groupApps": false,
         "groupClickAction": "cycle",

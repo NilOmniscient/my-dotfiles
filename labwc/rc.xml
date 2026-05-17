@@ -11,8 +11,8 @@
     <font name="sans" size="10" />
     <keepBorder>yes</keepBorder>
     <titlebar>
-      <showTitle>yes</showTitle>
-    </titlebar>
+      
+    <showTitle>yes</showTitle></titlebar>
     <dropShadows>no</dropShadows>
     <dropShadowsOnTiled>no</dropShadowsOnTiled>
   </theme>
@@ -28,7 +28,7 @@
       <action name="Execute" command="firefox"/>
     </keybind>
     <keybind key="W-b">
-      <action name="Execute" command="pcmanfm-qt"/>
+      <action name="Execute" command="thunar"/>
     </keybind>
     <keybind key="W-q">
       <action name="Close"/> 
@@ -101,7 +101,7 @@
   </focus>
   <placement>
     <policy>center</policy>
-  </placement>
+  <monitor>Mouse</monitor></placement>
   <osd show="yes" style="thumbnail" output="all" thumbnailLabelFormat="%T" />
   <resize>
     <popupShow>Never</popupShow>
