@@ -36,7 +36,4 @@ vim.schedule(function()
   require "mappings"
 end)
 
--- Enable the Dart language server
-vim.lsp.enable("dartls")
-
 require("overseer").setup()
