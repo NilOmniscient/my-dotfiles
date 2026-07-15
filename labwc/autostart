@@ -37,4 +37,5 @@ kanshi >/dev/null 2>&1 &
 #	timeout 600 'wlopm --off \*' \
 #	resume 'wlopm --on \*' \
 #	before-sleep 'swaylock -f -c 000000' >/dev/null 2>&1 &
-qs -c noctalia-shell
+# qs -c noctalia-shell
+noctalia

@@ -43,36 +43,42 @@
       <action name="PreviousWindow"/>
     </keybind>
     <!-- Noctalia Specific Keybinds -->
+    <keybind key="W-S-r">
+      <action name="Execute" command="noctalia msg config-reload"/>
+    </keybind>
+    <keybind key="W-C-r">
+      <action name="Execute" command="labwc --reconfigure"/>
+    </keybind>
     <keybind key="W-r">
-      <action name="Execute" command="qs -c noctalia-shell ipc call launcher toggle"/>
+      <action name="Execute" command="noctalia msg panel-toggle launcher"/>
     </keybind>
     <keybind key="W-p">
-      <action name="Execute" command="qs -c noctalia-shell ipc call sessionMenu toggle"/>
+      <action name="Execute" command="noctalia msg panel-toggle session"/>
     </keybind>
     <keybind key="W-l">
-      <action name="Execute" command="qs -c noctalia-shell ipc call lockScreen lock"/>
+      <action name="Execute" command="noctalia msg session lock"/>
     </keybind>
     <!-- Media Keys -->
     <keybind key="XF86AudioRaiseVolume">
-      <action name="Execute" command="qs -c noctalia-shell ipc call volume increase"/>
+      <action name="Execute" command="noctalia msg volume-up"/>
     </keybind>
     <keybind key="XF86AudioLowerVolume">
-      <action name="Execute" command="qs -c noctalia-shell ipc call volume decrease"/>
+      <action name="Execute" command="noctalia msg volume-down"/>
     </keybind>
     <keybind key="XF86AudioMute">
-      <action name="Execute" command="qs -c noctalia-shell ipc call volume muteOutput"/>
+      <action name="Execute" command="noctalia msg volume-mute"/>
     </keybind>
     <keybind key="XF86AudioPause">
-      <action name="Execute" command="qs -c noctalia-shell ipc call media playPause"/>
+      <action name="Execute" command="noctalia msg media toggle"/>
     </keybind>
     <keybind key="XF86AudioPlay">
-      <action name="Execute" command="qs -c noctalia-shell ipc call media playPause"/>
+      <action name="Execute" command="noctalia msg media toggle"/>
     </keybind>
     <keybind key="XF86AudioNext">
-      <action name="Execute" command="qs -c noctalia-shell ipc call media next"/>
+      <action name="Execute" command="noctalia msg media next"/>
     </keybind>
     <keybind key="XF86AudioPrev">
-      <action name="Execute" command="qs -c noctalia-shell ipc call media previous"/>
+      <action name="Execute" command="noctalia msg media previous"/>
     </keybind>
 
     <!--
@@ -88,9 +94,8 @@
     <default />
     <!-- Show a custom menu on desktop right click -->
     <context name="Root">
-      <mousebind button="Right" action="Press">
-        <action name="ShowMenu" menu="some-custom-menu" />
-      </mousebind>
+      <mousebind button="Left" action="Press"/>
+      <mousebind button="Right" action="Press"/>
     </context>
   <doubleClickTime>500</doubleClickTime></mouse>
 
