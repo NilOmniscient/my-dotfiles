@@ -312,8 +312,8 @@
         "backgroundOpacity": 1,
         "colorizeIcons": false,
         "deadOpacity": 0.6,
-        "displayMode": "auto_hide",
-        "dockType": "floating",
+        "displayMode": "always_visible",
+        "dockType": "attached",
         "enabled": false,
         "floatingRatio": 1,
         "groupApps": false,
@@ -329,6 +329,9 @@
         "launcherPosition": "end",
         "launcherUseDistroLogo": false,
         "monitors": [
+            "DP-3",
+            "DP-2",
+            "DP-1"
         ],
         "onlySameOutput": true,
         "pinnedApps": [
@@ -433,16 +436,16 @@
     },
     "location": {
         "analogClockInCalendar": false,
-        "autoLocate": false,
+        "autoLocate": true,
         "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
-        "name": "",
+        "name": "Spartanburg",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,
         "use12hourFormat": false,
-        "useFahrenheit": false,
+        "useFahrenheit": true,
         "weatherEnabled": true,
         "weatherShowEffects": true,
         "weatherTaliaMascotAlways": false
