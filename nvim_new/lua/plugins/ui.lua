@@ -37,6 +37,17 @@ return {
 	},
 	{
 		"akinsho/bufferline.nvim",
-		opts = {},
+		opts = {
+			options = {
+				offsets = {
+					{
+						filetype = "neo-tree",
+						text = "File Explorer",
+						highlight = "Directory",
+						separator = true,
+					},
+				},
+			},
+		},
 	},
 }
