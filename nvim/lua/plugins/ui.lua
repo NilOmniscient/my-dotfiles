@@ -55,6 +55,11 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		lazy = false,
+		opts = {
+			options = {
+				globalstatus = true,
+			},
+		},
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
