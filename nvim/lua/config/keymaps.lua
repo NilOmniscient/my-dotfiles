@@ -20,19 +20,15 @@ vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
 vim.keymap.set("n", "<leader>th", "<cmd>ToggleTerm<cr>")
 
 -- Compiler settings
-vim.api.nvim_set_keymap("n", "<F6>", "<cmd>CompilerOpen<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap(
+vim.keymap.set("n", "<F6>", "<cmd>CompilerOpen<cr>", { noremap = true, silent = true })
+vim.keymap.set(
 	"n",
 	"<S-F6>",
 	"<cmd>CompilerStop<cr>" -- (Optional, to dispose all tasks before redo)
 		.. "<cmd>CompilerRedo<cr>",
 	{ noremap = true, silent = true }
 )
-vim.api.nvim_set_keymap("n", "<S-F7>", "<cmd>CompilerToggleResults<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-F7>", "<cmd>CompilerToggleResults<cr>", { noremap = true, silent = true })
 
 -- Safely close buffer tab
-vim.keymap.set("n", "<leader>c", function()
-	local current_buf = vim.api.nvim_get_current_buf()
-	require("bufferline").cycle(1)
-	vim.cmd("bdelete! " .. current_buf)
-end, { desc = "Close Tab" })
+vim.keymap.set("n", "<leader>c", "<cmd>BufferClose<cr>", { noremap = true, silent = true })

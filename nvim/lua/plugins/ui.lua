@@ -36,19 +36,21 @@ return {
 		end,
 	},
 	{
-		"akinsho/bufferline.nvim",
+		"romgrk/barbar.nvim",
 		opts = {
-			options = {
-				offsets = {
-					{
-						filetype = "neo-tree",
-						text = "File Explorer",
-						highlight = "Directory",
-						separator = true,
-					},
-				},
+			auto_hide = true,
+			clickable = true,
+			sidebar_filetypes = {
+				["neo-tree"] = true,
 			},
 		},
+		dependencies = {
+			"lewis6991/gitsigns.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
+		init = function()
+			vim.g.barbar_auto_setup = false
+		end,
 	},
 	{
 		"nvim-lualine/lualine.nvim",
