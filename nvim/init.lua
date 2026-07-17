@@ -7,3 +7,4 @@ require("config")
 
 -- Finally, set the colorscheme
 vim.cmd.colorscheme("catppuccin-nvim")
+require("lualine").setup()
