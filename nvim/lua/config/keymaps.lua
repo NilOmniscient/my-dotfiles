@@ -29,3 +29,10 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true }
 )
 vim.api.nvim_set_keymap("n", "<S-F7>", "<cmd>CompilerToggleResults<cr>", { noremap = true, silent = true })
+
+-- Safely close buffer tab
+vim.keymap.set("n", "<leader>c", function()
+	local current_buf = vim.api.nvim_get_current_buf()
+	require("bufferline").cycle(1)
+	vim.cmd("bdelete! " .. current_buf)
+end, { desc = "Close Tab" })
