@@ -43,7 +43,7 @@ return {
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
-			keymap = { preset = "default" },
+			keymap = { preset = "super-tab" },
 			appearance = {
 				nerd_font_variant = "mono",
 			},
@@ -81,5 +81,17 @@ return {
 	{
 		"windwp/nvim-ts-autotag",
 		opts = {},
+	},
+	{
+		"folke/trouble.nvim",
+		opts = {},
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+		},
 	},
 }
