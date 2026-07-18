@@ -26,5 +26,10 @@ return {
 				desc = "NeoTree focus",
 			},
 		},
+		opts = {
+			window = {
+				width = 30,
+			},
+		},
 	},
 }

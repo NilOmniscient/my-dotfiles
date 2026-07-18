@@ -58,7 +58,9 @@ return {
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
-		opts = {},
+		opts = {
+			size = 8,
+		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
