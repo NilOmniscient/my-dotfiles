@@ -58,13 +58,9 @@ return {
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
-		opts = function()
-			local buf_opts = { buffer = 0 }
-			vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], buf_opts)
-			return {
-				size = 8,
-			}
-		end,
+		opts = {
+			size = 8,
+		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
