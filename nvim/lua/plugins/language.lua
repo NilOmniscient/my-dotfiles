@@ -8,4 +8,11 @@ return {
 		},
 		config = true,
 	},
+	{
+		"ManuLinares/nvim-c3",
+		build = function()
+			require("c3").update()
+		end,
+		config = true,
+	},
 }
