@@ -1,7 +1,7 @@
 local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
-local screen = require("screen")
+local screen = require("awful.screen")
 local beautiful = require("beautiful")
 local module = require("ui.wibar.module")
 

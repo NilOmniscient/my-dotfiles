@@ -10,7 +10,7 @@ apps.editor = function()
 	awful.spawn(os.getenv("EDITOR") or "nvim")
 end
 apps.file_browser = function()
-	awful.spawn("pcmanfm-qt")
+	awful.spawn("thunar")
 end
 apps.launcher = function()
 	awful.spawn("rofi -show drun")
@@ -29,37 +29,21 @@ apps.locker = function()
 		-- awful.spawn("swaylock -i " .. lockscreen)
 		awesome.lock()
 	else
-		awful.spawn("lxqt-leave --lockscreen")
+		awful.spawn("betterlockscreen -l")
 	end
 end
 apps.reboot = function()
-	if is_somewm then
-		awful.spawn("systemctl reboot")
-	else
-		awful.spawn("lxqt-leave --reboot")
-	end
+	awful.spawn("systemctl reboot")
 end
 apps.shutdown = function()
-	if is_somewm then
-		awful.spawn("systemctl poweroff")
-	else
-		awful.spawn("lxqt-leave --shutdown")
-	end
+	awful.spawn("systemctl poweroff")
 end
 apps.sleep = function()
-	if is_somewm then
-		awful.spawn("systemctl suspend")
-	else
-		awful.spawn("lxqt-leave --suspend")
-	end
+	awful.spawn("systemctl suspend")
 end
 
 apps.leave = function()
-	if is_somewm then
-		awesome.quit()
-	else
-		awful.spawn("lxqt-leave --logout")
-	end
+	awesome.quit()
 end
 
 -- Set the terminal for the menubar.

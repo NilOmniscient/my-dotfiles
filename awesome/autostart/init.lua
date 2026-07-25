@@ -10,6 +10,9 @@ if is_somewm then
 else
 	-- Spawn in awesome only things.
 	awful.spawn("autorandr")
+	awful.spawn("picom")
+	awful.spawn("xset s 300")
+	awful.spawn("xss-lock betterlockscreen -l")
 end
 
 -- Spawn in shared stuff.
