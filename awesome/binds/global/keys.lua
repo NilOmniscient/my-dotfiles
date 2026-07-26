@@ -45,7 +45,7 @@ local global_keys = {
 	{ { modkey }, "b", apps.browser, "Launch Browser", "launcher" },
 	{ { modkey }, "f", apps.file_browser, "Launch File Browser", "launcher" },
 	{ { modkey }, "r", launcher.show, "Application Launcher", "launcher" },
-	{ { modkey, mod.alt }, "l", apps.locker, "Lock Screen", "awesome" },
+	{ { modkey }, "l", apps.locker, "Lock Screen", "awesome" },
 
 	-- Dashboard Controls
 	{ { modkey, "Shift" }, "n", notifications.toggle_notification_center, "Toggle Notifications", "awesome" },
@@ -91,103 +91,6 @@ awful.keyboard.append_global_keybindings({
 		end
 	end, { description = "restore minimized", group = "client" }),
 
-	-- Layout related keybindings.
-	awful.key({ modkey, mod.shift }, "j", function()
-		awful.client.swap.byidx(1)
-	end, { description = "swap with next client by index", group = "client" }),
-	awful.key({ modkey, mod.shift }, "k", function()
-		awful.client.swap.byidx(-1)
-	end, { description = "swap with previous client by index", group = "client" }),
-	awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
-	awful.key({ modkey }, "l", function()
-		awful.tag.incmwfact(0.05)
-	end, { description = "increase master width factor", group = "layout" }),
-	awful.key({ modkey }, "h", function()
-		awful.tag.incmwfact(-0.05)
-	end, { description = "decrease master width factor", group = "layout" }),
-	awful.key({ modkey, mod.shift }, "h", function()
-		awful.tag.incnmaster(1, nil, true)
-	end, { description = "increase the number of master clients", group = "layout" }),
-	awful.key({ modkey, mod.shift }, "l", function()
-		awful.tag.incnmaster(-1, nil, true)
-	end, { description = "decrease the number of master clients", group = "layout" }),
-	awful.key({ modkey, mod.ctrl }, "h", function()
-		awful.tag.incncol(1, nil, true)
-	end, { description = "increase the number of columns", group = "layout" }),
-	awful.key({ modkey, mod.ctrl }, "l", function()
-		awful.tag.incncol(-1, nil, true)
-	end, { description = "decrease the number of columns", group = "layout" }),
-	awful.key({ modkey }, "space", function()
-		awful.layout.inc(1)
-	end, { description = "select next", group = "layout" }),
-	awful.key({ modkey, mod.shift }, "space", function()
-		awful.layout.inc(-1)
-	end, { description = "select previous", group = "layout" }),
-	awful.key({
-		modifiers = { modkey },
-		keygroup = "numrow",
-		description = "only view tag",
-		group = "tag",
-		on_press = function(index)
-			local tag = awful.screen.focused().tags[index]
-			if tag then
-				tag:view_only()
-			end
-		end,
-	}),
-	awful.key({
-		modifiers = { modkey, mod.ctrl },
-		keygroup = "numrow",
-		description = "toggle tag",
-		group = "tag",
-		on_press = function(index)
-			local tag = awful.screen.focused().tags[index]
-			if tag then
-				awful.tag.viewtoggle(tag)
-			end
-		end,
-	}),
-	awful.key({
-		modifiers = { modkey, mod.shift },
-		keygroup = "numrow",
-		description = "move focused client to tag",
-		group = "tag",
-		on_press = function(index)
-			if client.focus then
-				local tag = client.focus.screen.tags[index]
-				if tag then
-					client.focus:move_to_tag(tag)
-				end
-			end
-		end,
-	}),
-	awful.key({
-		modifiers = { modkey, mod.ctrl, mod.shift },
-		keygroup = "numrow",
-		description = "toggle focused client on tag",
-		group = "tag",
-		on_press = function(index)
-			if client.focus then
-				local tag = client.focus.screen.tags[index]
-				if tag then
-					client.focus:toggle_tag(tag)
-				end
-			end
-		end,
-	}),
-	awful.key({
-		modifiers = { modkey },
-		keygroup = "numpad",
-		description = "select layout directly",
-		group = "layout",
-		on_press = function(index)
-			local t = awful.screen.focused().selected_tag
-			if t then
-				t.layout = t.layouts[index] or t.layout
-			end
-		end,
-	}),
-
 	awful.key({}, "XF86AudioNext", function()
 		awful.spawn("playerctl next")
 	end, { description = "Next media track", group = "media" }),
@@ -212,7 +115,7 @@ awful.keyboard.append_global_keybindings({
 
 	-- Custom keys
 
-	awful.key({ modkey, mod.alt }, "p", function()
+	awful.key({ modkey }, "p", function()
 		local active_screen = awful.screen.focused()
 		awful.placement.centered(power_menu, {
 			parent = active_screen,
