@@ -11,8 +11,10 @@ else
 	-- Spawn in awesome only things.
 	awful.spawn("autorandr")
 	awful.spawn("picom")
-	awful.spawn("xset s 300")
-	awful.spawn("xss-lock betterlockscreen -l")
+	awful.spawn(
+		'xautolock -detectsleep -time 5 -locker "betterlockscreen -l" -notify 30 -notifier "notify-send -u critical -t 10000 -- \'LOCKING screen in 30 seconds\'"'
+	)
+	awful.spawn('xidlehook --not-when-fullscreen --detect-sleep --not-when-audio --timer 600 "systemctl suspend" -')
 end
 
 -- Spawn in shared stuff.
