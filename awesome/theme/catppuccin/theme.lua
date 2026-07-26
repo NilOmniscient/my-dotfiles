@@ -13,24 +13,86 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.lockscreen_font = "hack 14"
-theme.lockscreen_font_large = "hack 64"
+-- Fonts
+theme.font_name = "hack "
 
-theme.font_sm = "hack 12"
-theme.font_md = "hack 14"
-theme.font_lg = "hack 24"
+theme.font_sm = theme.font_name .. "12"
+theme.font_md = theme.font_name .. "14"
+theme.font_lg = theme.font_name .. "24"
 theme.font = theme.font_md
+
+-- SomeWM only
+theme.lockscreen_font = theme.font_md
+theme.lockscreen_font_large = theme.font_name .. "64"
+
+-- Cattpuccin Colors
+-- Base --
+theme.xcolorcrust = "#11111b"
+theme.xcolormantle = "#181825"
+theme.xcolorbase = "#1E1E2E"
+
+-- Surface --
+theme.xcolorS0 = "#313244"
+theme.xcolorS1 = "#45475a"
+theme.xcolorS2 = "#585b70"
+
+-- Overlay --
+theme.xcolorO0 = "#6c7086"
+theme.xcolorO1 = "#7f849c"
+theme.xcolorO2 = "#585b70"
+
+-- Text --
+theme.xcolorT0 = "#a6adc8"
+theme.xcolorT1 = "#bac2de"
+theme.xcolorT2 = "#cdd6f4"
+
+-- Lavender --
+theme.xcolor1 = "#b4befe"
+-- Blue --
+theme.xcolor2 = "#89b4fa"
+-- Sapphire --
+theme.xcolor3 = "#74c7ec"
+-- Sky --
+theme.xcolor4 = "#89dceb"
+-- Teal --
+theme.xcolor5 = "#94e2d5"
+-- Green --
+theme.xcolor6 = "#a6e3a1"
+-- Yellow --
+theme.xcolor7 = "#f9e2af"
+-- Peach --
+theme.xcolor8 = "#fab387"
+-- Maroon --
+theme.xcolor9 = "#eba0ac"
+-- Red --
+theme.xcolor10 = "#f38ba8"
+-- Mauve --
+theme.xcolor11 = "#cba6f7"
+-- Pink --
+theme.xcolor12 = "#f5c2e7"
+-- Flamingo --
+theme.xcolor13 = "#f2cdcd"
+-- Rosewater --
+theme.xcolor14 = "#f5e0dc"
+
+-- Choose your accent
+theme.accent = theme.xcolor1
+
+-- Theme Colors
 theme.transparent = "#00000000"
-theme.bg_normal = "#1e1e2e"
-theme.bg_focus = "#4e6b99"
-theme.bg_urgent = "#f38ba8"
-theme.bg_minimize = "#585b70"
+
+theme.bg_normal = theme.xcolorbase
+theme.bg_focus = theme.xcolorS0
+theme.bg_urgent = "#ff0000"
+theme.bg_minimize = "#444444"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#cdd6f4"
-theme.fg_focus = "#cdd6f4"
-theme.fg_urgent = theme.bg_normal
-theme.fg_minimize = theme.bg_normal
+theme.fg_normal = theme.xcolorT2 --Text Color
+theme.fg_focus = theme.xcolor5
+theme.fg_urgent = "#ffffff"
+theme.fg_minimize = "#ffffff"
+
+theme.snap_bg = theme.xcolor5
 
 theme.useless_gap = dpi(5)
 theme.snapper_gap = dpi(5)
@@ -38,8 +100,8 @@ theme.systray_icon_spacing = 0
 theme.systray_paddings = 0
 theme.border_width = dpi(2)
 theme.border_color_normal = theme.bg_focus
-theme.border_color_active = "#24e3e0"
-theme.border_color_marked = "#a6e3a1"
+theme.border_color_active = theme.accent
+theme.border_color_marked = theme.xcolor6
 
 -- There are other variable sets
 -- overriding the default one when

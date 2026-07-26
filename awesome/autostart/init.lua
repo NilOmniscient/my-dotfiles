@@ -8,9 +8,14 @@ if is_somewm then
 	-- Handle display arrangement
 	awful.spawn("kanshi")
 else
+	-- First, kill all duplicate spawn instances
+	awful.spawn("killall xidlehook")
+	awful.spawn("killall c")
+	awful.spawn("killall bluetoothctl")
 	-- Spawn in awesome only things.
 	awful.spawn("autorandr")
 	awful.spawn("picom")
+	awful.spawn("caffeine")
 	awful.spawn(
 		'xautolock -detectsleep -time 5 -locker "betterlockscreen -l" -notify 30 -notifier "notify-send -u critical -t 10000 -- \'LOCKING screen in 30 seconds\'"'
 	)

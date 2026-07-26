@@ -1,8 +1,7 @@
 local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
-local screen = require("awful.screen")
-local beautiful = require("beautiful")
+local theme = require("beautiful")
 local module = require("ui.wibar.module")
 
 local wrap_widget = function(w)
@@ -15,14 +14,14 @@ local wrap_widget = function(w)
 				bottom = 2,
 				left = 10,
 				right = 10,
-				color = beautiful.bg_normal,
+				color = theme.xcolorS0,
 				widget = wibox.container.margin,
 			},
-			bg = beautiful.bg_normal,
+			bg = theme.xcolorS0,
 			widget = wibox.container.background,
 			shape = gears.shape.rounded_rect,
 			shape_border_width = 2,
-			shape_border_color = beautiful.bg_focus,
+			shape_border_color = theme.border_color_active,
 		},
 	})
 	return wrapped
@@ -33,7 +32,7 @@ return function(s)
 	local right_widgets = {}
 	if s == screen.primary or awesome.release == "somewm" then
 		local systray = wibox.widget.systray()
-		systray:set_base_size(28)
+		systray:set_base_size(32)
 		right_widgets = wibox.widget({
 			spacing = 1,
 			spacing_widget = wibox.widget.separator,
@@ -75,9 +74,9 @@ return function(s)
 		layout = wibox.layout.fixed.horizontal,
 		position = "top",
 		screen = s,
-		height = beautiful.panel_height or 34,
-		bg = beautiful.transparent,
-		fg = beautiful.fg_normal,
+		height = theme.panel_height or 34,
+		bg = theme.xcolorbase,
+		fg = theme.fg_normal,
 		widget = {
 			layout = wibox.layout.align.horizontal,
 			expand = "none",
