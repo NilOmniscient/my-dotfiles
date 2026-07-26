@@ -444,7 +444,7 @@ local function create_app_item(app, index)
 			widget = wibox.container.margin,
 		},
 		bg = is_selected and (beautiful.bg_focus or "#d65d0e") or "transparent",
-		fg = is_selected and beautiful.bg_normal or beautiful.fg_normal,
+		fg = is_selected and beautiful.fg_focus or beautiful.fg_normal,
 		shape = beautiful.shape_small,
 		forced_height = config.item_height,
 		widget = wibox.container.background,
@@ -476,7 +476,7 @@ local function create_search_input()
 					font = beautiful.font,
 					widget = wibox.widget.textbox,
 				},
-				fg = beautiful.bg_focus or "#d65d0e",
+				fg = beautiful.fg_focus or "#d65d0e",
 				widget = wibox.container.background,
 			},
 			{
@@ -492,7 +492,7 @@ local function create_search_input()
 			{
 				orientation = "horizontal",
 				forced_height = 2,
-				color = beautiful.bg_focus or "#d65d0e",
+				color = beautiful.fg_focus or "#d65d0e",
 				widget = wibox.widget.separator,
 			},
 			top = 8,

@@ -103,7 +103,7 @@ function sliders.create()
 	-- Volume slider
 	local volume_slider = create_slider(
 		"󰕾",
-		theme.fg_focus or "#d65d0e",
+		theme.accent or "#d65d0e",
 		[[wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null | awk '{print int($2*100)}' || echo 50]],
 		function(value)
 			return string.format("wpctl set-volume @DEFAULT_AUDIO_SINK@ %d%%", value)
@@ -114,7 +114,7 @@ function sliders.create()
 	-- Brightness slider
 	local brightness_slider = create_slider(
 		"󰃟",
-		theme.fg_focus or "#d79921",
+		theme.accent or "#d79921",
 		[[brightnessctl -m 2>/dev/null | cut -d',' -f4 | tr -d '%' || echo 50]],
 		function(value)
 			return string.format("brightnessctl set %d%%", value)

@@ -32,16 +32,11 @@ return function(s)
 	local right_widgets = {}
 	if s == screen.primary or awesome.release == "somewm" then
 		local systray = wibox.widget.systray()
-		systray:set_base_size(32)
 		right_widgets = wibox.widget({
 			spacing = 1,
 			spacing_widget = wibox.widget.separator,
 			layout = wibox.layout.fixed.horizontal,
-			wibox.widget({
-				widget = wibox.container.margin,
-				margins = 2,
-				systray,
-			}),
+			systray,
 			module.dashboard,
 		})
 	else

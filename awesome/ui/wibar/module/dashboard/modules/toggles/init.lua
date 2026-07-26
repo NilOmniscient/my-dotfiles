@@ -22,7 +22,7 @@ local toggle_states = {
 -- @tparam function on_toggle Callback when toggled (receives new state)
 -- @tparam function check_cmd Optional command to check initial state
 local function create_toggle(icon, label, key, on_toggle, check_cmd)
-	local active_color = theme.fg_focus or "#d65d0e"
+	local active_color = theme.accent or "#d65d0e"
 	local inactive_color = theme.bg_focus or "#3c3836"
 
 	local icon_widget = wibox.widget({
