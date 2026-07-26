@@ -16,7 +16,10 @@ else
 	awful.spawn("autorandr")
 	awful.spawn("picom")
 	awful.spawn("caffeine")
-	awful.spawn('xautolock -detectsleep -time 5 -locker "betterlockscreen -l" ')
+	awful.spawn("numlockx on")
+	awful.spawn(
+		'xautolock -detectsleep -time 5 -locker "betterlockscreen -l" -notify 30 -notifier "notify-send -u normal -t 10000 -- \'LOCKING screen in 30 seconds\'"'
+	)
 	awful.spawn('xidlehook --not-when-fullscreen --detect-sleep --not-when-audio --timer 600 "systemctl suspend" -')
 end
 

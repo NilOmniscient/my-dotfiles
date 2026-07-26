@@ -573,7 +573,7 @@ local function create_header()
 			margins = 4,
 			widget = wibox.container.margin,
 		},
-		bg = "#cc241d",
+		bg = beautiful.bg_urgent or "#cc241d",
 		fg = beautiful.fg_urgent or "#ffffff",
 		shape = beautiful.shape_small or gears.shape.rounded_rect,
 		forced_width = 80,
@@ -822,20 +822,9 @@ ruled.notification.connect_signal("request::rules", function()
 			position = M.config.positions.bottom_right,
 		},
 		callback = function(n)
-			-- Check if it's from wife/special contact
-			if is_special_contact(n, "wife") then
-				n.bg = "#b4befe" -- Pink background for wife's messages
-				n.fg = "#1e1e2e"
-				n.urgency = "critical"
-				n.timeout = 0 -- Don't auto-dismiss
-
-				n:append_actions(naughty.action({ name = "Reply" }))
-				n:append_actions(naughty.action({ name = "Snooze" }))
-			else
-				-- Standard browser notification actions
-				n:append_actions(naughty.action({ name = "Open" }))
-				n:append_actions(naughty.action({ name = "Snooze" }))
-			end
+			-- Standard browser notification actions
+			n:append_actions(naughty.action({ name = "Open" }))
+			n:append_actions(naughty.action({ name = "Snooze" }))
 		end,
 	})
 

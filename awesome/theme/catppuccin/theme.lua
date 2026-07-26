@@ -83,13 +83,13 @@ theme.transparent = "#00000000"
 
 theme.bg_normal = theme.xcolorbase
 theme.bg_focus = theme.xcolorS0
-theme.bg_urgent = "#ff0000"
+theme.bg_urgent = theme.xcolor8
 theme.bg_minimize = "#444444"
 theme.bg_systray = theme.bg_focus
 
 theme.fg_normal = theme.xcolorT2 --Text Color
 theme.fg_focus = theme.xcolor5
-theme.fg_urgent = "#ffffff"
+theme.fg_urgent = theme.xcolorbase
 theme.fg_minimize = "#ffffff"
 
 theme.snap_bg = theme.xcolor5
