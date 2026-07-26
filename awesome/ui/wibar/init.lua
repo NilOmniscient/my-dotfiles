@@ -63,10 +63,7 @@ return function(s)
 			-- media_summary,
 			module.media_player,
 		},
-		{
-			widget = wibox.container.margin,
-			wibox.widget.textclock("   %I:%M %P "),
-		},
+		module.clock,
 		{
 			widget = wibox.container.margin,
 			module.notifications,

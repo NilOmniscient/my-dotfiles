@@ -16,8 +16,10 @@ local theme = {}
 theme.lockscreen_font = "hack 14"
 theme.lockscreen_font_large = "hack 64"
 
-theme.font = "hack 14"
-theme.font_large = "hack 24"
+theme.font_sm = "hack 12"
+theme.font_md = "hack 14"
+theme.font_lg = "hack 24"
+theme.font = theme.font_md
 theme.transparent = "#00000000"
 theme.bg_normal = "#1e1e2e"
 theme.bg_focus = "#4e6b99"

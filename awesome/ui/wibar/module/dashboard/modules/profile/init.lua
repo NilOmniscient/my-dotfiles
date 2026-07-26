@@ -61,7 +61,7 @@ end
 profile.create = function()
 	local time_widget = wibox.widget({
 		format = "%H:%M %P",
-		font = theme.font_large or "hack 48",
+		font = theme.font_lg or "hack 48",
 		halign = "center",
 		widget = wibox.widget.textclock,
 	})
@@ -165,7 +165,7 @@ profile.create = function()
 	local user_icon = wibox.widget({
 		{
 			text = "",
-			font = theme.font_large,
+			font = theme.font_lg,
 			halign = "center",
 			valign = "center",
 			widget = wibox.widget.textbox,

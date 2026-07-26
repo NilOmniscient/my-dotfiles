@@ -8,7 +8,7 @@ local dashboard = wibox.widget({
 	{
 		{
 			text = " 󰕮 Dashboard ",
-			font = theme.font,
+			font = theme.font_sm,
 			widget = wibox.widget.textbox,
 		},
 		margins = 4,
@@ -32,7 +32,6 @@ local dashboard_popup = awful.popup({
 		modules.profile.create(),
 		modules.sliders.create(),
 		modules.toggles.create(),
-		modules.calendar.create(),
 	},
 })
 
