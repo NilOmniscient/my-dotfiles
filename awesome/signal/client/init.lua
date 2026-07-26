@@ -1,3 +1,6 @@
 require(... .. ".titlebars")
 -- require(... .. ".sloppy_focus")
--- require(... .. ".rounded_corners")
+if awesome.release == "somewm" then
+else
+	require(... .. ".rounded_corners")
+end
