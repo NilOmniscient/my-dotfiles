@@ -24,3 +24,4 @@ else
 end
 
 -- Spawn in shared stuff.
+awful.spawn("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
