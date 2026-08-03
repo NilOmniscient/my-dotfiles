@@ -13,7 +13,7 @@ else
 	awful.spawn("killall c")
 	awful.spawn("killall bluetoothctl")
 	-- Spawn in awesome only things.
-	awful.spawn("autorandr")
+	awful.spawn("autorandr -c")
 	awful.spawn("picom")
 	awful.spawn("caffeine")
 	awful.spawn("numlockx on")
