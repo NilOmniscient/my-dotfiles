@@ -105,8 +105,8 @@
     <raiseOnFocus>no</raiseOnFocus>
   </focus>
   <placement>
-    <policy>center</policy>
-  <monitor>Mouse</monitor></placement>
+    <policy>cursor</policy>
+  </placement>
   <osd show="yes" style="thumbnail" output="all" thumbnailLabelFormat="%T" />
   <resize>
     <popupShow>Never</popupShow>
