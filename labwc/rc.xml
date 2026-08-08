@@ -17,6 +17,10 @@
     <dropShadowsOnTiled>no</dropShadowsOnTiled>
   </theme>
 
+  <windowSwitcher preview="no" outlines="yes">
+    <osd style="thumbnail"/>
+  </windowSwitcher>
+
   <keyboard>
     <numlock>on</numlock>
     <default />
@@ -80,6 +84,12 @@
     <keybind key="XF86AudioPrev">
       <action name="Execute" command="noctalia msg media previous"/>
     </keybind>
+    <keybind key="W-S-Right">
+      <action name="MoveToOutput" direction="right" wrap="yes"/>
+    </keybind>
+    <keybind key="W-S-Left">
+      <action name="MoveToOutput" direction="left" wrap="yes"/>
+    </keybind>
 
     <!--
       Remove a previously defined keybind
@@ -119,6 +129,9 @@
   </desktops>
   <windowRules>
     <windowRule identifier="*" serverDecoration="no"/>
+    <windowRule identifier="*">
+      <action name="MoveToOutput" output="DP-3"/>
+    </windowRule>
   </windowRules>
   <snapping>
     <!-- Set inner and outer range to 0 to disable window snapping completely -->
