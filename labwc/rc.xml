@@ -30,6 +30,7 @@
     </keybind>
     <keybind key="W-f">
       <action name="Execute" command="firefox"/>
+      <action name="Execute" command="firefox-bin"/>
     </keybind>
     <keybind key="W-b">
       <action name="Execute" command="thunar"/>
@@ -115,7 +116,7 @@
     <raiseOnFocus>no</raiseOnFocus>
   </focus>
   <placement>
-    <policy>cursor</policy>
+    <policy>center</policy>
   </placement>
   <osd show="yes" style="thumbnail" output="all" thumbnailLabelFormat="%T" />
   <resize>
