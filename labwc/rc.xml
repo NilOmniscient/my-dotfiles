@@ -17,6 +17,10 @@
     <dropShadowsOnTiled>no</dropShadowsOnTiled>
   </theme>
 
+  <windowSwitcher preview="no" outlines="yes">
+    <osd style="thumbnail"/>
+  </windowSwitcher>
+
   <keyboard>
     <numlock>on</numlock>
     <default />
@@ -26,6 +30,7 @@
     </keybind>
     <keybind key="W-f">
       <action name="Execute" command="firefox"/>
+      <action name="Execute" command="firefox-bin"/>
     </keybind>
     <keybind key="W-b">
       <action name="Execute" command="thunar"/>
@@ -80,6 +85,12 @@
     <keybind key="XF86AudioPrev">
       <action name="Execute" command="noctalia msg media previous"/>
     </keybind>
+    <keybind key="W-S-Right">
+      <action name="MoveToOutput" direction="right" wrap="yes"/>
+    </keybind>
+    <keybind key="W-S-Left">
+      <action name="MoveToOutput" direction="left" wrap="yes"/>
+    </keybind>
 
     <!--
       Remove a previously defined keybind
@@ -106,7 +117,7 @@
   </focus>
   <placement>
     <policy>center</policy>
-  <monitor>Mouse</monitor></placement>
+  </placement>
   <osd show="yes" style="thumbnail" output="all" thumbnailLabelFormat="%T" />
   <resize>
     <popupShow>Never</popupShow>
@@ -119,6 +130,9 @@
   </desktops>
   <windowRules>
     <windowRule identifier="*" serverDecoration="no"/>
+    <windowRule identifier="*">
+      <action name="MoveToOutput" output="DP-3"/>
+    </windowRule>
   </windowRules>
   <snapping>
     <!-- Set inner and outer range to 0 to disable window snapping completely -->
