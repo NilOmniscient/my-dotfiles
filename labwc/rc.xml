@@ -129,9 +129,9 @@
     <prefix>Workspace</prefix>
   </desktops>
   <windowRules>
-    <windowRule identifier="*" serverDecoration="no"/>
     <windowRule identifier="*">
       <action name="MoveToOutput" output="DP-3"/>
+      <action name="SetDecorations" decorations="border"/>
     </windowRule>
   </windowRules>
   <snapping>
