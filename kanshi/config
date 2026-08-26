@@ -1,0 +1,9 @@
+profile docked {
+  output eDP-1 disable
+  output DP-10 mode 1920x1080 position 2560,0
+  output DP-9 mode 1920x1080 position 4480,0
+}
+
+profile laptop {
+  output eDP-1 enable
+}
