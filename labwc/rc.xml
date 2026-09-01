@@ -1,32 +1,31 @@
+<?xml version="1.0"?>
 <!--
   This is a very simple config file with many options missing. For a complete
   set of options with comments, see docs/rc.xml.all
 -->
-
 <labwc_config>
-
   <theme>
     <name>noctalia</name>
     <cornerRadius>8</cornerRadius>
-    <font name="sans" size="10" />
+    <font name="sans" size="10"/>
     <keepBorder>yes</keepBorder>
     <titlebar>
-      
-    <showTitle>yes</showTitle></titlebar>
+      <showTitle>yes</showTitle>
+    </titlebar>
     <dropShadows>no</dropShadows>
     <dropShadowsOnTiled>no</dropShadowsOnTiled>
+    <maximizedDecoration>titlebar</maximizedDecoration>
+    <icon>breeze-dark</icon>
   </theme>
-
   <windowSwitcher preview="no" outlines="yes">
     <osd style="thumbnail"/>
   </windowSwitcher>
-
   <keyboard>
     <numlock>on</numlock>
-    <default />
+    <default/>
     <!-- Use a different terminal emulator -->
     <keybind key="W-Return">
-      <action name="Execute" command="ghostty" />
+      <action name="Execute" command="ghostty"/>
     </keybind>
     <keybind key="W-f">
       <action name="Execute" command="firefox"/>
@@ -36,7 +35,7 @@
       <action name="Execute" command="thunar"/>
     </keybind>
     <keybind key="W-q">
-      <action name="Close"/> 
+      <action name="Close"/>
     </keybind>
     <keybind key="W-m">
       <action name="ToggleMaximize"/>
@@ -91,25 +90,23 @@
     <keybind key="W-S-Left">
       <action name="MoveToOutput" direction="left" wrap="yes"/>
     </keybind>
-
     <!--
       Remove a previously defined keybind
       A shorter alternative is <keybind key="W-F4" />
     -->
     <keybind key="W-F4">
-      <action name="None" />
+      <action name="None"/>
     </keybind>
   </keyboard>
-
   <mouse>
-    <default />
+    <default/>
     <!-- Show a custom menu on desktop right click -->
     <context name="Root">
       <mousebind button="Left" action="Press"/>
       <mousebind button="Right" action="Press"/>
     </context>
-  <doubleClickTime>500</doubleClickTime></mouse>
-
+    <doubleClickTime>500</doubleClickTime>
+  </mouse>
   <focus>
     <followMouse>no</followMouse>
     <followMouseRequiresMovement>no</followMouseRequiresMovement>
@@ -118,12 +115,12 @@
   <placement>
     <policy>center</policy>
   </placement>
-  <osd show="yes" style="thumbnail" output="all" thumbnailLabelFormat="%T" />
+  <osd show="yes" style="thumbnail" output="all" thumbnailLabelFormat="%T"/>
   <resize>
     <popupShow>Never</popupShow>
     <drawContents>yes</drawContents>
     <cornerRange>20</cornerRange>
-    <minimumArea>64</minimumArea>
+    <minimumArea>8</minimumArea>
   </resize>
   <desktops>
     <prefix>Workspace</prefix>
@@ -136,12 +133,15 @@
   </windowRules>
   <snapping>
     <!-- Set inner and outer range to 0 to disable window snapping completely -->
-    <range inner="50" outer="50" />
-    <cornerRange>50</cornerRange>
+    <range inner="50" outer="50"/>
+    <cornerRange>1</cornerRange>
     <overlay enabled="yes">
-      <delay inner="100" outer="100" />
+      <delay inner="100" outer="100"/>
     </overlay>
     <topMaximize>no</topMaximize>
     <notifyClient>always</notifyClient>
   </snapping>
+  <core>
+    <decoration>server</decoration>
+  </core>
 </labwc_config>
