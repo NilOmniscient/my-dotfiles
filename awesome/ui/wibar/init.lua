@@ -94,4 +94,7 @@ return function(s)
 			wrap_widget(right_widgets),
 		},
 	})
+	s.mywibox:struts({
+		top = theme.panel_height or 34,
+	})
 end
