@@ -48,5 +48,21 @@ client.connect_signal("request::default_keybindings", function()
 		awful.key({ modkey }, "t", function(c)
 			c.ontop = not c.ontop
 		end, { description = "toggle keep on top", group = "client" }),
+		awful.key({ modkey }, "right", function(c)
+			local f = awful.placement.scale + awful.placement.right + awful.placement.maximize_vertically
+			f(c, { honor_workarea = true, to_percent = 0.5 })
+		end, { description = "snap client right", group = "client" }),
+		awful.key({ modkey }, "left", function(c)
+			local f = awful.placement.scale + awful.placement.left + awful.placement.maximize_vertically
+			f(c, { honor_workarea = true, to_percent = 0.5 })
+		end, { description = "snap client left", group = "client" }),
+		awful.key({ modkey }, "up", function(c)
+			local f = awful.placement.scale + awful.placement.top + awful.placement.maximize_horizontally
+			f(c, { honor_workarea = true, to_percent = 0.5 })
+		end, { description = "snap client top", group = "client" }),
+		awful.key({ modkey }, "down", function(c)
+			local f = awful.placement.scale + awful.placement.bottom + awful.placement.maximize_horizontally
+			f(c, { honor_workarea = true, to_percent = 0.5 })
+		end, { description = "snap client bottom", group = "client" }),
 	})
 end)

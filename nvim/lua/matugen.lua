@@ -17,7 +17,7 @@ function M.setup()
     base0C = '#96e9db',
     base0D = '#bb8af4',
     base0E = '#fab185',
-    base0F = '#bb1040',
+    base0F = '#fcd0b6',
   })
 
   local hi = function(group, opts)
@@ -38,14 +38,22 @@ function M.setup()
   hi('TelescopeMatching',       { fg = '#cba6f7',             bold = true })
 end
 
- -- Register a signal handler for SIGUSR1 (matugen updates)
- local signal = vim.uv.new_signal()
- signal:start(
-   'sigusr1',
-   vim.schedule_wrap(function()
-     package.loaded['matugen'] = nil
-     require('matugen').setup()
-   end)
- )
+-- Register a signal handler for SIGUSR1 (matugen updates).
+-- The handler re-requires this module, which re-runs the code below, so the
+-- previous handle is stopped first; otherwise handlers double on every signal.
+if _G.__matugen_signal then
+  _G.__matugen_signal:stop()
+  _G.__matugen_signal:close()
+end
 
- return M
+local signal = vim.uv.new_signal()
+_G.__matugen_signal = signal
+signal:start(
+  'sigusr1',
+  vim.schedule_wrap(function()
+    package.loaded['matugen'] = nil
+    require('matugen').setup()
+  end)
+)
+
+return M
