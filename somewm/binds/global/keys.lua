@@ -7,6 +7,7 @@ local shift = mod.shift
 local alt = mod.alt
 
 local apps = require("config.apps")
+local launcher = require("widgets.launcher")
 
 -- For now, just do the basic commands that don't need extra modules
 awful.keyboard.append_global_keybindings({
@@ -15,6 +16,7 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey, shift }, "q", awesome.quit, { description = "Quit SomeWM", group = "somewm" }),
 
 	-- Launchers
+	awful.key({ modkey }, "r", launcher.show, { description = "Application Launcher", group = "launcher" }),
 	awful.key({ modkey }, "Return", apps.terminal, { description = "Launch Terminal", group = "launcher" }),
 	awful.key({ modkey }, "b", apps.browser, { description = "Launch Browser", group = "launcher" }),
 	awful.key({ modkey }, "f", apps.file_browser, { description = "Launch File Browser", group = "launcher" }),
