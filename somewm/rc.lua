@@ -12,6 +12,7 @@ local config = require("config")
 
 -- Next, require keybindings
 require("binds")
+require("autostart")
 
 local gears = require("gears")
 local awful = require("awful")

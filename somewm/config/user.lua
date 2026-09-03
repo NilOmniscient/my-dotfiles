@@ -1,5 +1,7 @@
 local awful = require("awful")
 
+-- Input settings
+
 local settings = {
 	-- Primary Monitor
 	primary_output = "DP-3",
@@ -37,6 +39,10 @@ local settings = {
 		awful.layout.suit.magnifier,
 	},
 	enable_titlebars = false,
+	autostart = {
+		"nm-applet",
+	},
+	autostart_once = {},
 }
 
 local success, user_defined = pcall(require, "config.user_defined")
