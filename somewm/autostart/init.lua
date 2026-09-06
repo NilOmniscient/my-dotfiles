@@ -1,4 +1,3 @@
-local awesome = require("awesome")
 local awful = require("awful")
 local user = require("config.user")
 
