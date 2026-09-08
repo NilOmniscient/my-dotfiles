@@ -1,11 +1,11 @@
 local awful = require("awful")
+local client = require("client")
+local gears = require("gears")
 local mod = require("binds.mod")
 local modkey = mod.modkey
 local ctrl = mod.ctrl
 local shift = mod.shift
 local alt = mod.alt
-
-local client = require("client")
 
 client.connect_signal("request::default_keybindings", function()
 	awful.keyboard.append_client_keybindings({
@@ -53,5 +53,11 @@ client.connect_signal("request::default_keybindings", function()
 			local f = awful.placement.scale + awful.placement.bottom + awful.placement.maximize_horizontally
 			f(c, { honor_workarea = true, to_percent = 0.5 })
 		end, { description = "snap client bottom", group = "floating client" }),
+
+		-- Client Screen management
+		awful.key({ modkey }, "o", function(c)
+			c:move_to_screen()
+			awful.client.jumpto(c)
+		end, { description = "move to screen", group = "client" }),
 	})
 end)
