@@ -2,10 +2,16 @@ local awful = require("awful")
 local ruled = require("ruled")
 local user = require("config.user")
 
--- Before anything, make sure to set awful.screen.preferred to the user primary
-awful.screen.preferred = outputs
-
 --- Rules.
+ruled.client.disconnect_signal("request::activate", awful.permissions.activate)
+function awful.permissions.activate(c)
+	if c:isvisible() then
+		ruled.client.focus = c
+		c:raise()
+	end
+end
+ruled.client.connect_signal("request::activate", awful.permissions.activate)
+
 -- Rules to apply to new clients.
 ruled.client.connect_signal("request::rules", function()
 	-- All clients will match this rule.
