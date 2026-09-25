@@ -142,6 +142,7 @@
     <notifyClient>always</notifyClient>
   </snapping>
   <core>
+    <gap>5</gap>
     <decoration>server</decoration>
   </core>
 </labwc_config>
