@@ -1,4 +1,5 @@
 local awful = require("awful")
+local screen = require("screen")
 
 local mod = require("binds.mod")
 local modkey = mod.modkey
@@ -7,7 +8,7 @@ local modkey = mod.modkey
 client.connect_signal("request::default_keybindings", function()
 	awful.keyboard.append_client_keybindings({
 		-- Client state management.
-		awful.key({ modkey }, "f", function(c)
+		awful.key({ modkey }, "a", function(c)
 			c.fullscreen = not c.fullscreen
 			c:raise()
 		end, { description = "toggle fullscreen", group = "client" }),
@@ -20,23 +21,10 @@ client.connect_signal("request::default_keybindings", function()
 			awful.client.floating.toggle,
 			{ description = "toggle floating", group = "client" }
 		),
-		awful.key({ modkey }, "n", function(c)
-			-- The client currently has the input focus, so it cannot be
-			-- minimized, since minimized clients can't have the focus.
-			c.minimized = true
-		end, { description = "minimize", group = "client" }),
 		awful.key({ modkey }, "m", function(c)
 			c.maximized = not c.maximized
 			c:raise()
 		end, { description = "(un)maximize", group = "client" }),
-		awful.key({ modkey, mod.ctrl }, "m", function(c)
-			c.maximized_vertical = not c.maximized_vertical
-			c:raise()
-		end, { description = "(un)maximize vertically", group = "client" }),
-		awful.key({ modkey, mod.shift }, "m", function(c)
-			c.maximized_horizontal = not c.maximized_horizontal
-			c:raise()
-		end, { description = "(un)maximize horizontally", group = "client" }),
 
 		-- Client position in tiling management.
 		awful.key({ modkey, mod.ctrl }, "Return", function(c)
@@ -48,21 +36,41 @@ client.connect_signal("request::default_keybindings", function()
 		awful.key({ modkey }, "t", function(c)
 			c.ontop = not c.ontop
 		end, { description = "toggle keep on top", group = "client" }),
-		awful.key({ modkey }, "right", function(c)
+
+		-- Client position in Floating mode.
+		awful.key({ modkey }, "Right", function(c)
 			local f = awful.placement.scale + awful.placement.right + awful.placement.maximize_vertically
 			f(c, { honor_workarea = true, to_percent = 0.5 })
 		end, { description = "snap client right", group = "client" }),
-		awful.key({ modkey }, "left", function(c)
+		awful.key({ modkey }, "Left", function(c)
 			local f = awful.placement.scale + awful.placement.left + awful.placement.maximize_vertically
 			f(c, { honor_workarea = true, to_percent = 0.5 })
 		end, { description = "snap client left", group = "client" }),
-		awful.key({ modkey }, "up", function(c)
+		awful.key({ modkey }, "Up", function(c)
 			local f = awful.placement.scale + awful.placement.top + awful.placement.maximize_horizontally
 			f(c, { honor_workarea = true, to_percent = 0.5 })
 		end, { description = "snap client top", group = "client" }),
-		awful.key({ modkey }, "down", function(c)
+		awful.key({ modkey }, "Down", function(c)
 			local f = awful.placement.scale + awful.placement.bottom + awful.placement.maximize_horizontally
 			f(c, { honor_workarea = true, to_percent = 0.5 })
 		end, { description = "snap client bottom", group = "client" }),
+
+		-- Client screen in Floating mode.
+		awful.key({ modkey, mod.shift }, "Right", function(c)
+			local target = c.screen:get_next_in_direction("right")
+			if target then
+				c:move_to_screen(target)
+			else
+				c:move_to_screen(0)
+			end
+		end, { description = "move client to next right screen", group = "client" }),
+		awful.key({ modkey, mod.shift }, "Left", function(c)
+			local target = c.screen:get_next_in_direction("left")
+			if target then
+				c:move_to_screen(target)
+			else
+				c:move_to_screen(screen.count() - 1)
+			end
+		end, { description = "move client to next left screen", group = "client" }),
 	})
 end)
