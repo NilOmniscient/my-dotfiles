@@ -55,6 +55,9 @@ theme.urgent = color.red
 theme.urgent_hover = color.soft_red
 theme.fg_dim = color.grey1 -- secondary text: dates, hints, muted status lines
 
+-- Some spacing bits
+theme.widget_spacing = dpi(10)
+
 -- Global shape setting: "rectangle" or "rounded"
 -- Change this single setting to switch all widget corners
 theme.shape_style = "rectangle"

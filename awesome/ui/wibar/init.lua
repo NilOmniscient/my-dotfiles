@@ -1,4 +1,5 @@
 local awful = require("awful")
+local theme = require("beautiful")
 local wibox = require("wibox")
 
 -- Local
@@ -23,8 +24,14 @@ return function(s)
 				layout = wibox.layout.flex.horizontal,
 			},
 			{
-				widgets.volume,
-				expand = "none",
+				nil,
+				nil,
+				{
+					s == screen.primary and wibox.widget.systray() or nil,
+					widgets.volume,
+					spacing = theme.widget_spacing,
+					layout = wibox.layout.fixed.horizontal,
+				},
 				layout = wibox.layout.align.horizontal,
 			},
 		},
