@@ -6,7 +6,7 @@ local modkey = mod.modkey
 local apps = require("config.apps")
 
 -- Import any widgets we need to control
-local widgets = require("widgets")
+local windowswitcher = require("widgets.windowswitcher")
 
 -- Convert a table to a proper keybind
 local function table_to_keybinding(bindings)
@@ -65,7 +65,7 @@ local launchers = {
 
 local global_keys = {
 	-- Widget keybinds
-	{ { modkey }, "Tab", widgets.windowswitcher.show, "Window Switcher", "widgets" },
+	{ { modkey }, "Tab", windowswitcher.show, "Window Switcher", "widgets" },
 
 	-- General Awesome keys
 	{ { modkey }, "s", require("awful.hotkeys_popup").show_help, "show help", "awesome" },

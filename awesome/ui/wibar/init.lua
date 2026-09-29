@@ -1,7 +1,8 @@
 local awful = require("awful")
 local wibox = require("wibox")
 
-local module = require(... .. ".module")
+-- Local
+local widgets = require("widgets")
 
 return function(s)
 	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
@@ -13,16 +14,18 @@ return function(s)
 		widget = {
 			layout = wibox.layout.align.horizontal,
 			{
-				widget = wibox.container.place,
-				valign = "center",
+				layout = wibox.layout.fixed.horizontal,
 			},
 			{
-				widget = wibox.container.place,
-				valign = "center",
+				nil,
+				-- wibox.widget.textclock(),
+				widgets.clock,
+				nil,
+				expand = "none",
+				layout = wibox.layout.align.horizontal,
 			},
 			{
-				widget = wibox.container.place,
-				valign = "center",
+				layout = wibox.layout.align.horizontal,
 			},
 		},
 	})
