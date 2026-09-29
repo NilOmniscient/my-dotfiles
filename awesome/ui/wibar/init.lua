@@ -23,6 +23,7 @@ return function(s)
 				layout = wibox.layout.flex.horizontal,
 			},
 			{
+				widgets.volume,
 				expand = "none",
 				layout = wibox.layout.align.horizontal,
 			},
