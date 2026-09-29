@@ -3,6 +3,7 @@ local wibox = require("wibox")
 
 -- Local
 local widgets = require("widgets")
+local modules = require("ui.wibar.module")
 
 return function(s)
 	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
@@ -12,19 +13,17 @@ return function(s)
 		position = "top",
 		screen = s,
 		widget = {
-			layout = wibox.layout.align.horizontal,
+			layout = wibox.layout.flex.horizontal,
 			{
+				modules.tasklist(s),
 				layout = wibox.layout.fixed.horizontal,
 			},
 			{
-				nil,
-				-- wibox.widget.textclock(),
 				widgets.clock,
-				nil,
-				expand = "none",
-				layout = wibox.layout.align.horizontal,
+				layout = wibox.layout.flex.horizontal,
 			},
 			{
+				expand = "none",
 				layout = wibox.layout.align.horizontal,
 			},
 		},
