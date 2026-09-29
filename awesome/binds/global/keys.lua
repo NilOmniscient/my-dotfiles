@@ -8,161 +8,85 @@ local apps = require("config.apps")
 -- Import any widgets we need to control
 local widgets = require("widgets")
 
---- Global key bindings
-awful.keyboard.append_global_keybindings({
-	-- Widget keybinds
-	awful.key({ modkey }, "Tab", widgets.windowswitcher.show, { description = "Window Switcher", group = "client" }),
-	-- General Awesome keys.
-	awful.key(
-		{ modkey },
-		"s",
-		require("awful.hotkeys_popup").show_help,
-		{ description = "show help", group = "awesome" }
-	),
-	awful.key({ modkey }, "w", function()
-		require("ui.menu").main:show()
-	end, { description = "show main menu", group = "awesome" }),
-	awful.key({ modkey, mod.ctrl }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
-	awful.key({ modkey, mod.shift }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
-	awful.key({ modkey }, "x", function()
-		awful.prompt.run({
-			prompt = "Run Lua code: ",
-			textbox = awful.screen.focused().mypromptbox.widget,
-			exe_callback = awful.util.eval,
-			history_path = awful.util.get_cache_dir() .. "/history_eval",
-		})
-	end, { description = "lua execute prompt", group = "awesome" }),
-	awful.key({ modkey }, "Return", function()
+-- Convert a table to a proper keybind
+local function table_to_keybinding(bindings)
+	local key_bindings = {}
+	for _, g_key in ipairs(bindings) do
+		table.insert(
+			key_bindings,
+			awful.key(g_key[1], g_key[2], g_key[3], { description = g_key[4], group = g_key[5] })
+		)
+	end
+	return key_bindings
+end
+
+local media_helpers = {
+	raise_volume = function()
+		awful.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+")
+		awesome.emit_signal("volume::update")
+	end,
+	lower_volume = function()
+		awful.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
+		awesome.emit_signal("volume::update")
+	end,
+	toggle_mute = function()
+		awful.spawn("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
+		awesome.emit_signal("volume::update")
+	end,
+	next_track = function()
+		awful.spawn("playerctl next")
+	end,
+	prev_track = function()
+		awful.spawn("playerctl prev")
+	end,
+	play_pause = function()
+		awful.spawn("playerctl play-pause")
+	end,
+}
+local awesome_helpers = {
+	show_menu = function()
+		require("ui.menu"):show()
+	end,
+}
+local launchers = {
+	terminal = function()
 		awful.spawn(apps.terminal)
-	end, { description = "open a terminal", group = "launcher" }),
-	awful.key({ modkey }, "r", function()
+	end,
+	launcher = function()
 		awful.spawn(apps.launcher)
-	end, { description = "App Launcher", group = "launcher" }),
-	awful.key({ modkey }, "b", function()
+	end,
+	browser = function()
 		awful.spawn(apps.browser)
-	end, { description = "launch browser", group = "launcher" }),
-	awful.key({ modkey }, "f", function()
+	end,
+	file_browser = function()
 		awful.spawn(apps.file_browser)
-	end, { description = "launch file browser", group = "launcher" }),
-	awful.key({ modkey }, "p", function()
-		require("menubar").show()
-	end, { description = "show the menubar", group = "launcher" }),
+	end,
+}
 
-	-- Focus related keybindings.
-	awful.key({ modkey }, "j", function()
-		awful.client.focus.byidx(1)
-	end, { description = "focus next by index", group = "client" }),
-	awful.key({ modkey }, "k", function()
-		awful.client.focus.byidx(-1)
-	end, { description = "focus previous by index", group = "client" }),
-	awful.key({ modkey, mod.ctrl }, "j", function()
-		awful.screen.focus_relative(1)
-	end, { description = "focus the next screen", group = "screen" }),
-	awful.key({ modkey, mod.ctrl }, "k", function()
-		awful.screen.focus_relative(-1)
-	end, { description = "focus the previous screen", group = "screen" }),
-	awful.key({ modkey, mod.ctrl }, "n", function()
-		local c = awful.client.restore()
-		-- Focus restored client
-		if c then
-			c:activate({ raise = true, context = "key.unminimize" })
-		end
-	end, { description = "restore minimized", group = "client" }),
+local global_keys = {
+	-- Widget keybinds
+	{ { modkey }, "Tab", widgets.windowswitcher.show, "Window Switcher", "widgets" },
 
-	-- Layout related keybindings.
-	awful.key({ modkey, mod.shift }, "j", function()
-		awful.client.swap.byidx(1)
-	end, { description = "swap with next client by index", group = "client" }),
-	awful.key({ modkey, mod.shift }, "k", function()
-		awful.client.swap.byidx(-1)
-	end, { description = "swap with previous client by index", group = "client" }),
-	awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
-	awful.key({ modkey }, "l", function()
-		awful.tag.incmwfact(0.05)
-	end, { description = "increase master width factor", group = "layout" }),
-	awful.key({ modkey }, "h", function()
-		awful.tag.incmwfact(-0.05)
-	end, { description = "decrease master width factor", group = "layout" }),
-	awful.key({ modkey, mod.shift }, "h", function()
-		awful.tag.incnmaster(1, nil, true)
-	end, { description = "increase the number of master clients", group = "layout" }),
-	awful.key({ modkey, mod.shift }, "l", function()
-		awful.tag.incnmaster(-1, nil, true)
-	end, { description = "decrease the number of master clients", group = "layout" }),
-	awful.key({ modkey, mod.ctrl }, "h", function()
-		awful.tag.incncol(1, nil, true)
-	end, { description = "increase the number of columns", group = "layout" }),
-	awful.key({ modkey, mod.ctrl }, "l", function()
-		awful.tag.incncol(-1, nil, true)
-	end, { description = "decrease the number of columns", group = "layout" }),
-	awful.key({ modkey }, "space", function()
-		awful.layout.inc(1)
-	end, { description = "select next", group = "layout" }),
-	awful.key({ modkey, mod.shift }, "space", function()
-		awful.layout.inc(-1)
-	end, { description = "select previous", group = "layout" }),
-	awful.key({
-		modifiers = { modkey },
-		keygroup = "numrow",
-		description = "only view tag",
-		group = "tag",
-		on_press = function(index)
-			local tag = awful.screen.focused().tags[index]
-			if tag then
-				tag:view_only()
-			end
-		end,
-	}),
-	awful.key({
-		modifiers = { modkey, mod.ctrl },
-		keygroup = "numrow",
-		description = "toggle tag",
-		group = "tag",
-		on_press = function(index)
-			local tag = awful.screen.focused().tags[index]
-			if tag then
-				awful.tag.viewtoggle(tag)
-			end
-		end,
-	}),
-	awful.key({
-		modifiers = { modkey, mod.shift },
-		keygroup = "numrow",
-		description = "move focused client to tag",
-		group = "tag",
-		on_press = function(index)
-			if client.focus then
-				local tag = client.focus.screen.tags[index]
-				if tag then
-					client.focus:move_to_tag(tag)
-				end
-			end
-		end,
-	}),
-	awful.key({
-		modifiers = { modkey, mod.ctrl, mod.shift },
-		keygroup = "numrow",
-		description = "toggle focused client on tag",
-		group = "tag",
-		on_press = function(index)
-			if client.focus then
-				local tag = client.focus.screen.tags[index]
-				if tag then
-					client.focus:toggle_tag(tag)
-				end
-			end
-		end,
-	}),
-	awful.key({
-		modifiers = { modkey },
-		keygroup = "numpad",
-		description = "select layout directly",
-		group = "layout",
-		on_press = function(index)
-			local t = awful.screen.focused().selected_tag
-			if t then
-				t.layout = t.layouts[index] or t.layout
-			end
-		end,
-	}),
-})
+	-- General Awesome keys
+	{ { modkey }, "s", require("awful.hotkeys_popup").show_help, "show help", "awesome" },
+	{ { modkey }, "w", awesome_helpers.show_menu, "show main menu", "awesome" },
+	{ { modkey, mod.ctrl }, "r", awesome.restart, "reload awesome", "awesome" },
+	{ { modkey, mod.shift }, "q", awesome.quit, "quit awesome", "awesome" },
+
+	-- Launcher bindings
+	{ { modkey }, "Return", launchers.terminal, "open terminal", "launcher" },
+	{ { modkey }, "r", launchers.launcher, "open app launcher", "launcher" },
+	{ { modkey }, "b", launchers.browser, "open web browser", "launcher" },
+	{ { modkey }, "f", launchers.file_browser, "open file browser", "launcher" },
+
+	-- Media bindings
+	{ {}, "XF86AudioLowerVolume", media_helpers.lower_volume, "decrease volume", "media" },
+	{ {}, "XF86AudioRaiseVolume", media_helpers.raise_volume, "increase volume", "media" },
+	{ {}, "XF86AudioMute", media_helpers.toggle_mute, "mute volume", "media" },
+	{ {}, "XF86AudioNext", media_helpers.next_track, "next track", "media" },
+	{ {}, "XF86AudioPlay", media_helpers.play_pause, "play/pause track", "media" },
+	{ {}, "XF86AudioPrev", media_helpers.prev_track, "previous track", "media" },
+}
+
+--- Global key bindings
+awful.keyboard.append_global_keybindings(table_to_keybinding(global_keys))

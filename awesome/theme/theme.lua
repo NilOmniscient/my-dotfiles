@@ -2,6 +2,8 @@
 -- Default awesome theme --
 ---------------------------
 
+local gears = require("gears")
+
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
@@ -40,6 +42,44 @@ theme.font_family = "Hack Nerd Font"
 theme.font_size = function(size, style)
 	return theme.font_family .. " " .. (style and (style .. " ") or "") .. size
 end
+theme.font = theme.font_size(10)
+theme.primary_color = color.soft_purple
+theme.primary_color_hover = color.purple
+theme.active = color.green
+theme.active_hover = color.soft_green
+theme.accent = color.yellow
+theme.accent_hover = color.soft_yellow
+theme.highlight = color.blue
+theme.highlight_hover = color.soft_blue
+theme.urgent = color.red
+theme.urgent_hover = color.soft_red
+theme.fg_dim = color.grey1 -- secondary text: dates, hints, muted status lines
+
+-- Global shape setting: "rectangle" or "rounded"
+-- Change this single setting to switch all widget corners
+theme.shape_style = "rectangle"
+theme.corner_radius = 12 -- Only used when shape_style = "rounded"
+
+-- Helper function to get the appropriate shape
+-- Usage: beautiful.shape(cr, w, h) or beautiful.shape
+function theme.shape(cr, w, h)
+	if theme.shape_style == "rounded" then
+		gears.shape.rounded_rect(cr, w, h, theme.corner_radius)
+	else
+		gears.shape.rectangle(cr, w, h)
+	end
+end
+
+-- Smaller radius shape for inner elements (buttons, toggles, etc.)
+function theme.shape_small(cr, w, h)
+	if theme.shape_style == "rounded" then
+		gears.shape.rounded_rect(cr, w, h, math.min(theme.corner_radius / 2, 6))
+	else
+		gears.shape.rectangle(cr, w, h)
+	end
+end
+
+-- AwesomeWM required
 theme.bg_normal = color.bg
 theme.bg_focus = color.grey2
 theme.bg_urgent = color.soft_red
@@ -151,7 +191,7 @@ theme.icon_theme = nil
 rnotification.connect_signal("request::rules", function()
 	rnotification.append_rule({
 		rule = { urgency = "critical" },
-		properties = { bg = "#ff0000", fg = "#ffffff" },
+		properties = { bg = theme.bg_urgent, fg = theme.fg_urgent },
 	})
 end)
 
