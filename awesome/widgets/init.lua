@@ -1,0 +1,3 @@
+return {
+	windowswitcher = require(... .. ".windowswitcher"),
+}

@@ -1,7 +1,7 @@
 ---------------------------
 -- Default awesome theme --
 ---------------------------
-local gears = require("gears")
+
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
@@ -9,54 +9,40 @@ local dpi = xresources.apply_dpi
 
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
-local colors = require("theme.colors")
-local color = colors["catppuccin_mocha"]
+
+local color = {
+	bg = "#1e1e2e", -- Base in palette
+	fg = "#cdd6f4", -- Text in palette
+	grey1 = "#313244", -- Surface 0
+	grey2 = "#45475a", -- Surface 1
+	red = "#f38ba8",
+	soft_red = "#f38ba8",
+	green = "#a6e3a1",
+	soft_green = "#a6e3a1",
+	yellow = "#f9e2af",
+	soft_yellow = "#f9e2af",
+	blue = "#89b4fa",
+	soft_blue = "#74c7ec", -- Sapphire
+	soft_blue2 = "#89dceb", -- Sky
+	purple = "#cba6f7", -- Mauve
+	soft_purple = "#b4befe", -- Lavender
+	pink = "#f5c2e7",
+	white = "#bac2de", -- Subtext 1
+	white2 = "#a6adc8", -- Subtext 0
+	orange = "#fab287", -- Peach
+	soft_orange = "#fab287",
+}
 
 local theme = {}
 
-theme.shape_style = "rounded" -- "rounded" or "rectangle"
-theme.corner_radius = 12 -- Only works if shape_style == "rounded"
-
--- Font family builder
+theme.font = "sans 8"
 theme.font_family = "Hack Nerd Font"
-function theme.font_size(size, style)
+theme.font_size = function(size, style)
 	return theme.font_family .. " " .. (style and (style .. " ") or "") .. size
 end
-theme.font = theme.font_size(10)
-
--- Some semantic colors
-theme.primary_color = color.purple
-theme.primary_color_hover = color.soft_purple
-theme.active = color.green
-theme.active_hover = color.soft_green
-theme.accent = color.yellow
-theme.accent_hover = color.soft_yellow
-theme.highlight = color.blue
-theme.highlight_hover = color.soft_blue
-theme.urgent = color.red
-theme.urgent_hover = color.soft_red
-theme.fg_dim = color.grey1
-
--- Shape helpers
-function theme.shape(cr, w, h)
-	if theme.shape_style == "rounded" then
-		gears.shape.rounded_rect(cr, w, h, theme.corner_radius)
-	else
-		gears.shape.rectangle(cr, w, h)
-	end
-end
-function theme.shape_small(cr, w, h)
-	if theme.shape_style == "rounded" then
-		gears.shape.rounded_rect(cr, w, h, math.min(theme.corner_radius / 2, 6))
-	else
-		gears.shape.rectangle(cr, w, h)
-	end
-end
-
--- The "REQUIRED" settings
 theme.bg_normal = color.bg
 theme.bg_focus = color.grey2
-theme.bg_urgent = color.soft_read
+theme.bg_urgent = color.soft_red
 theme.bg_minimize = color.grey1
 theme.bg_systray = color.bg
 
@@ -65,8 +51,8 @@ theme.fg_focus = color.white
 theme.fg_urgent = color.white
 theme.fg_minimize = color.white
 
-theme.useless_gap = dpi(0)
-theme.snapper_gap = dpi(5)
+theme.snapper_gap = dpi(4)
+theme.useless_gap = dpi(8)
 theme.border_width = dpi(1)
 theme.border_color_normal = color.bg
 theme.border_color_active = color.soft_orange
@@ -84,48 +70,23 @@ theme.border_color_marked = color.red
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
 
--- Notification popup styling (matching dashboard/launcher)
-theme.notification_bg = theme.bg_normal .. "F8" -- Semi-transparent
-theme.notification_fg = theme.fg_normal
-theme.notification_border_color = theme.primary_color
-theme.notification_border_width = dpi(1)
-theme.notification_shape = theme.shape
-theme.notification_margin = dpi(12)
-theme.notification_max_width = dpi(400)
-theme.notification_icon_size = dpi(48)
-theme.notification_spacing = dpi(8)
-
--- Action button styling
-theme.notification_action_bg_normal = color.grey2 -- #3c3836 - darker, subtler
-theme.notification_action_bg_selected = theme.primary_color
-theme.notification_action_fg_normal = theme.fg_normal
-theme.notification_action_fg_selected = theme.bg_normal
-theme.notification_action_shape_normal = theme.shape_small
-theme.notification_action_shape_selected = theme.shape_small
-theme.notification_action_border_width = dpi(1)
-theme.notification_action_border_color = color.grey1 -- subtle border
-
--- Lockscreen styling
-theme.lockscreen_bg = color.bg
-theme.lockscreen_fg = color.fg
-theme.lockscreen_clock_fg = color.fg
-theme.lockscreen_date_fg = color.grey1
-theme.lockscreen_input_bg = color.grey2
-theme.lockscreen_input_fg = color.fg
-theme.lockscreen_input_border = theme.primary_color
-theme.lockscreen_error_fg = color.soft_red
-
--- Variables set for theming the menu:
--- menu_[bg|fg]_[normal|focus]
--- menu_[border_color|border_width]
-theme.menu_submenu_icon = recolor(theme_path .. "/submenu.png", color.purple)
-theme.menu_height = dpi(15)
-theme.menu_width = dpi(100)
-
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(taglist_square_size, theme.fg_normal)
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(taglist_square_size, theme.fg_normal)
+
+-- Variables set for theming notifications:
+-- notification_font
+-- notification_[bg|fg]
+-- notification_[width|height|margin]
+-- notification_[border_color|border_width|shape|opacity]
+
+-- Variables set for theming the menu:
+-- menu_[bg|fg]_[normal|focus]
+-- menu_[border_color|border_width]
+theme.menu_submenu_icon = themes_path .. "default/submenu.png"
+theme.menu_height = dpi(15)
+theme.menu_width = dpi(100)
 
 -- You can add as many variables as
 -- you wish and access them by using
@@ -190,7 +151,7 @@ theme.icon_theme = nil
 rnotification.connect_signal("request::rules", function()
 	rnotification.append_rule({
 		rule = { urgency = "critical" },
-		properties = { bg = theme.bg_urgent, fg = theme.fg_urgent },
+		properties = { bg = "#ff0000", fg = "#ffffff" },
 	})
 end)
 
