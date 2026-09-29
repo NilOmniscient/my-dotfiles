@@ -1,4 +1,5 @@
 local awful = require("awful")
+local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 
@@ -39,6 +40,16 @@ local volume_widget = wibox.widget({
 	},
 	spacing = beautiful.widget_icon_spacing,
 	layout = wibox.layout.fixed.horizontal,
+	buttons = {
+		awful.button({}, awful.button.names.SCROLL_UP, function()
+			awful.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+")
+			awesome.emit_signal("volume::update")
+		end),
+		awful.button({}, awful.button.names.SCROLL_DOWN, function()
+			awful.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
+			awesome.emit_signal("volume::update")
+		end),
+	},
 })
 
 volume_widget.tooltip = awful.tooltip({
@@ -59,22 +70,24 @@ local function level_icon(volume_level, muted)
 end
 
 local function update_volume()
-	awful.spawn.easy_async_with_shell(get_volume_cmd(), function(vol)
-		-- INFO: This stdout contains a \n character that messes up how the tooltip looks.
-		local vol_string = string.gsub(vol, "\n", "")
+	gears.timer.start_new(0.25, function()
+		awful.spawn.easy_async_with_shell(get_volume_cmd(), function(vol)
+			-- INFO: This stdout contains a \n character that messes up how the tooltip looks.
+			local vol_string = string.gsub(vol, "\n", "")
 
-		-- If there is no audio sink at all (a VM, a nested test instance, a machine with
-		-- PipeWire down) the command above prints nothing, and tonumber gives back nil.
-		-- Every comparison below would then throw, so pin it to a number here.
-		local volume_level = tonumber(vol_string) or 0
+			-- If there is no audio sink at all (a VM, a nested test instance, a machine with
+			-- PipeWire down) the command above prints nothing, and tonumber gives back nil.
+			-- Every comparison below would then throw, so pin it to a number here.
+			local volume_level = tonumber(vol_string) or 0
 
-		volume_widget:get_children_by_id("text")[1].text = volume_level .. "%"
-		volume_widget.tooltip.text = volume_level .. "%"
+			volume_widget:get_children_by_id("text")[1].text = volume_level .. "%"
+			volume_widget.tooltip.text = volume_level .. "%"
 
-		--INFO: The way pamixer works, if you increase volume, it does not break `mute`.  So I want to update the tooltip, but not the icon, that's why I have it nested instead of a separate function.
-		awful.spawn.easy_async_with_shell(get_mute_cmd(), function(mute)
-			local muted = string.find(mute, "true") ~= nil
-			volume_widget:get_children_by_id("icon")[1].text = level_icon(volume_level, muted)
+			--INFO: The way pamixer works, if you increase volume, it does not break `mute`.  So I want to update the tooltip, but not the icon, that's why I have it nested instead of a separate function.
+			awful.spawn.easy_async_with_shell(get_mute_cmd(), function(mute)
+				local muted = string.find(mute, "true") ~= nil
+				volume_widget:get_children_by_id("icon")[1].text = level_icon(volume_level, muted)
+			end)
 		end)
 	end)
 end
