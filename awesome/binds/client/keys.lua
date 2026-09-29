@@ -56,7 +56,7 @@ local client_helpers = {
 		if target then
 			c:move_to_screen(target)
 		else
-			c:move_to_screen(awful.screen.count() - 1)
+			c:move_to_screen(screen.count() - 1)
 		end
 	end,
 }
