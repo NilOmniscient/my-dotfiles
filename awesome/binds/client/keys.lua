@@ -1,5 +1,4 @@
 local awful = require("awful")
-local screen = require("screen")
 
 local mod = require("binds.mod")
 local modkey = mod.modkey
@@ -69,7 +68,7 @@ client.connect_signal("request::default_keybindings", function()
 			if target then
 				c:move_to_screen(target)
 			else
-				c:move_to_screen(screen.count() - 1)
+				c:move_to_screen(awful.screen.count() - 1)
 			end
 		end, { description = "move client to next left screen", group = "client" }),
 	})
