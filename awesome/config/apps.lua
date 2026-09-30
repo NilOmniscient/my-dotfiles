@@ -1,11 +1,12 @@
--- This is used later as the default terminal and editor to run.
+local awful = require("awful")
+
+local is_somewm = awesome.release == "somewm"
 local apps = {}
 apps.terminal = "ghostty"
 apps.editor = os.getenv("EDITOR") or "vi"
 apps.editor_cmd = apps.terminal .. " -e " .. apps.editor
 
 -- Some other apps, e.g. Browser, File Browser, and Launcher
-apps.launcher = "xfce4-appfinder"
 apps.browser = "firefox"
 apps.file_browser = "dolphin"
 
@@ -30,6 +31,15 @@ if systemctl ~= 0 then
 	apps.poweroff = systemctl .. " poweroff"
 	apps.suspend = systemctl .. " suspend"
 	apps.reboot = systemctl .. " reboot"
+end
+
+-- Finally, the locker. Because SomeWM and Awesome are incompatible re: locking
+if is_somewm then
+	apps.locker = awesome.lock
+else
+	apps.locker = function()
+		awful.spawn("betterlockscreen -l")
+	end
 end
 
 return apps

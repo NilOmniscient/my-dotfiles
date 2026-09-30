@@ -75,6 +75,7 @@ local global_keys = {
 	{ { modkey }, "w", awesome_helpers.show_menu, "show main menu", "awesome" },
 	{ { modkey, mod.ctrl }, "r", awesome.restart, "reload awesome", "awesome" },
 	{ { modkey, mod.shift }, "q", awesome.quit, "quit awesome", "awesome" },
+	{ { modkey }, "l", apps.locker, "show lockscreen", "awesome" },
 	{ { modkey }, "p", exitscreen.show, "show exit screen", "awesome" },
 	{ { modkey }, "r", launcher.show, "show app launcher", "awesome" },
 	{ { modkey }, "d", dashboard.toggle, "show dashboard", "awesome" },

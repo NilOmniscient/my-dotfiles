@@ -747,7 +747,7 @@ ruled.notification.connect_signal("request::rules", function()
 			fg = beautiful.fg_urgent,
 			timeout = 0, -- Never timeout
 			border_color = "#ff0000",
-			position = M.config.positions.top_middle,
+			position = M.config.positions.top_right,
 		},
 		callback = function(n)
 			play_sound("critical")
@@ -771,7 +771,7 @@ ruled.notification.connect_signal("request::rules", function()
 			app_name = { "Firefox", "Chrome", "Chromium", "Brave", "firefox", "chrome", "chromium", "brave" },
 		},
 		properties = {
-			position = M.config.positions.bottom_right,
+			position = M.config.positions.top_right,
 		},
 		callback = function(n)
 			if is_vip(n) then
@@ -813,7 +813,7 @@ ruled.notification.connect_signal("request::rules", function()
 			category = { "email", "email.arrived" },
 		},
 		properties = {
-			position = M.config.positions.bottom_left,
+			position = M.config.positions.top_right,
 			timeout = 8,
 		},
 		callback = function(n)
@@ -830,7 +830,7 @@ ruled.notification.connect_signal("request::rules", function()
 			category = { "calendar", "reminder" },
 		},
 		properties = {
-			position = M.config.positions.top_middle,
+			position = M.config.positions.top_right,
 			timeout = 0, -- Don't auto-dismiss reminders
 		},
 		callback = function(n)
@@ -846,7 +846,7 @@ ruled.notification.connect_signal("request::rules", function()
 			category = { "media", "music" },
 		},
 		properties = {
-			position = M.config.positions.bottom_middle,
+			position = M.config.positions.top_right,
 			timeout = 4,
 		},
 		-- No actions for media - they're just informational
@@ -859,7 +859,7 @@ ruled.notification.connect_signal("request::rules", function()
 			category = { "device", "device.added", "device.removed", "network" },
 		},
 		properties = {
-			position = M.config.positions.top_middle,
+			position = M.config.positions.top_right,
 			timeout = 5,
 		},
 		callback = function(n)
@@ -874,7 +874,7 @@ ruled.notification.connect_signal("request::rules", function()
 		},
 		properties = {
 			urgency = "critical",
-			position = M.config.positions.top_middle,
+			position = M.config.positions.top_right,
 			bg = "#ffa500",
 			fg = "#000000",
 		},
@@ -889,7 +889,7 @@ ruled.notification.connect_signal("request::rules", function()
 			category = { "transfer", "transfer.complete" },
 		},
 		properties = {
-			position = M.config.positions.bottom_right,
+			position = M.config.positions.top_right,
 			timeout = 6,
 		},
 		callback = function(n)
