@@ -20,8 +20,16 @@ return function(s)
 				layout = wibox.layout.fixed.horizontal,
 			},
 			{
-				widgets.clock,
-				layout = wibox.layout.flex.horizontal,
+				nil,
+				{
+					widgets.notification,
+					widgets.clock,
+					spacing = theme.widget_spacing,
+					layout = wibox.layout.fixed.horizontal,
+				},
+				nil,
+				expand = "none",
+				layout = wibox.layout.align.horizontal,
 			},
 			{
 				nil,

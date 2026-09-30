@@ -10,14 +10,23 @@ require("theme")
 --- Error handling.
 -- Notification library.
 local naughty = require("naughty")
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config).
-naughty.connect_signal("request::display_error", function(message, startup)
-	naughty.notification({
-		urgency = "critical",
-		title = "Oops, an error happened" .. (startup and " during startup!" or "!"),
-		message = message,
-	})
+
+-- Create a try function so that failures just drop a feature instead of the entire environment
+local function try(name, fn)
+	local ok, err = pcall(fn)
+	if not ok then
+		io.stderr:write(("[rc.lua] %s failed to load: %s\n"):format(name, tostring(err)))
+		naughty.notification({
+			urgency = "critical",
+			title = name .. " failed to load",
+			message = tostring(err),
+		})
+	end
+	return ok
+end
+
+try("notifications", function()
+	require("module.notifications")
 end)
 
 -- Allow Awesome to automatically focus a client upon changing tags or loading.
