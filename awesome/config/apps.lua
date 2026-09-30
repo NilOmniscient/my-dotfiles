@@ -8,7 +8,7 @@ apps.editor_cmd = apps.terminal .. " -e " .. apps.editor
 
 -- Some other apps, e.g. Browser, File Browser, and Launcher
 apps.browser = "firefox"
-apps.file_browser = "dolphin"
+apps.file_browser = "thunar"
 
 -- Set the terminal for the menubar.
 require("menubar").utils.terminal = apps.terminal
