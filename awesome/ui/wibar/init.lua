@@ -18,6 +18,8 @@ return function(s)
 	s.mywibox = awful.wibar({
 		position = "top",
 		screen = s,
+		border_width = 1,
+		border_color = theme.primary_color,
 		widget = {
 			layout = wibox.layout.flex.horizontal,
 			{
