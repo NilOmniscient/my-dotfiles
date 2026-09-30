@@ -3,7 +3,7 @@ local awful = require("awful")
 local user = require("config.user")
 
 -- Some basic default awesomewm starters
-awful.spawn.once("xset s " .. user.sleep_time .. " " .. user.sleep_time)
+awful.spawn.once("xset s " .. user.lock_time .. " " .. user.lock_time)
 awful.spawn.once("xss-lock --transfer-sleep-lock -- betterlockscreen -l &")
 awful.spawn.once("autorandr --change")
 awful.spawn.once("picom")
