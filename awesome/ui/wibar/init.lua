@@ -31,6 +31,7 @@ return function(s)
 				{
 					widgets.notification,
 					widgets.clock,
+					-- widgets.nowplaying,
 					spacing = theme.widget_spacing,
 					layout = wibox.layout.fixed.horizontal,
 				},
