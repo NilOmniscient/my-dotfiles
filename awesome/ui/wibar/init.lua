@@ -6,6 +6,11 @@ local wibox = require("wibox")
 local widgets = require("widgets")
 local modules = require("ui.wibar.module")
 
+local spacer = {
+	text = " ",
+	widget = wibox.widget.textbox,
+}
+
 return function(s)
 	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
 
@@ -37,6 +42,8 @@ return function(s)
 				{
 					s == screen.primary and wibox.widget.systray() or nil,
 					widgets.volume,
+					widgets.dashboard,
+					spacer,
 					spacing = theme.widget_spacing,
 					layout = wibox.layout.fixed.horizontal,
 				},

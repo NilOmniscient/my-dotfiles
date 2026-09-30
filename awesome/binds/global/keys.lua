@@ -6,8 +6,10 @@ local modkey = mod.modkey
 local apps = require("config.apps")
 
 -- Import any widgets we need to control
+local dashboard = require("module.dashboard")
 local windowswitcher = require("module.windowswitcher")
 local exitscreen = require("module.exitscreen")
+local launcher = require("module.launcher")
 
 -- Convert a table to a proper keybind
 local function table_to_keybinding(bindings)
@@ -74,10 +76,11 @@ local global_keys = {
 	{ { modkey, mod.ctrl }, "r", awesome.restart, "reload awesome", "awesome" },
 	{ { modkey, mod.shift }, "q", awesome.quit, "quit awesome", "awesome" },
 	{ { modkey }, "p", exitscreen.show, "show exit screen", "awesome" },
+	{ { modkey }, "r", launcher.show, "show app launcher", "awesome" },
+	{ { modkey }, "d", dashboard.toggle, "show dashboard", "awesome" },
 
 	-- Launcher bindings
 	{ { modkey }, "Return", launchers.terminal, "open terminal", "launcher" },
-	{ { modkey }, "r", launchers.launcher, "open app launcher", "launcher" },
 	{ { modkey }, "b", launchers.browser, "open web browser", "launcher" },
 	{ { modkey }, "f", launchers.file_browser, "open file browser", "launcher" },
 
