@@ -27,11 +27,11 @@
     <keybind key="W-Return">
       <action name="Execute" command="ghostty"/>
     </keybind>
-    <keybind key="W-f">
+    <keybind key="W-b">
       <action name="Execute" command="firefox"/>
       <action name="Execute" command="firefox-bin"/>
     </keybind>
-    <keybind key="W-b">
+    <keybind key="W-f">
       <action name="Execute" command="thunar"/>
     </keybind>
     <keybind key="W-q">

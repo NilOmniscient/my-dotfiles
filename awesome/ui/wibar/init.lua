@@ -24,6 +24,8 @@ return function(s)
 			layout = wibox.layout.flex.horizontal,
 			{
 				modules.tasklist(s),
+
+				widgets.nowplaying,
 				layout = wibox.layout.fixed.horizontal,
 			},
 			{
@@ -31,7 +33,6 @@ return function(s)
 				{
 					widgets.notification,
 					widgets.clock,
-					-- widgets.nowplaying,
 					spacing = theme.widget_spacing,
 					layout = wibox.layout.fixed.horizontal,
 				},
