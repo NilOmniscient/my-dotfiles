@@ -52,6 +52,7 @@ return function(s)
 				{
 					systray,
 					widgets.volume,
+					modules.idlestate,
 					widgets.dashboard,
 					spacer,
 					spacing = theme.widget_spacing,
