@@ -11,8 +11,14 @@ local spacer = {
 	widget = wibox.widget.textbox,
 }
 
+local is_somewm = awesome.release == "somewm"
+
 return function(s)
 	s.mypromptbox = awful.widget.prompt() -- Create a promptbox.
+	local systray = nil
+	if s == screen.primary or is_somewm then
+		systray = wibox.widget.systray()
+	end
 
 	-- Create the wibox
 	s.mywibox = awful.wibar({
@@ -44,7 +50,7 @@ return function(s)
 				nil,
 				nil,
 				{
-					s == screen.primary and wibox.widget.systray() or nil,
+					systray,
 					widgets.volume,
 					widgets.dashboard,
 					spacer,
