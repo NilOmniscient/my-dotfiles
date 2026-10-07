@@ -20,6 +20,7 @@ return {
 		soft_orange = "#FFB86C",
 		white = "#F8F8F2",
 		white2 = "#F8F8F2",
+		wallpaper = "dracula.png",
 	},
 	nord = {
 		bg = "#2E3440", -- Polarnight1
@@ -42,6 +43,7 @@ return {
 		white2 = "#ECEFF4", -- snowstorm3 in palette
 		orange = "#D08770", -- aurora2 in palette
 		soft_orange = "#D08770", -- aurora2 in palette
+		wallpaper = "catppuccin.png",
 	},
 	catppuccin_mocha = {
 		bg = "#1e1e2e", -- Base in palette
@@ -64,5 +66,6 @@ return {
 		white2 = "#a6adc8", -- Subtext 0
 		orange = "#fab287", -- Peach
 		soft_orange = "#fab287",
+		wallpaper = "catppuccin.png",
 	},
 }

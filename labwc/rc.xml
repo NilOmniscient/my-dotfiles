@@ -14,7 +14,8 @@
     <dropShadows>no</dropShadows>
     <dropShadowsOnTiled>no</dropShadowsOnTiled>
     <maximizedDecoration>titlebar</maximizedDecoration>
-    <icon>breeze-dark</icon>
+    <icon>Dracula</icon>
+    <name>Dracula</name>
   </theme>
   <windowSwitcher preview="no" outlines="yes">
     <osd style="thumbnail"/>

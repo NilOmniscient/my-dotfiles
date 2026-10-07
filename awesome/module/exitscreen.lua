@@ -39,9 +39,7 @@ local options = {
 		icon = "󰤄",
 		key = "s",
 		command = function()
-			if apps.suspend then
-				awful.spawn(apps.suspend)
-			end
+			awful.spawn("suspend")
 		end,
 	},
 	{
@@ -49,9 +47,7 @@ local options = {
 		icon = "󰜉",
 		key = "r",
 		command = function()
-			if apps.reboot then
-				awful.spawn(apps.reboot)
-			end
+			awful.spawn("reboot")
 		end,
 	},
 	{
@@ -59,9 +55,7 @@ local options = {
 		icon = "󰐥",
 		key = "p",
 		command = function()
-			if apps.poweroff then
-				awful.spawn(apps.poweroff)
-			end
+			awful.spawn("poweroff")
 		end,
 	},
 }

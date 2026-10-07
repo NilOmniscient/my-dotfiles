@@ -3,6 +3,8 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 local wibox = require("wibox")
 
+local is_somewm = awesome.release == "somewm"
+
 --- Attach tags and widgets to all screens.
 screen.connect_signal("request::desktop_decoration", function(s)
 	-- Create all tags and attach the layouts to each of them.
@@ -18,24 +20,11 @@ end)
 -- may want to use the deprecated `gears.wallpaper` instead. This is
 -- the most common case of just wanting to set an image as wallpaper.
 screen.connect_signal("request::wallpaper", function(s)
-	--[[
-  awful.wallpaper({
-		screen = s,
-		widget = {
-			widget = wibox.container.tile,
-			valign = "center",
-			halign = "center",
-			tiled = false,
-			{
-				widget = wibox.widget.imagebox,
-				image = beautiful.wallpaper,
-				upscale = true,
-				downscale = true,
-			},
-		},
-	})
-  ]]
-	gears.wallpaper.maximized(beautiful.wallpaper)
+	if is_somewm then
+		gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+	else
+		gears.wallpaper.maximized(beautiful.wallpaper)
+	end
 end)
 -- An example of what's mentioned above. For more information, see:
 -- https://awesomewm.org/apidoc/utility_libraries/gears.wallpaper.html

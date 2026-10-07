@@ -18,6 +18,7 @@ local color = colors["dracula"]
 
 local theme = {}
 
+theme.wallpaper = config_dir .. "assets/dracula.png"
 theme.font = "sans 8"
 theme.font_family = "Hack Nerd Font"
 theme.font_size = function(size, style)
@@ -143,8 +144,6 @@ theme.titlebar_maximized_button_normal_inactive = themes_path .. "default/titleb
 theme.titlebar_maximized_button_focus_inactive = themes_path .. "default/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_active = themes_path .. "default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active = themes_path .. "default/titlebar/maximized_focus_active.png"
-
-theme.wallpaper = config_dir .. "assets/wallpaper.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path .. "default/layouts/fairhw.png"
