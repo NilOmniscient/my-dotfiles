@@ -35,7 +35,9 @@ end
 
 -- Finally, the locker. Because SomeWM and Awesome are incompatible re: locking
 if is_somewm then
-	apps.locker = awesome.lock
+	apps.locker = function()
+		awesome.lock()
+	end
 else
 	apps.locker = function()
 		awful.spawn("betterlockscreen -l")

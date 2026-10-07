@@ -9,6 +9,8 @@ require("autostart")
 
 require("theme")
 
+local is_somewm = awesome.release == "somewm"
+
 --- Error handling.
 -- Notification library.
 local naughty = require("naughty")
@@ -30,6 +32,11 @@ end
 try("notifications", function()
 	require("module.notifications")
 end)
+if is_somewm then
+	try("lockscreen", function()
+		require("module.lockscreen").init()
+	end)
+end
 
 -- Allow Awesome to automatically focus a client upon changing tags or loading.
 require("awful.autofocus")
