@@ -13,28 +13,8 @@ local gfs = require("gears.filesystem")
 local config_dir = gfs.get_configuration_dir()
 local themes_path = gfs.get_themes_dir()
 
-local color = {
-	bg = "#1e1e2e", -- Base in palette
-	fg = "#cdd6f4", -- Text in palette
-	grey1 = "#313244", -- Surface 0
-	grey2 = "#45475a", -- Surface 1
-	red = "#f38ba8",
-	soft_red = "#f38ba8",
-	green = "#a6e3a1",
-	soft_green = "#a6e3a1",
-	yellow = "#f9e2af",
-	soft_yellow = "#f9e2af",
-	blue = "#89b4fa",
-	soft_blue = "#74c7ec", -- Sapphire
-	soft_blue2 = "#89dceb", -- Sky
-	purple = "#cba6f7", -- Mauve
-	soft_purple = "#b4befe", -- Lavender
-	pink = "#f5c2e7",
-	white = "#bac2de", -- Subtext 1
-	white2 = "#a6adc8", -- Subtext 0
-	orange = "#fab287", -- Peach
-	soft_orange = "#fab287",
-}
+local colors = require("theme.colors")
+local color = colors["dracula"]
 
 local theme = {}
 
