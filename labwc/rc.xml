@@ -5,6 +5,7 @@
 -->
 <labwc_config>
   <theme>
+    <name>noctalia</name>
     <cornerRadius>8</cornerRadius>
     <font name="sans" size="10"/>
     <keepBorder>yes</keepBorder>
