@@ -1,27 +1,31 @@
 local awful = require("awful")
-local client = require("client")
+
 local mod = require("binds.mod")
 local modkey = mod.modkey
-local shift = mod.shift
 
-local helper = require("binds.helpers").table_to_bindings
+-- Convert a table to a proper keybind
+local function table_to_keybinding(bindings)
+	local key_bindings = {}
+	for _, g_key in ipairs(bindings) do
+		table.insert(
+			key_bindings,
+			awful.key(g_key[1], g_key[2], g_key[3], { description = g_key[4], group = g_key[5] })
+		)
+	end
+	return key_bindings
+end
 
 local client_helpers = {
-	toggle_fullscreen = function(c)
+	fullscreen = function(c)
 		c.fullscreen = not c.fullscreen
 		c:raise()
 	end,
-	close_client = function(c)
+	close = function(c)
 		c:kill()
 	end,
-	toggle_floating = function(c)
-		c.floating = not c.floating
-	end,
-	toggle_maximize = function(c)
+	maximize = function(c)
 		c.maximized = not c.maximized
-	end,
-	toggle_ontop = function(c)
-		c.ontop = not c.ontop
+		c:raise()
 	end,
 	snap_right = function(c)
 		local f = awful.placement.scale + awful.placement.right + awful.placement.maximize_vertically
@@ -39,35 +43,42 @@ local client_helpers = {
 		local f = awful.placement.scale + awful.placement.bottom + awful.placement.maximize_horizontally
 		f(c, { honor_workarea = true, to_percent = 0.5 })
 	end,
-	move_to_left = function(c)
-		local s = c.screen:get_next_in_direction("left")
-		c:move_to_screen(s)
+	move_left = function(c)
+		local target = c.screen:get_next_in_direction("right")
+		if target then
+			c:move_to_screen(target)
+		else
+			c:move_to_screen(0)
+		end
 	end,
-	move_to_right = function(c)
-		local s = c.screen:get_next_in_direction("right")
-		c:move_to_screen(s)
+	move_right = function(c)
+		local target = c.screen:get_next_in_direction("left")
+		if target then
+			c:move_to_screen(target)
+		else
+			c:move_to_screen(screen.count() - 1)
+		end
 	end,
 }
 
-local client_bindings = {
-	-- Client State
-	{ { modkey }, "a", client_helpers.toggle_fullscreen, "Toggle Fullscreen", "client" },
-	{ { modkey }, "q", client_helpers.close_client, "Close Client", "client" },
-	{ { modkey }, "space", client_helpers.toggle_floating, "Toggle Floating", "client" },
-	{ { modkey }, "m", client_helpers.toggle_maximize, "(un)maximize", "client" },
-	{ { modkey }, "t", client_helpers.toggle_ontop, "Toggle keep on top", "client" },
+local client_keys = {
+	-- Basic client state management
+	{ { modkey }, "a", client_helpers.fullscreen, "toggle_fullscreen", "client" },
+	{ { modkey }, "q", client_helpers.close, "close", "client" },
+	{ { modkey }, "m", client_helpers.maximize, "(un)maximize", "client" },
 
-	-- Client Position
-	{ { modkey }, "Right", client_helpers.snap_right, "Snap to right edge", "floating client" },
-	{ { modkey }, "Left", client_helpers.snap_left, "Snap to left edge", "floating client" },
-	{ { modkey }, "Up", client_helpers.snap_top, "Snap to top edge", "floating client" },
-	{ { modkey }, "Down", client_helpers.snap_bottom, "Snap to bottom edge", "floating client" },
+	-- Client position management
+	{ { modkey }, "Right", client_helpers.snap_right, "snap client right", "client" },
+	{ { modkey }, "Left", client_helpers.snap_left, "snap client left", "client" },
+	{ { modkey }, "Up", client_helpers.snap_top, "snap client top", "client" },
+	{ { modkey }, "Down", client_helpers.snap_bottom, "snap client bottom", "client" },
 
 	-- Client screen management
-	{ { modkey, shift }, "Left", client_helpers.move_to_left, "Move left one screen", "client" },
-	{ { modkey, shift }, "Right", client_helpers.move_to_right, "Move Right one screen", "client" },
+	{ { modkey, mod.shift }, "Right", client_helpers.move_right, "move client to next right screen", "client" },
+	{ { modkey, mod.shift }, "Left", client_helpers.move_left, "move client to next left screen", "client" },
 }
 
+--- Convert and connect the keybindings.
 client.connect_signal("request::default_keybindings", function()
-	awful.keyboard.append_client_keybindings(helper(client_bindings))
+	awful.keyboard.append_client_keybindings(table_to_keybinding(client_keys))
 end)

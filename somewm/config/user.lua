@@ -1,52 +1,33 @@
 local awful = require("awful")
 
--- Input settings
-
-local settings = {
-	-- Primary Monitor
-	primary_output = "DP-3",
-
-	-- Default Apps
-	browser = "firefox-bin",
-	file_browser = "thunar",
-	editor = os.getenv("EDITOR") or "nvim",
-	terminal = "ghostty",
-
-	-- Power control commands
-	reboot = "loginctl reboot",
-	shutdown = "loginctl poweroff",
-	sleep = "loginctl suspend",
-
-	-- Default ModKey
-	modkey = "Mod4",
-
-	-- Default Layouts and Tags
-	tags = { "1", "2", "3" },
+-- Specify user preferences for Awesome's behavior.
+return {
+	-- Default modkey.
+	-- Usually, Mod4 is the key with a logo between Control and Alt. If you do not like
+	-- this or do not have such a key, I suggest you to remap Mod4 to another key using
+	-- xmodmap or other tools. However, you can use another modifier like Mod1, but it
+	-- may interact with others.
+	mod = "Mod4",
+	-- Each screen has its own tag table. You can just define one and append it to all
+	-- screens (default behavior).
+	tags = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+	-- Table of layouts to cover with awful.layout.inc, ORDER MATTERS, the first layout
+	-- in the table is your DEFAULT LAYOUT.
 	layouts = {
 		awful.layout.suit.floating,
 		awful.layout.suit.tile,
 		awful.layout.suit.tile.left,
 		awful.layout.suit.tile.bottom,
 		awful.layout.suit.tile.top,
-		awful.layout.suit.carousel,
 		awful.layout.suit.fair,
 		awful.layout.suit.fair.horizontal,
-		awful.layout.suit.max,
-		awful.layout.suit.corner.nw,
 		awful.layout.suit.spiral,
 		awful.layout.suit.spiral.dwindle,
+		awful.layout.suit.max,
 		awful.layout.suit.max.fullscreen,
 		awful.layout.suit.magnifier,
+		awful.layout.suit.corner.nw,
 	},
-	enable_titlebars = false,
-	autostart = {
-		"nm-applet",
-	},
-	autostart_once = {},
+	lock_time = 300,
+	sleep_time = 600,
 }
-
-local success, user_defined = pcall(require, "config.user_defined")
-if not success then
-	user_defined = {}
-end
-return settings

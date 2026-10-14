@@ -1,5 +1,5 @@
--- Return all global keybinds
+-- Returns all global WM mouse and keybinds.
 return {
-	keys = require(... .. ".keys"),
-	mouse = require(... .. ".mouse"),
+   keys  = require(... .. '.keys'),
+   mouse = require(... .. '.mouse')
 }

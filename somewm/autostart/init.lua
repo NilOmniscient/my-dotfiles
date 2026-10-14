@@ -1,10 +1,13 @@
-local awful = require("awful")
-local user = require("config.user")
+local is_somewm = awesome.release == "somewm"
 
-for _, application in ipairs(user.autostart) do
-	awful.spawn(application)
+local autostart = nil
+
+if is_somewm then
+	autostart = require(... .. ".somewm")
+else
+	autostart = require(... .. ".awesome")
 end
 
-for _, application in ipairs(user.autostart_once) do
-	awful.spawn.once(application)
-end
+return {
+	autostart = autostart,
+}

@@ -1,4 +1,5 @@
+-- Returns all mouse and keybinds for both clients and the WM.
 return {
-	client = require(... .. ".client"),
-	global = require(... .. ".global"),
+   global = require(... .. '.global'),
+   client = require(... .. '.client')
 }

@@ -1,8 +1,9 @@
 return {
-	alt = "Mod1",
-	super = "Mod4",
-	shift = "Shift",
-	ctrl = "Control",
+   alt   = 'Mod1',
+   super = 'Mod4',
+   shift = 'Shift',
+   ctrl  = 'Control',
 
-	modkey = "Mod4",
+   -- Set Super as default modkey if none is present.
+   modkey = require('config.user').mod or 'Mod4'
 }

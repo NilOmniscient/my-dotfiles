@@ -1,1 +1,0 @@
--- Register various signals here, and attach their appropriate callbacks
