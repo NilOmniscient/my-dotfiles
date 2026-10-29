@@ -1,2 +1,2 @@
-vim.lsp.config("serve-d", {})
-vim.lsp.enable("serve-d")
+vim.lsp.config("serve_d", {})
+vim.lsp.enable("serve_d")
