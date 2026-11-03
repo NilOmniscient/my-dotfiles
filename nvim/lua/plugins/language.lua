@@ -16,4 +16,7 @@ return {
 		end,
 		config = true,
 	},
+	{
+		"elkowar/yuck.vim",
+	},
 }

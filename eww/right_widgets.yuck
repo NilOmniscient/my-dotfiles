@@ -1,0 +1,11 @@
+(defwidget right_widgets []
+  (box
+    :orientation "horizontal"
+    :halign "end"
+    :space-evenly false
+    :spacing 10
+    (label :text "widgets")
+    (box :class "tray"
+      (systray))
+  )
+)
