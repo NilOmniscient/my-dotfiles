@@ -20,3 +20,16 @@
   )
 )
 
+(defwindow notifications 
+  :monitor 0
+  :geometry (geometry :x "0%"
+    :y "4px"
+    :width "40%"
+    :height "40%"
+    :anchor "top center")
+  :stacking "fg"
+  :windowtype "dock"
+  :wm-ignore false
+  (label :text "Notification Center")
+)
+
