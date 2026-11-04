@@ -8,11 +8,10 @@
       :orientation "horizontal"
       :halign "center"
       :onclick "end-rs history toggle"
+      :onmiddleclick "end-rs history clear"
       :onrightclick "end-rs dnd toggle"
       (label :text {(end-histories == '' || end-histories == '(box :space-evenly false :orientation "v" )') ? end_status : " 󱅫 "})
     )
-    ; 󱅫
-    ; 󰵙
     (label :text time)
   )
 )
