@@ -8,8 +8,8 @@
       :orientation "horizontal"
       :halign "center"
       :onclick "end-rs history toggle"
-      :onrightclick ""
-      (label :text dunst_status)
+      :onrightclick "end-rs dnd toggle"
+      (label :text {(end-histories == '' || end-histories == '(box :space-evenly false :orientation "v" )') ? end_status : " 󱅫 "})
     )
     ; 󱅫
     ; 󰵙
@@ -19,5 +19,5 @@
 
 (defpoll time :interval "10s"
   "date '+%I:%M %p'")
-(defpoll dunst_status :interval "2s"
-  "./scripts/dunst_status.sh")
+(defpoll end_status :interval "2s"
+  "./scripts/end_status.sh")
