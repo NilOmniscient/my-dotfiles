@@ -32,7 +32,7 @@
           :onclick "dunstctl history-rm ${notification.id}"
           (box
             :orientation "v"
-            (label :class "notification-header" :text {notification.app})
+            (label :class "notification-header" :text "${notification.app} - ${formattime(notification.timestamp, "%I:%M %p")}")
             (label :class "notification-summary" :text {notification.summary})
             (label :class "notification-body" :text {notification.body})))))))
   

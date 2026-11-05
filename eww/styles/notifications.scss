@@ -1,18 +1,19 @@
 .notifications {
   border-radius: 5px;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: $borders_edge;
 }
 .notification {
   margin: 10px 5px 0px 5px;
   border-radius: 5px;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: $selected_borders_color;
+  background-color: $widget_capsule_color;
 }
 .notification-header {
   border-color: $selected_borders_color;
-  border-bottom-width: 2px;
+  border-bottom-width: 1px;
   border-style: solid;
 }

@@ -1,2 +1,2 @@
 #!/bin/bash
-dunstctl history | jq -c '[.data[] | .[] | {id: .id.data, app: .appname.data, summary: .summary.data, body: .body.data}]'
+dunstctl history | jq -c '[.data[] | .[] | {id: .id.data, app: .appname.data, summary: .summary.data, body: .body.data, icon: .icon_path.data, timestamp: .timestamp.data}]'
