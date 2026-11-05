@@ -4,17 +4,19 @@
     :space-evenly false
     :spacing 10
     (box
+      :class "widget"
       :orientation "horizontal"
       :space-evenly false
       :spacing 2
       (image
         :icon active_icon)
-      (label 
+      (label
         :halign "start"
         :limit-width: 15
         :show-truncated true
         :text active_window))
-    (label 
+    (label
+      :class "widget"
       :halign "start"
       :truncate true
       :limit-width 29

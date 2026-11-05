@@ -1,18 +1,20 @@
 (defwidget center_widgets []
   (box
     :orientation "horizontal"
-    :halign "center"
     :space-evenly false
     :spacing 10
     (eventbox
-      :orientation "horizontal"
-      :halign "center"
       :onclick "eww open notifications --toggle"
       :onmiddleclick "dunstctl history-clear"
       :onrightclick "dunstctl set-pause toggle"
-      (label :text dunst_status) 
+      (label 
+        :class "widget"
+        :halign "center"
+        :text dunst_status) 
     )
-    (label :text time)
+    (label
+      :class "widget"
+      :text time)
   )
 )
 

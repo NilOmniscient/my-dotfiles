@@ -1,7 +1,7 @@
-(include "left_widgets.yuck")
-(include "center_widgets.yuck")
-(include "right_widgets.yuck")
-(include "notifications.yuck")
+(include "widgets/left_widgets.yuck")
+(include "widgets/center_widgets.yuck")
+(include "widgets/right_widgets.yuck")
+(include "widgets/notifications.yuck")
 
 (defwindow bar 
   :monitor 0

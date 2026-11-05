@@ -1,0 +1,8 @@
+@import "styles/colors.scss";
+@import "styles/notifications.scss";
+
+.widget {
+  border-radius: 16px;
+  background-color: $widget_capsule_color;
+  padding: 2px 10px 2px 10px;
+}
