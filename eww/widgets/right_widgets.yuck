@@ -1,3 +1,4 @@
+(include "widgets/volume.yuck")
 (defwidget right_widgets []
   (box
     :orientation "horizontal"
@@ -5,9 +6,14 @@
     :space-evenly false
     :spacing 10
     (label
+      ; volume_widget
+      ; battery_widget
       :class "widget"
       :text "widgets")
-    (box :class "widget"
-      (systray))
+    (box
+      :spacing 10
+      :space-evenly false
+      (volume)
+      (systray :class "widget"))
   )
 )

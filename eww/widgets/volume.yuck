@@ -1,0 +1,51 @@
+(defvar volume_icon "󰕾")
+(defpoll current_volume
+  :interval "2s"
+  `text=\`wpctl get-volume @DEFAULT_SINK@\`;
+              volume=\$(echo \$text | cut -d" " -f2)
+              if [ \$(echo \$text | cut -d" " -f3) == "[MUTED]" ]; then
+                eww update volume_icon=󰝟
+              elif (( \$(echo "\$volume <= 0.25" | bc -l) )); then
+                eww update volume_icon=󰕿
+              elif (( \$(echo "\$volume < 0.75" | bc -l) )); then
+                eww update volume_icon=󰖀
+              else
+                eww update volume_icon=󰕾
+              fi
+  echo \$text | cut -d" " -f2`)
+(defwidget volume []
+  (eventbox
+    :onclick `wpctl set-mute @DEFAULT_SINK@ toggle
+              text=\`wpctl get-volume @DEFAULT_SINK@\`;
+              volume=\$(echo \$text | cut -d" " -f2)
+              if [ \$(echo \$text | cut -d" " -f3) == "[MUTED]" ]; then
+                eww update volume_icon=󰝟
+              elif (( \$(echo "\$volume <= 0.25" | bc -l) )); then
+                eww update volume_icon=󰕿
+              elif (( \$(echo "\$volume < 0.75" | bc -l) )); then
+                eww update volume_icon=󰖀
+              else
+                eww update volume_icon=󰕾
+              fi
+             `
+    :onscroll `if [ {} == "up" ]; then
+                wpctl set-volume @DEFAULT_SINK@ 5%+
+              else
+                wpctl set-volume @DEFAULT_SINK@ 5%-
+              fi
+              text=\`wpctl get-volume @DEFAULT_SINK@\`;
+              volume=\$(echo \$text | cut -d" " -f2)
+              if [ \$(echo \$text | cut -d" " -f3) == "[MUTED]" ]; then
+                eww update volume_icon=󰝟
+              elif (( \$(echo "\$volume <= 0.25" | bc -l) )); then
+                eww update volume_icon=󰕿
+              elif (( \$(echo "\$volume < 0.75" | bc -l) )); then
+                eww update volume_icon=󰖀
+              else
+                eww update volume_icon=󰕾
+              fi
+              eww update current_volume=\$(echo \$text | cut -d" " -f2)`
+    (label
+      :class "widget"
+      :text "${volume_icon} ${replace(replace(current_volume,"0\\.",""),"1\\.","1")}%"))
+  )
