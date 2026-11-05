@@ -7,7 +7,7 @@
     (eventbox
       :orientation "horizontal"
       :halign "center"
-      :onclick ""
+      :onclick "eww open notifications --toggle"
       :onmiddleclick "dunstctl history-clear"
       :onrightclick "dunstctl set-pause toggle"
       (label :text dunst_status) 

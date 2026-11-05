@@ -1,7 +1,7 @@
 (include "left_widgets.yuck")
 (include "center_widgets.yuck")
 (include "right_widgets.yuck")
-(include "end.yuck")
+(include "notifications.yuck")
 
 (defwindow bar 
   :monitor 0
