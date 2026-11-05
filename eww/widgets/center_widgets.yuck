@@ -1,10 +1,10 @@
-(defwidget center_widgets []
+(defwidget center_widgets [screen]
   (box
     :orientation "horizontal"
     :space-evenly false
     :spacing 10
     (eventbox
-      :onclick "eww open notifications --toggle"
+      :onclick "eww open notifications --screen ${screen} --toggle"
       :onmiddleclick "dunstctl history-clear"
       :onrightclick "dunstctl set-pause toggle"
       (label 

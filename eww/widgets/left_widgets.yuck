@@ -19,7 +19,7 @@
       :class "widget"
       :halign "start"
       :truncate true
-      :limit-width 29
+      :limit-width 24
       :text now_playing)
   )
 )
@@ -33,5 +33,5 @@
 )
 (deflisten now_playing :interval "2s"
   :initial "󰝚 Nothing Playing"
-  `playerctl --follow metadata --format '󰝚 {{ title }}'`
+  `playerctl --follow metadata --format '󰝚 {{ title }} - {{ artist }}'`
 )

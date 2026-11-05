@@ -5,11 +5,6 @@
     :halign "end"
     :space-evenly false
     :spacing 5 
-    (label
-      ; volume_widget
-      ; battery_widget
-      :class "widget"
-      :text "widgets")
     (systray :class "widget")
     (volume)
   )

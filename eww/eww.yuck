@@ -3,8 +3,8 @@
 (include "widgets/right_widgets.yuck")
 (include "widgets/notifications.yuck")
 
-(defwindow bar 
-  :monitor 0
+(defwindow bar [screen] 
+  :monitor screen
   :geometry (geometry :x "0%"
     :y "2px"
     :width "100%"
@@ -17,7 +17,8 @@
   :wm-ignore false
   (centerbox :orientation "horizontal"
     (left_widgets)
-    (center_widgets)
+    (center_widgets
+      :screen screen)
     (right_widgets)
   )
 )

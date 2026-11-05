@@ -1,5 +1,4 @@
 (defwindow notifications
-  :monitor 0
   :geometry (geometry :x "0%"
     :y "2px"
     :width "40%"
