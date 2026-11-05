@@ -1,0 +1,22 @@
+(defwidget center_widgets []
+  (box
+    :orientation "horizontal"
+    :halign "center"
+    :space-evenly false
+    :spacing 10
+    (eventbox
+      :orientation "horizontal"
+      :halign "center"
+      :onclick ""
+      :onmiddleclick "dunstctl history-clear"
+      :onrightclick "dunstctl set-pause toggle"
+      (label :text dunst_status) 
+    )
+    (label :text time)
+  )
+)
+
+(defpoll time :interval "10s"
+  "date '+%I:%M %p'")
+(defpoll dunst_status :interval "2s"
+  "./scripts/dunst_status.sh")
