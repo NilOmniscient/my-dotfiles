@@ -1,21 +1,23 @@
 (defvar volume_icon "󰕾")
 (defpoll current_volume
   :interval "2s"
+  :run-while volume_load
   `text=\`wpctl get-volume @DEFAULT_SINK@\`;
-              volume=\$(echo \$text | cut -d" " -f2)
-              if [ \$(echo \$text | cut -d" " -f3) == "[MUTED]" ]; then
-                eww update volume_icon=󰝟
-              elif (( \$(echo "\$volume <= 0.25" | bc -l) )); then
-                eww update volume_icon=󰕿
-              elif (( \$(echo "\$volume < 0.75" | bc -l) )); then
-                eww update volume_icon=󰖀
-              else
-                eww update volume_icon=󰕾
-              fi
+    volume=\$(echo \$text | cut -d" " -f2)
+    if [ \$(echo \$text | cut -d" " -f3) == "[MUTED]" ]; then
+      eww update volume_icon=󰝟
+    elif (( \$(echo "\$volume <= 0.25" | bc -l) )); then
+      eww update volume_icon=󰕿
+    elif (( \$(echo "\$volume < 0.75" | bc -l) )); then
+      eww update volume_icon=󰖀
+    else
+      eww update volume_icon=󰕾
+    fi
   echo \$text | cut -d" " -f2`)
 (defwidget volume []
   (eventbox
-    :onclick `wpctl set-mute @DEFAULT_SINK@ toggle
+    :onclick `pavucontrol &` 
+    :onrightclick `wpctl set-mute @DEFAULT_SINK@ toggle
               text=\`wpctl get-volume @DEFAULT_SINK@\`;
               volume=\$(echo \$text | cut -d" " -f2)
               if [ \$(echo \$text | cut -d" " -f3) == "[MUTED]" ]; then
