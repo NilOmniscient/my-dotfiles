@@ -21,12 +21,12 @@
 }
 
 #bar-inner {
-  padding: 4px;
   background-color: var(--base_color);
+  min-height: 24px;
 }
 
 .module{
-  padding: 4px;
+  padding: 0px 4px 0px 4px;
   border: solid 1px;
   border-radius: 100px;
   border: solid 1px;
