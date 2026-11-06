@@ -1,4 +1,3 @@
-import psutil
 from fabric import Application, Fabricator
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
@@ -8,11 +7,18 @@ from fabric.widgets.label import Label
 from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.x11 import X11Window
 
-# Non-widgets
+# Services
+from fabric.notifications import Notifications, Notification
 from fabric.system_tray.widgets import SystemTray
-from fabric.utils import get_relative_path
+
+# Non-widgets
+from fabric.utils import get_relative_path, monitor_file
+
+# Non-fabric
 import os
+import psutil
 import subprocess
+import sys
 
 from gi.repository import Playerctl
 
@@ -169,13 +175,29 @@ class EndChildren(Box):
 
 
 if __name__ == "__main__":
-    bar = WStatusBar() if detect_display_server() == "wayland" else XStatusBar()
-    bar.children = CenterBox(
-        name="bar-inner",
-        start_children=StartChildren(),
-        center_children=CenterChildren(),
-        end_children=EndChildren(),
-    )
-    app = Application("bar", bar)
-    app.set_stylesheet_from_file(get_relative_path("./styles.css"))
+    bars = []
+    monitor_count = 1
+    if len(sys.argv) > 1:
+        monitor_count = int(sys.argv[1])
+    for i in range(monitor_count):
+        bar = (
+            WStatusBar(monitor=i)
+            if detect_display_server() == "wayland"
+            else XStatusBar(monitor=i)
+        )
+        bar.children = CenterBox(
+            style_classes=["bar-inner"],
+            start_children=StartChildren(),
+            center_children=CenterChildren(),
+            end_children=EndChildren(),
+        )
+        bars.append(bar)
+    app = Application("bar", bars[0])
+
+    def apply_stylesheet(*_):
+        return app.set_stylesheet_from_file(get_relative_path("./styles.css"))
+
+    style_monitor = monitor_file(get_relative_path("./styles.css"))
+    style_monitor.connect("changed", apply_stylesheet)
+    apply_stylesheet()
     app.run()
