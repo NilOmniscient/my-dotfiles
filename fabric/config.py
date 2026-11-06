@@ -1,3 +1,4 @@
+import psutil
 from fabric import Application, Fabricator
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
@@ -5,10 +6,13 @@ from fabric.widgets.datetime import DateTime
 from fabric.widgets.label import Label
 from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.x11 import X11Window
+from fabric.utils import get_relative_path
 import os
 import subprocess
 
 from gi.repository import Playerctl
+
+max_chars = 24
 
 
 def detect_display_server():
@@ -25,9 +29,18 @@ def detect_display_server():
 class WStatusBar(WaylandWindow):
     def __init__(self, **kwargs):
         super().__init__(
-            layer="top", anchor="left top right", exclusivity="auto", **kwargs
+            name="bar",
+            layer="top",
+            anchor="left top right",
+            exclusivity="auto",
+            **kwargs,
         )
-        self.active_window = Label(label="Desktop")
+        self.active_window = Label(
+            label="Desktop",
+            ellipsization="end",
+            max_chars_width=max_chars,
+            style_classes=["module"],
+        )
         self.window_poll = Fabricator(
             interval=1000,
             default_value="",
@@ -44,8 +57,15 @@ class WStatusBar(WaylandWindow):
 
 class XStatusBar(X11Window):
     def __init__(self, **kwargs):
-        super().__init__(layer="top", geometry="top", type_hint="dock", **kwargs)
-        self.active_window = Label(label="Desktop")
+        super().__init__(
+            name="bar", layer="top", geometry="top", type_hint="dock", **kwargs
+        )
+        self.active_window = Label(
+            label="Desktop",
+            ellipsization="end",
+            max_chars_width=max_chars,
+            style_classes=["module"],
+        )
         self.window_poll = Fabricator(
             interval=1000,
             default_value="",
@@ -62,9 +82,14 @@ class XStatusBar(X11Window):
 
 class StartChildren(Box):
     def __init__(self, active_window, **kwargs):
-        super().__init__(**kwargs)
+        super().__init__(spacing=5, **kwargs)
 
-        self.now_playing = Label(label="󰝚 Nothing Playing")
+        self.now_playing = Label(
+            label="󰝚 Nothing Playing",
+            ellipsization="end",
+            max_chars_width=max_chars,
+            style_classes=["module"],
+        )
         # Handle playerctl stuff.
         self.player_manager = Playerctl.PlayerManager()
         self.active_player = None
@@ -74,7 +99,7 @@ class StartChildren(Box):
                 keys = metadata.keys()
                 if "xesam:artist" in keys and "xesam:title" in keys:
                     self.now_playing.set_label(
-                        f"{metadata['xesam:title']} - {metadata['xesam:artist'][0]}"
+                        f"󰝚 {metadata['xesam:title']} - {metadata['xesam:artist'][0]}"
                     )
 
         def track_player(player):
@@ -115,14 +140,16 @@ class CenterChildren(Box):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.children = [DateTime()]
+        self.children = [DateTime(style_classes=["module"])]
 
 
 if __name__ == "__main__":
     bar = WStatusBar() if detect_display_server() == "wayland" else XStatusBar()
     bar.children = CenterBox(
+        name="bar-inner",
         start_children=StartChildren(bar.active_window),
         center_children=CenterChildren(),
     )
     app = Application("bar", bar)
+    app.set_stylesheet_from_file(get_relative_path("./styles.css"))
     app.run()

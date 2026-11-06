@@ -1,0 +1,35 @@
+:vars {
+  --base_color: #282a36;
+  --background: #1e1f29;
+  --foreground: #f8f8f2;
+  --lime: #50fa7a;
+  --red: #ff5555;
+  --orange: #ffb86c;
+  --yellow: #f1fa8c;
+  --purple: #bd93f9;
+  --darkpurple: #44475a;
+  --cyan: #72bfd0;
+  --blue: #13b1d5;
+  --slider: #7b7bbd;
+}
+
+* {
+  all:unset;
+  color: var(--foreground);
+  font-size: 14px;
+  font-family: "Hack*", sans-serif;
+}
+
+#bar-inner {
+  padding: 4px;
+  background-color: var(--base_color);
+}
+
+.module{
+  padding: 4px;
+  border: solid 1px;
+  border-radius: 100px;
+  border: solid 1px;
+  background-color: var(--darkpurple);
+}
+
