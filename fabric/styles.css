@@ -14,21 +14,55 @@
 }
 
 * {
-  all:unset;
+  all: unset;
   color: var(--foreground);
   font-size: 14px;
   font-family: "Hack*", sans-serif;
 }
 
 .bar-inner {
+  padding: 2px;
   background-color: var(--base_color);
+  border: solid 2px;
+  border-color: var(--darkpurple);
   min-height: 24px;
 }
 
-.module{
+.module {
   padding: 0px 4px 0px 4px;
-  border: solid 0px;
   border-radius: 100px;
   background-color: var(--darkpurple);
 }
 
+.button {
+  padding: 4px 10px 4px 8px;
+  border-radius: 50%;
+}
+
+.notification {
+  padding: 0.8rem;
+  border: solid 1px var(--darkpurple);
+  border-radius: 1rem;
+  background-color: var(--background);
+}
+
+.notification .summary {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.notification .body {
+  color: darker(var(--foreground));
+  font-weight: normal;
+}
+
+.notification button {
+  padding: 0.8rem;
+  font-weight: 600;
+  border-radius: 3rem;
+  background-color: var(--darkpurple);
+}
+
+.notification button:hover {
+  background-color: lighter(var(--darkpurple));
+}
