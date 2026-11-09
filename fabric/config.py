@@ -32,6 +32,7 @@ notification_width = 360
 notification_image_size = 64
 notification_timeout = 10 * 1000
 notification_monitor = 0
+notifications = Notifications()
 
 
 def detect_display_server():
@@ -231,10 +232,7 @@ class NotificationWidget(Box):
                     .build(
                         lambda box, _: box.pack_end(
                             Button(
-                                image=Image(
-                                    icon_name="close-symbolic",
-                                    icon_size=18,
-                                ),
+                                label="󰅖",
                                 v_align="center",
                                 h_align="end",
                                 on_clicked=lambda *_: self._notification.close(),
@@ -316,6 +314,20 @@ if __name__ == "__main__":
         )
         bars.append(bar)
     # Generate the notification area
+    notification_builder = lambda viewport, _: notifications.connect(
+        "notification_added",
+        lambda notifs_service, nid: (
+            viewport.add(
+                NotificationWidget(
+                    cast(
+                        Notification,
+                        notifs_service.get_notification_from_id(nid),
+                    )
+                )
+            ),
+        ),
+    )
+
     if detect_display_server() == "wayland":
         bars.append(
             WaylandWindow(
@@ -326,18 +338,7 @@ if __name__ == "__main__":
                     size=2,
                     spacing=4,
                     orientation="v",
-                ).build(
-                    lambda viewport, _: Notifications(
-                        on_notification_added=lambda notifs_service, nid: viewport.add(
-                            NotificationWidget(
-                                cast(
-                                    Notification,
-                                    notifs_service.get_notification_from_id(nid),
-                                )
-                            )
-                        )
-                    )
-                ),
+                ).build(notification_builder),
             )
         )
     else:
@@ -350,18 +351,7 @@ if __name__ == "__main__":
                     size=2,
                     spacing=4,
                     orientation="v",
-                ).build(
-                    lambda viewport, _: Notifications(
-                        on_notification_added=lambda notifs_service, nid: viewport.add(
-                            NotificationWidget(
-                                cast(
-                                    Notification,
-                                    notifs_service.get_notification_from_id(nid),
-                                )
-                            )
-                        )
-                    )
-                ),
+                ).build(notification_builder),
             )
         )
     app = Application(
