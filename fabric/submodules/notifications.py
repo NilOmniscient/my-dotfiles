@@ -14,9 +14,11 @@ from fabric.widgets.x11 import X11Window
 from gi.repository import GdkPixbuf
 
 from submodules.helpers import detect_display_server
+from submodules.services import DNDService
+
 from typing import cast
 
-notifications = Notifications()
+do_not_disturb: DNDService
 notification_width = 360
 notification_image_size = 64
 notification_timeout = 10 * 1000
@@ -38,6 +40,7 @@ class NotificationWidget(Box):
             style_classes="notification",
             spacing=8,
             orientation="v",
+            visible=do_not_disturb.get_enabled() == False,
             **kwargs,
         )
         self._notification = notification
@@ -137,12 +140,21 @@ class NotificationWidget(Box):
         )
 
 
-def create_notification_area(width, image_size, timeout, monitor) -> Window:
+def create_notification_area(
+    notifications: Notifications,
+    dnd_service: DNDService,
+    width,
+    image_size,
+    timeout,
+    monitor,
+) -> Window:
     global \
+        do_not_disturb, \
         notification_width, \
         notification_image_size, \
         notification_timeout, \
         notification_monitor
+    do_not_disturb = dnd_service
     notification_width = width
     notification_image_size = image_size
     notification_timeout = timeout

@@ -2,6 +2,7 @@ from fabric import Application
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.x11 import X11Window
+from fabric.notifications import Notifications
 
 # Services
 
@@ -18,6 +19,7 @@ from submodules.bar_center import BarCenter
 from submodules.bar_end import BarEnd
 from submodules.helpers import detect_display_server
 from submodules.notifications import create_notification_area
+from submodules.services import DNDService
 
 max_chars = 24
 bar_height = 26
@@ -26,6 +28,10 @@ notification_width = 360
 notification_image_size = 64
 notification_timeout = 10 * 1000
 notification_monitor = 0
+
+# Launch the notifications service
+do_not_disturb = DNDService()
+notifications = Notifications()
 
 
 class WStatusBar(WaylandWindow):
@@ -62,12 +68,14 @@ if __name__ == "__main__":
         bar.children = CenterBox(
             style_classes=["bar-inner"],
             start_children=BarStart(icon_size, max_chars),
-            center_children=BarCenter(),
+            center_children=BarCenter(dnd_service=do_not_disturb),
             end_children=BarEnd(icon_size),
         )
         bars.append(bar)
     bars.append(
         create_notification_area(
+            notifications,
+            do_not_disturb,
             notification_width,
             notification_image_size,
             notification_timeout,
