@@ -14,7 +14,10 @@ class BarCenter(Box):
                 h_align="center",
                 v_align="center",
                 style_classes=["module", "button"],
-                onclick=lambda _: dnd_service.toggle_enabled(),
+                on_clicked=lambda b, *_: (
+                    dnd_service.toggle_enabled(),
+                    b.set_label("󱏨" if dnd_service.get_enabled() else "󰂚"),
+                ),
             ),
             DateTime(style_classes=["module"]),
         ]

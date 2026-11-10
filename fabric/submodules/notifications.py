@@ -40,7 +40,6 @@ class NotificationWidget(Box):
             style_classes="notification",
             spacing=8,
             orientation="v",
-            visible=do_not_disturb.get_enabled() == False,
             **kwargs,
         )
         self._notification = notification
@@ -162,13 +161,17 @@ def create_notification_area(
 
     notification_builder = lambda viewport, _: notifications.connect(
         "notification_added",
-        lambda notifs_service, nid: viewport.add(
-            NotificationWidget(
-                cast(
-                    Notification,
-                    notifs_service.get_notification_from_id(nid),
+        lambda notifs_service, nid: (
+            viewport.add(
+                NotificationWidget(
+                    cast(
+                        Notification,
+                        notifs_service.get_notification_from_id(nid),
+                    )
                 )
             )
+            if not do_not_disturb.get_enabled()
+            else None
         ),
     )
     return window_type(
