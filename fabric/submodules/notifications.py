@@ -159,10 +159,14 @@ def create_notification_area(
     notification_timeout = timeout
     notification_monitor = monitor
 
-    notification_builder = lambda viewport, _: notifications.connect(
+    notification_box = Box(size=2, spacing=4, orientation="v")
+    notification_window = window_type(
+        margin="8px 8px 8px 8px", anchor="top right", child=notification_box
+    )
+    notifications.connect(
         "notification_added",
         lambda notifs_service, nid: (
-            viewport.add(
+            notification_box.add(
                 NotificationWidget(
                     cast(
                         Notification,
@@ -174,13 +178,13 @@ def create_notification_area(
             else None
         ),
     )
-    return window_type(
-        monitor=notification_monitor,
-        margin="8px 8px 8px 8px",
-        anchor="top right",
-        child=Box(
-            size=2,
-            spacing=4,
-            orientation="v",
-        ).build(notification_builder),
+    notifications.connect(
+        "changed",
+        lambda notifs_service: (
+            notification_window.hide()
+            if len(notifications.notifications) == 0
+            else notification_window.show_all()
+        ),
     )
+
+    return notification_window
