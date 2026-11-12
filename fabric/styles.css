@@ -43,11 +43,11 @@
   padding: 0.8rem;
   border: solid 1px var(--darkpurple);
   border-radius: 1rem;
-  background-color: var(--background);
+  background-color: var(--base_color);
 }
 
 .notification .summary {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
 }
 

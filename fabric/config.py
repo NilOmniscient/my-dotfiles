@@ -12,6 +12,8 @@ from fabric.utils import get_relative_path, monitor_file
 # Non-fabric
 import sys
 
+from gi.repository import Gdk
+
 
 # local
 from submodules.bar_start import BarStart
@@ -54,11 +56,8 @@ class XStatusBar(X11Window):
 
 if __name__ == "__main__":
     bars = []
-    monitor_count = 1
-    if len(sys.argv) > 1:
-        monitor_count = int(sys.argv[1])
-    if len(sys.argv) > 2:
-        notification_monitor = int(sys.argv[2])
+    display = Gdk.Display.get_default()
+    monitor_count = display.get_n_monitors()
     for i in range(monitor_count):
         bar = (
             WStatusBar(monitor=i)
