@@ -15,6 +15,7 @@ from helpers.window_helper import build_window
 from submodules.bar_start import BarStart
 from submodules.bar_center import BarCenter
 from submodules.bar_end import BarEnd
+from submodules.launcher import AppLauncher
 from submodules.notifications import create_notification_area
 from submodules.services import DNDService
 
@@ -73,10 +74,14 @@ if __name__ == "__main__":
             notification_timeout,
         )
     )
+    app_launcher = AppLauncher()
+    app_launcher.hide()
+    bars.append(app_launcher)
     app = Application(
-        "bar",
-        bars[0],
+        "voidshell",
     )
+    for window in bars:
+        app.add_window(window)
 
     def apply_stylesheet(*_):
         return app.set_stylesheet_from_file(get_relative_path("./styles.css"))

@@ -4,6 +4,7 @@ from fabric.widgets.x11 import X11Window
 
 import ast
 import os
+import typing
 
 from gi.repository.Gdk import WindowTypeHint
 
@@ -17,6 +18,13 @@ def detect_display_server():
     elif os.environ.get("DISPLAY"):
         return "x11"
     return session_type or "unknown"
+
+
+def get_window_type() -> type:
+    if detect_display_server() == "wayland":
+        return WaylandWindow
+    else:
+        return X11Window
 
 
 def get_window_commands() -> list[str]:
@@ -39,8 +47,8 @@ def build_window(
     **kwargs,
 ) -> Window:
     if detect_display_server() == "wayland":
-        if side == "center" or side == "center-auto":
-            side = ""
+        if side == "center-auto":
+            side = "center"
         elif side == "top":
             side = "left top right"
         elif side == "right":

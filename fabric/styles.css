@@ -70,3 +70,51 @@
 .notification button:hover {
   background-color: lighter(var(--darkpurple));
 }
+
+.app_launcher {
+  background-color: var(--base_color);
+  border: solid 2px;
+  padding: 12px;
+  border-radius: 1rem;
+  border-color: var(--darkpurple);
+}
+.app_launcher_search {
+  background-color: var(--darkpurple);
+  padding: 20px;
+  border-radius: 1rem;
+}
+.app_launcher_search_entry {
+  background-color: var(--base_color);
+  border-radius: 1rem;
+  border: solid 2px;
+  padding: 8px;
+  border-color: var(--purple);
+}
+.launcher_button:hover {
+  background-color: var(--darkpurple);
+  border: solid 2px;
+  border-radius: 1rem;
+  border-color: var(--darkpurple);
+}
+
+scrolledwindow scrollbar {
+  background-color: var(--darkpurple);
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: 4px;
+}
+
+scrolledwindow scrollbar slider {
+  background-color: var(--slider);
+  border-radius: 4px;
+  min-width: 8px;
+  min-height: 8px;
+}
+
+tooltip label {
+  padding: 4px;
+  border: solid 1px;
+  border-radius: 1rem;
+  border-color: var(--foreground);
+  background-color: var(--base_color);
+}
