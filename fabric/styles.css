@@ -40,6 +40,7 @@
 }
 
 .notification {
+  margin: 8px 20px;
   padding: 0.8rem;
   border: solid 1px var(--darkpurple);
   border-radius: 1rem;
@@ -51,16 +52,19 @@
   font-weight: bold;
 }
 
+.notification-icon {
+  font-size: 30px;
+  margin: 8px 20px;
+}
 .notification .body {
   color: darker(var(--foreground));
   font-weight: normal;
 }
 
 .notification button {
-  padding: 0.8rem;
+  padding: 4px;
   font-weight: 600;
   border-radius: 3rem;
-  background-color: var(--darkpurple);
 }
 
 .notification button:hover {

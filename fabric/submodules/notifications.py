@@ -5,15 +5,13 @@ from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.window import Window
-from fabric.widgets.x11 import X11Window
 
 
 # From GObject
 from gi.repository import GdkPixbuf
 
-from submodules.helpers import detect_display_server
+from helpers.window_helper import build_window
 from submodules.services import DNDService
 
 from typing import cast
@@ -23,9 +21,6 @@ notification_width = 360
 notification_image_size = 64
 notification_timeout = 10 * 1000
 notification_monitor = 0
-
-is_wayland = detect_display_server() == "wayland"
-window_type = WaylandWindow if is_wayland else X11Window
 
 
 class NotificationCenter:
@@ -54,50 +49,58 @@ class NotificationWidget(Box):
                     )
                 )
             )
+        container_children = [
+            Box(
+                orientation="h",
+                children=[
+                    Label(
+                        label="󰂚",
+                        style_classes=["notification-icon"],
+                    ),
+                    Label(
+                        label=self._notification.summary,
+                        ellipsization="middle",
+                    )
+                    .build()
+                    .add_style_class("summary")
+                    .unwrap(),
+                ],
+                h_expand=True,
+                v_expand=True,
+            )
+            # add the "close" button
+            .build(
+                lambda box, _: box.pack_end(
+                    Button(
+                        label="󰅖",
+                        v_align="center",
+                        h_align="end",
+                        on_clicked=lambda *_: self._notification.close(),
+                    ),
+                    False,
+                    False,
+                    0,
+                )
+            ),
+        ]
+        if self._notification.body != "":
+            container_children.append(
+                # a box for holding both the "summary" label and the "close" button
+                Label(
+                    label=self._notification.body,
+                    line_wrap="word-char",
+                    v_align="start",
+                    h_align="start",
+                )
+                .build()
+                .add_style_class("body")
+                .unwrap()
+            )
         body_container.add(
             Box(
                 spacing=4,
                 orientation="v",
-                children=[
-                    # a box for holding both the "summary" label and the "close" button
-                    Box(
-                        orientation="h",
-                        children=[
-                            Label(
-                                label=self._notification.summary,
-                                ellipsization="middle",
-                            )
-                            .build()
-                            .add_style_class("summary")
-                            .unwrap(),
-                        ],
-                        h_expand=True,
-                        v_expand=True,
-                    )
-                    # add the "close" button
-                    .build(
-                        lambda box, _: box.pack_end(
-                            Button(
-                                label="󰅖",
-                                v_align="center",
-                                h_align="end",
-                                on_clicked=lambda *_: self._notification.close(),
-                            ),
-                            False,
-                            False,
-                            0,
-                        )
-                    ),
-                    Label(
-                        label=self._notification.body,
-                        line_wrap="word-char",
-                        v_align="start",
-                        h_align="start",
-                    )
-                    .build()
-                    .add_style_class("body")
-                    .unwrap(),
-                ],
+                children=container_children,
                 h_expand=True,
                 v_expand=True,
             )
@@ -145,24 +148,19 @@ def create_notification_area(
     width,
     image_size,
     timeout,
-    monitor,
 ) -> Window:
     global \
         do_not_disturb, \
         notification_width, \
         notification_image_size, \
-        notification_timeout, \
-        notification_monitor
+        notification_timeout
     do_not_disturb = dnd_service
     notification_width = width
     notification_image_size = image_size
     notification_timeout = timeout
-    notification_monitor = monitor
 
     notification_box = Box(size=2, spacing=4, orientation="v")
-    notification_window = window_type(
-        margin="8px 8px 8px 8px", anchor="top right", child=notification_box
-    )
+    notification_window = build_window(side="top-right", child=notification_box)
     notifications.connect(
         "notification_added",
         lambda notifs_service, nid: (

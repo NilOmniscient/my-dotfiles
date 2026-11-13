@@ -4,22 +4,17 @@ from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.x11 import X11Window
 from fabric.notifications import Notifications
 
-# Services
-
 # Non-widgets
 from fabric.utils import get_relative_path, monitor_file
-
-# Non-fabric
-import sys
 
 from gi.repository import Gdk
 
 
 # local
+from helpers.window_helper import build_window
 from submodules.bar_start import BarStart
 from submodules.bar_center import BarCenter
 from submodules.bar_end import BarEnd
-from submodules.helpers import detect_display_server
 from submodules.notifications import create_notification_area
 from submodules.services import DNDService
 
@@ -59,10 +54,8 @@ if __name__ == "__main__":
     display = Gdk.Display.get_default()
     monitor_count = display.get_n_monitors()
     for i in range(monitor_count):
-        bar = (
-            WStatusBar(monitor=i)
-            if detect_display_server() == "wayland"
-            else XStatusBar(monitor=i)
+        bar = build_window(
+            styles=["bar"], wlayer="top", exclusive=True, side="top", monitor=i
         )
         bar.children = CenterBox(
             style_classes=["bar-inner"],
@@ -78,7 +71,6 @@ if __name__ == "__main__":
             notification_width,
             notification_image_size,
             notification_timeout,
-            notification_monitor,
         )
     )
     app = Application(

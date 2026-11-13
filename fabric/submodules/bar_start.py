@@ -7,7 +7,7 @@ from gi.repository import Playerctl
 
 import subprocess
 
-from submodules.helpers import detect_display_server
+from helpers.window_helper import get_window_commands
 
 
 class BarStart(Box):
@@ -20,7 +20,7 @@ class BarStart(Box):
             max_chars_width=max_chars,
             style_classes=["module"],
         )
-        # Handle playerctl stuff.
+        # Handleplayerctl stuff.
         self.player_manager = Playerctl.PlayerManager()
         self.active_player = None
 
@@ -64,16 +64,8 @@ class BarStart(Box):
             track_player(self.player_manager.props.players[0])
 
         # Build two fabricators, one for active window title, and the other for active window class
-        window_name_cmd = (
-            "wdotool --backend wlroots getwindowname $(wdotool --backend wlroots getactivewindow)"
-            if detect_display_server() == "wayland"
-            else "xdotool getwindowname $(xdotool getactivewindow)"
-        )
-        window_icon_cmd = (
-            "wdotool --backend wlroots getwindowclassname $(wdotool --backend wlroots getactivewindow)"
-            if detect_display_server() == "wayland"
-            else "xdotool getwindowclassname $(xdotool getactivewindow)"
-        )
+        window_commands = get_window_commands()
+
         self.window_title = Label(
             label="Desktop",
             ellipsization="end",
@@ -87,7 +79,7 @@ class BarStart(Box):
             interval=1000,
             default_value="",
             poll_from=lambda f: subprocess.run(
-                window_name_cmd,
+                window_commands[0],
                 capture_output=True,
                 text=True,
                 check=False,
@@ -99,7 +91,7 @@ class BarStart(Box):
             interval=1000,
             default_value="",
             poll_from=lambda f: subprocess.run(
-                window_icon_cmd,
+                window_commands[1],
                 capture_output=True,
                 text=True,
                 check=False,
